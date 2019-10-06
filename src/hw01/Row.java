@@ -19,4 +19,42 @@
 package hw01;
 
 public class Row {
+
+    private int correctPegs;
+    private int pegsInCorrectPosition;
+    private int incorrectPegs;
+
+    public Row(int correctPegs, int pegsInCorrectPosition, int incorrectPegs) {
+        this.correctPegs = correctPegs;
+        this.pegsInCorrectPosition = pegsInCorrectPosition;
+        this.incorrectPegs = incorrectPegs;
+    }
+
+    public int getCorrectPegs() {
+        return correctPegs;
+    }
+
+    public int getPegsInCorrectPosition() {
+        return pegsInCorrectPosition;
+    }
+
+    public int getIncorrectPegs() {
+        return incorrectPegs;
+    }
+
+
+    @Override
+    public String toString() {
+        String s = "";
+        for (int i = 0; i < this.correctPegs; i++) {
+            s += "*";
+        }
+        for (int i = 0; i < this.pegsInCorrectPosition; i++) {
+            s += "+";
+        }
+        for (int i = 0; i < this.incorrectPegs; i++) {
+            s += "-";
+        }
+        return  s;
+    }
 }
