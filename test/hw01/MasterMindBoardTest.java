@@ -20,7 +20,7 @@ class MasterMindBoardTest {
      * Test guess method
      */
     @Test
-    void guess() {
+    void guess() throws Exception {
         Row guessResult = board.guess(new int[]{1, 1, 1, 1});
         assertEquals("*---", guessResult.toString());
 
@@ -35,6 +35,9 @@ class MasterMindBoardTest {
 
         guessResult = board.guess(new int[]{1, 3, 5, 3});
         assertEquals("**++", guessResult.toString());
+
+        guessResult = board.guess(new int[]{3, 3, 0, 3});
+        assertEquals("*+--", guessResult.toString());
 
 
     }

@@ -22,11 +22,13 @@ package hw01;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
+import java.util.Scanner;
 import java.util.stream.Collectors;
 
 public class MasterMindBoard {
 
     private int currentRow;
+    private boolean win;
 
     final static int MAX_SLOT_VALUE = 6;
     final static int MIN_SLOT_VALUE = 1;
@@ -40,6 +42,7 @@ public class MasterMindBoard {
      */
     public MasterMindBoard() {
         this.currentRow = 1;
+        this.win = false;
         this.generateRandomSecretCode();
 
     }
@@ -50,6 +53,7 @@ public class MasterMindBoard {
      */
     public MasterMindBoard(int[] secretCode) throws IllegalArgumentException {
         this.currentRow = 1;
+        this.win = false;
 
         //Make sure secret code is valid
         if (secretCode.length != ROW_SIZE)
@@ -67,7 +71,11 @@ public class MasterMindBoard {
 
 
 
-    public Row guess(int[] guesses) {
+    public Row guess(int[] guesses) throws Exception {
+        if (this.currentRow > this.MAXIMUM_ROWS) {
+            throw new Exception("Exceeded maximum number of guesses");
+        }
+
         //Verify dimension of guesses array
         if (guesses.length != ROW_SIZE) {
             throw new IllegalArgumentException("Number of guesses must be " + ROW_SIZE);
@@ -94,8 +102,17 @@ public class MasterMindBoard {
         }
 
         this.currentRow++;
+
+        if (correctPegs == ROW_SIZE) {
+            this.win = true;
+        }
+
         return new Row(correctPegs, pegsIncorrectPosition, ROW_SIZE - correctPegs - pegsIncorrectPosition);
 
+    }
+
+    public boolean checkWin() {
+        return this.win;
     }
 
     private void generateRandomSecretCode() {
@@ -108,8 +125,37 @@ public class MasterMindBoard {
 
     public void playCommandLine(){
         System.out.printf("Guess my code using numbers between %d and %d. You have %d guesses", MIN_SLOT_VALUE, MAX_SLOT_VALUE, MAXIMUM_ROWS);
+        Scanner in = new Scanner(System.in);
 
 
+        for (int i = 1; i <= this.MAXIMUM_ROWS; i++) {
+            System.out.print("Guess " + i + ":\n");
+            String inputStr = in.next();
+            while (isValidInput(inputStr) == false) {
+                System.out.println("Please provide valid input");
+                System.out.print("Guess " + i + ":\n");
+                inputStr = in.next();
+            }
+        }
+    }
+
+    private static boolean isValidInput(String input) {
+        if (input.length() != ROW_SIZE) {
+            return false;
+        }
+        String pattern = String.format("[%d-%d]{%d}", MIN_SLOT_VALUE, MAX_SLOT_VALUE, ROW_SIZE);
+        return input.matches(pattern);
+    }
+
+    private static int[] convertStrToArray(String input) {
+        int[] intArray = new int[ROW_SIZE];
+        for (int i = 0; i < input.length(); i++) {
+
+            char c = input.charAt(i);
+            intArray[i] = Integer.parseInt(String.valueOf(c));
+        }
+
+        return intArray;
     }
 
 
