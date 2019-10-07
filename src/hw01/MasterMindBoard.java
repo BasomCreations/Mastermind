@@ -22,6 +22,7 @@ package hw01;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
+import java.util.stream.Collectors;
 
 public class MasterMindBoard {
 
@@ -34,38 +35,66 @@ public class MasterMindBoard {
 
     private int[] secretCode = new int[ROW_SIZE];
 
+    /**
+     * Constructor
+     */
     public MasterMindBoard() {
         this.currentRow = 1;
         this.generateRandomSecretCode();
 
     }
 
+    /**
+     * Alternate constructor in which you specify the secret code
+     * @param secretCode
+     */
+    public MasterMindBoard(int[] secretCode) throws IllegalArgumentException {
+        this.currentRow = 1;
+
+        //Make sure secret code is valid
+        if (secretCode.length != ROW_SIZE)
+        {throw new IllegalArgumentException(String.format("Code must be %d digits", ROW_SIZE));}
+        for (int digit:
+             secretCode) {
+            if (digit < MIN_SLOT_VALUE || digit > MAX_SLOT_VALUE) {
+                throw new IllegalArgumentException(String.format("Code digits mus be between %d and %d", MIN_SLOT_VALUE, MAX_SLOT_VALUE));
+            }
+        }
+
+        this.secretCode = secretCode;
+
+    }
+
+
+
     public Row guess(int[] guesses) {
+        //Verify dimension of guesses array
         if (guesses.length != ROW_SIZE) {
             throw new IllegalArgumentException("Number of guesses must be " + ROW_SIZE);
         }
 
+        //Get list of temporary list of secret code elements
+        List<Integer> tempCode = Arrays.stream(this.secretCode).boxed().collect(Collectors.toList());
         int correctPegs = 0;
         for (int i = 0; i < guesses.length; i++) {
             if (guesses[i] == this.secretCode[i]){
                 correctPegs++;
+                tempCode.remove((Object)guesses[i]);
                 guesses[i] = -1;
             }
         }
 
-        int pegsIncorrectPositon = 0;
-        List<Object> tempCode = Arrays.asList(this.secretCode);
-
+        int pegsIncorrectPosition = 0;
         for (int guess:
              guesses) {
             if (tempCode.contains((Object)guess)){
-                pegsIncorrectPositon++;
+                pegsIncorrectPosition++;
                 tempCode.remove((Object)guess);
             }
         }
 
-        currentRow++;
-        return new Row(correctPegs, pegsIncorrectPositon, ROW_SIZE - correctPegs - pegsIncorrectPositon);
+        this.currentRow++;
+        return new Row(correctPegs, pegsIncorrectPosition, ROW_SIZE - correctPegs - pegsIncorrectPosition);
 
     }
 
