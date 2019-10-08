@@ -13,6 +13,7 @@ class MasterMindBoardTest {
     void setUp() {
         int[] code = {1, 3, 3, 5};
         board = new MasterMindBoard(code);
+
     }
 
 
@@ -20,7 +21,7 @@ class MasterMindBoardTest {
      * Test guess method
      */
     @Test
-    void guess() throws Exception {
+    void guessTest() throws Exception {
         Row guessResult = board.guess(new int[]{1, 1, 1, 1});
         assertEquals("*---", guessResult.toString());
 
@@ -39,6 +40,19 @@ class MasterMindBoardTest {
         guessResult = board.guess(new int[]{3, 3, 0, 3});
         assertEquals("*+--", guessResult.toString());
 
-
     }
+
+
+    /**
+     * Test Constructor Exception
+     */
+    @Test
+    void testConstructorException(){
+
+        assertThrows(IllegalArgumentException.class, () -> new MasterMindBoard(new int[]{3, 3, 4}));
+        assertThrows(IllegalArgumentException.class, () -> new MasterMindBoard(new int[]{3, 3, 4, 5, 6, 6}));
+        assertThrows(IllegalArgumentException.class, () -> new MasterMindBoard(new int[]{7, 7, 7, 7}));
+    }
+
+
 }

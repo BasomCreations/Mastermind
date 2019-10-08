@@ -18,8 +18,18 @@
  */
 package main;
 
+import hw01.MasterMindBoard;
+
+import java.util.Scanner;
+
 public class Main {
-    public static void main(String[] args) {
-        System.out.println("Hello, World!");
+    public static void main(String[] args) throws Exception {
+        Scanner in = new Scanner(System.in);
+        System.out.println("Welcome to MasterMind!");
+
+        MasterMindBoard game = new MasterMindBoard(new int[]{1, 2, 3, 6});
+        //MasterMindBoard game = new MasterMindBoard();
+
+        game.playCommandLine();
     }
 }

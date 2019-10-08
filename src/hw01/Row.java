@@ -18,12 +18,24 @@
  */
 package hw01;
 
+
+/**
+ * Row class
+ * row objects store the number of correct pegs, pegs in incorrect position and incorrect pegs
+ * from a user's guess in the masterMind game
+ */
 public class Row {
 
     private int correctPegs;
     private int pegsInCorrectPosition;
     private int incorrectPegs;
 
+    /**
+     * Constructor
+     * @param correctPegs number of correct pegs (red or *)
+     * @param pegsInCorrectPosition number of pegs in incorrect position (white or +)
+     * @param incorrectPegs number of incorrect pegs (-)
+     */
     public Row(int correctPegs, int pegsInCorrectPosition, int incorrectPegs) {
         this.correctPegs = correctPegs;
         this.pegsInCorrectPosition = pegsInCorrectPosition;
@@ -43,6 +55,12 @@ public class Row {
     }
 
 
+    /**
+     * Gets string representation of object
+     * for example: a row object with 2 correct pegs, 1 peg in incorrect position and
+     * 1 incorrect peg would be represented as **+-
+     * @return
+     */
     @Override
     public String toString() {
         String s = "";
