@@ -16,7 +16,7 @@
  *
  * ****************************************
  */
-package main;
+package hw01;
 
 import hw01.MasterMindBoard;
 
@@ -27,9 +27,22 @@ public class Main {
         Scanner in = new Scanner(System.in);
         System.out.println("Welcome to MasterMind!");
 
-        MasterMindBoard game = new MasterMindBoard(new int[]{1, 2, 3, 6});
-        //MasterMindBoard game = new MasterMindBoard();
+//        MasterMindBoard game = new MasterMindBoard(new int[]{1, 2, 3, 6});
+//        //MasterMindBoard game = new MasterMindBoard();
+//
+//        game.playCommandLine();
 
-        game.playCommandLine();
+        GameServer g = new GameServer(2000);
+        System.out.println("Ip is: "+g.getIp());
+        g.connectToClient();
+
+        System.out.println("Connected");
+
+        String s = g.readline();
+        while (s != null){
+            System.out.println(s);
+            s = g.readline();
+        }
+
     }
 }
