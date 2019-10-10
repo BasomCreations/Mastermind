@@ -18,7 +18,6 @@
  */
 package hw01;
 
-import hw01.MasterMindBoard;
 
 import java.util.Scanner;
 

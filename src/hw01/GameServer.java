@@ -32,6 +32,7 @@ public class GameServer {
 
     private PrintWriter out;
     private BufferedReader in;
+    private ObjectOutputStream objOut;
     private ObjectInputStream objIn;
 
 
@@ -72,6 +73,7 @@ public class GameServer {
 
         this.out = new PrintWriter(clientSocket.getOutputStream(), true);
         this.in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+        this.objOut = new ObjectOutputStream(clientSocket.getOutputStream());
         this.objIn = new ObjectInputStream(clientSocket.getInputStream());
 
     }

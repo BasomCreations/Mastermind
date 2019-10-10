@@ -26,8 +26,9 @@ public class GameClient {
     Socket clientSocket;
     PrintWriter out;
     BufferedReader in;
-    ObjectInputStream objIn;
     ObjectOutputStream objOut;
+    ObjectInputStream objIn;
+
 
 
     public void connectToServer(String ipadress, int port) throws IOException {
@@ -36,8 +37,9 @@ public class GameClient {
 
         this.out = new PrintWriter(clientSocket.getOutputStream(), true);
         this.in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
-        this.objIn = new ObjectInputStream(clientSocket.getInputStream());
         this.objOut = new ObjectOutputStream(clientSocket.getOutputStream());
+        this.objIn = new ObjectInputStream(clientSocket.getInputStream());
+
     }
 
 
