@@ -30,8 +30,7 @@ public class GameServer {
     private ServerSocket serverSocket;
     private Socket clientSocket;
 
-    private PrintWriter out;
-    private BufferedReader in;
+
     private ObjectOutputStream objOut;
     private ObjectInputStream objIn;
 
@@ -71,21 +70,23 @@ public class GameServer {
     public void connectToClient() throws IOException {
         clientSocket = serverSocket.accept();
 
-        this.out = new PrintWriter(clientSocket.getOutputStream(), true);
-        this.in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
         this.objOut = new ObjectOutputStream(clientSocket.getOutputStream());
         this.objIn = new ObjectInputStream(clientSocket.getInputStream());
 
     }
 
-    public String readline() throws IOException {
-        return this.in.readLine();
-    }
 
     public Object readObject() throws IOException, ClassNotFoundException {
         return this.objIn.readObject();
     }
 
+    public void closeClientScoket() throws IOException {
+        this.clientSocket.close();
+    }
+
+    public void closeServerSocket() throws IOException {
+        this.serverSocket.close();
+    }
 
 
     public InetAddress getIp() {

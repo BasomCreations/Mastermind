@@ -47,9 +47,7 @@ public class TwoPlayerGameServerSide {
 
         System.out.println("\nWaiting for other player...");
         Score clientScore = (Score) server.readObject();
-        if (clientScore  == null){
-            System.out.println("Error: client disconnected");
-        }
+
         System.out.println(clientScore);
 
 

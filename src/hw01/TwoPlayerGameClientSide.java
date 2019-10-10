@@ -18,7 +18,6 @@
  */
 package hw01;
 
-import java.io.IOException;
 import java.util.Scanner;
 
 public class TwoPlayerGameClientSide {
@@ -50,7 +49,7 @@ public class TwoPlayerGameClientSide {
 
         Score score = new Score(board.getGuesses(), board.getPlayTime(), this.clientName, board.checkWin());
 
-        gameClient.sendScore(score);
+        gameClient.sendObject(score);
 
         System.out.println("Score sent");
 

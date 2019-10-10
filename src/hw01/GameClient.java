@@ -24,8 +24,6 @@ import java.net.Socket;
 public class GameClient {
 
     Socket clientSocket;
-    PrintWriter out;
-    BufferedReader in;
     ObjectOutputStream objOut;
     ObjectInputStream objIn;
 
@@ -34,9 +32,6 @@ public class GameClient {
     public void connectToServer(String ipadress, int port) throws IOException {
         clientSocket = new Socket(ipadress, port);
 
-
-        this.out = new PrintWriter(clientSocket.getOutputStream(), true);
-        this.in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
         this.objOut = new ObjectOutputStream(clientSocket.getOutputStream());
         this.objIn = new ObjectInputStream(clientSocket.getInputStream());
 
@@ -48,8 +43,13 @@ public class GameClient {
     }
 
 
-    public void sendScore(Score socre) throws IOException {
+    public void sendObject(Score socre) throws IOException {
         objOut.writeObject(socre);
+    }
+
+
+    public void close() throws IOException {
+        clientSocket.close();
     }
 
 }
