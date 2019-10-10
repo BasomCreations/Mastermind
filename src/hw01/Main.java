@@ -27,21 +27,28 @@ public class Main {
         Scanner in = new Scanner(System.in);
         System.out.println("Welcome to MasterMind!");
 
-//        MasterMindBoard game = new MasterMindBoard(new int[]{1, 2, 3, 6});
-//        //MasterMindBoard game = new MasterMindBoard();
-//
-//        game.playCommandLine();
 
-        GameServer g = new GameServer();
-        System.out.println("Ip is: "+g.getIp());
-        g.connectToClient();
+        System.out.println("Single or 2 player?");
+        String answer = in.nextLine();
+        if (answer.equals("2")){
 
-        System.out.println("Connected");
+            System.out.println("Server? [yes/no]");
+            answer = in.nextLine();
+            if (answer.equals("yes")) {
+                TwoPlayerGameServerSide hostBoard = new TwoPlayerGameServerSide("host player");
+                hostBoard.playCommandLine();
+            } else {
+                TwoPlayerGameClientSide clientBoard = new TwoPlayerGameClientSide("Client Player");
+                clientBoard.playCommandLine();
+            }
 
-        String s = g.readline();
-        while (s != null){
-            System.out.println(s);
-            s = g.readline();
+
+
+        } else {
+            //1 player game
+            MasterMindBoard board = new MasterMindBoard();
+            board.playCommandLine();
+
         }
 
     }
