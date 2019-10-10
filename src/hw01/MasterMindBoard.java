@@ -66,13 +66,25 @@ public class MasterMindBoard {
      */
     private int[] secretCode = new int[ROW_SIZE];
 
+
+    /**
+     * Start time
+     */
+    private long startTime;
+
+    /**
+     * Finish time
+     */
+    private long finishTime;
+
     /**
      * Default Constructor
      */
     public MasterMindBoard() {
         this.currentRow = 1;
         this.win = false;
-        this.generateRandomSecretCode();
+        int [] code = this.generateRandomSecretCode();
+        this.secretCode = code;
 
     }
 
@@ -153,6 +165,7 @@ public class MasterMindBoard {
 
         if (correctPegs == ROW_SIZE) {
             this.win = true;
+
         }
 
         return new Row(correctPegs, pegsIncorrectPosition, ROW_SIZE - correctPegs - pegsIncorrectPosition);
@@ -171,11 +184,15 @@ public class MasterMindBoard {
      * Generate random secret code
      */
 
-    private void generateRandomSecretCode() {
+    public static int[] generateRandomSecretCode() {
+
+        int[] secretCode = new int[ROW_SIZE];
+
         Random rand = new Random();
-        for (int i = 0; i < this.secretCode.length; i++) {
-            this.secretCode[i] = rand.nextInt(MAX_SLOT_VALUE) + MIN_SLOT_VALUE;
+        for (int i = 0; i < secretCode.length; i++) {
+            secretCode[i] = rand.nextInt(MAX_SLOT_VALUE) + MIN_SLOT_VALUE;
         }
+        return secretCode;
     }
 
 
@@ -183,6 +200,9 @@ public class MasterMindBoard {
      * Method to play the game in a command line interface
      */
     public void playCommandLine() throws Exception {
+
+        this.setStartTime();
+
         System.out.printf("Guess my code using numbers between %d and %d. You have %d guesses\n", MIN_SLOT_VALUE, MAX_SLOT_VALUE, MAXIMUM_ROWS);
         Scanner in = new Scanner(System.in);
 
@@ -201,7 +221,7 @@ public class MasterMindBoard {
             System.out.print(inputStr + " --> " + result.toString());
 
             if(this.win){
-                System.out.println("    Congratulations you won!");
+                System.out.println("    Congratulations you guessed!");
                 break;
             } else {
                 if (this.currentRow > MAXIMUM_ROWS){
@@ -214,6 +234,7 @@ public class MasterMindBoard {
 
         }
 
+        this.finishTime = System.nanoTime();
 
     }
 
@@ -247,6 +268,33 @@ public class MasterMindBoard {
 
         return intArray;
     }
+
+    /**
+     * Sets start time
+     */
+    private void setStartTime(){
+        this.startTime = System.nanoTime();
+    }
+
+    /**
+     * Get total elapsed time in seconds
+     * @return time
+     */
+    public int getPlayTime(){
+        int time = (int)((this.finishTime - this.startTime) * Math.pow(10, -9));
+        return time;
+    }
+
+
+    /**
+     * Returns the number of guesses the player has taken
+     * @return number of guesses
+     */
+    public int getGuesses(){
+        return this.currentRow - 1;
+    }
+
+
 
 
 }

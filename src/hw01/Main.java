@@ -32,7 +32,7 @@ public class Main {
 //
 //        game.playCommandLine();
 
-        GameServer g = new GameServer(2000);
+        GameServer g = new GameServer();
         System.out.println("Ip is: "+g.getIp());
         g.connectToClient();
 

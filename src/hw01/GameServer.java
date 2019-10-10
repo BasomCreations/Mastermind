@@ -32,8 +32,10 @@ public class GameServer {
 
     private PrintWriter out;
     private BufferedReader in;
+    private ObjectInputStream objIn;
 
-    public static int DEFAULTPORT = 7777;
+
+    public static int DEFAULTPORT = 20000;
 
     /**
      * Default constructor with default port number
@@ -70,12 +72,17 @@ public class GameServer {
 
         this.out = new PrintWriter(clientSocket.getOutputStream(), true);
         this.in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+        this.objIn = new ObjectInputStream(clientSocket.getInputStream());
+
     }
 
     public String readline() throws IOException {
         return this.in.readLine();
     }
 
+    public Object readObject() throws IOException, ClassNotFoundException {
+        return this.objIn.readObject();
+    }
 
 
 
