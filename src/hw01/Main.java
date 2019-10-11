@@ -23,35 +23,61 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) throws Exception {
+        playGame();
+
+    }
+
+
+    /**
+     * Method containing all the game logic
+     * @throws Exception
+     */
+    private static void playGame() throws Exception {
         Scanner in = new Scanner(System.in);
-        System.out.println("Welcome to MasterMind!");
+        System.out.println("Welcome to MasterMind!\n");
 
         System.out.print("Please Enter Your Name: ");
         String name = in.nextLine();
 
 
-        System.out.println("Single or 2 player?");
-        String answer = in.nextLine();
-        if (answer.equals("2")){
+        //After each game the player can either keep playing or terminate the program
+        while (true){
 
-            System.out.print("Server? [yes/no]");
-            answer = in.nextLine();
-            if (answer.equals("yes")) {
-                TwoPlayerGameServerSide hostBoard = new TwoPlayerGameServerSide(name);
-                hostBoard.playCommandLine();
+            System.out.println("Do you want a single or 2 player game? [1/2]");
+            String answer = UsefullFunctions.getValidInput(in, new String[]{"1", "2"});
+
+            //two player game
+            if (answer.equals("2")){
+
+                System.out.print("host or client?");
+                answer = UsefullFunctions.getValidInput(in, new String[]{"host", "client"});
+
+                if (answer.equals("host")) {
+                    TwoPlayerGameServerSide hostBoard = new TwoPlayerGameServerSide(name);
+                    hostBoard.playCommandLine();
+                } else {
+                    TwoPlayerGameClientSide clientBoard = new TwoPlayerGameClientSide(name);
+                    clientBoard.playCommandLine();
+                }
+
+
             } else {
-                TwoPlayerGameClientSide clientBoard = new TwoPlayerGameClientSide(name);
-                clientBoard.playCommandLine();
+                // Single player game
+                MasterMindBoard board = new MasterMindBoard();
+                board.playCommandLine();
+
             }
 
-
-
-        } else {
-            //1 player game
-            MasterMindBoard board = new MasterMindBoard();
-            board.playCommandLine();
+            //Check if the player wants to play another game
+            System.out.println("\n Do you want to do a new game? [yes/no]");
+            answer = UsefullFunctions.getValidInput(in, new String[]{"yes", "no"});
+            if (answer.equals("no")){break;}
 
         }
-
     }
+
+
 }
+
+
+
