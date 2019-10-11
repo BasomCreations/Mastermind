@@ -42,13 +42,35 @@ public class TwoPlayerGameServerSide {
         server.connectToClient();
 
         System.out.println("Connection established successfully");
+
+
+        //Send secret code to client
+        server.sendObject(this.getSecretCode());
+        Protocol response = (Protocol)server.readObject();
+        if (!response.equals(Protocol.RECEIVED)){
+            System.out.println("Something went wrong...");
+            return;
+        }
+
+
         board.playCommandLine();
         Score score = new Score(board.getGuesses(), board.getPlayTime(), this.hostPlayerName, board.checkWin());
 
         System.out.println("\nWaiting for other player...");
         Score clientScore = (Score) server.readObject();
+        server.sendObject(Protocol.RECEIVED);
 
-        System.out.println(clientScore);
+
+        GameResults scores = new GameResults();
+        scores.addScore(score);
+        scores.addScore(clientScore);
+
+        scores.sortByMoves();
+
+        server.sendObject(scores);
+
+        System.out.println("The results are:");
+        System.out.println(scores);
 
 
 

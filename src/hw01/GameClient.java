@@ -43,8 +43,8 @@ public class GameClient {
     }
 
 
-    public void sendObject(Score socre) throws IOException {
-        objOut.writeObject(socre);
+    public void sendObject(Object o) throws IOException {
+        objOut.writeObject(o);
     }
 
 

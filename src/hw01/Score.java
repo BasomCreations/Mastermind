@@ -23,11 +23,11 @@ import java.io.Serializable;
 public class Score implements Serializable {
 
     private int turns;
-    private double time;
+    private int time;
     private String name;
     private boolean win;
 
-    public Score(int turns, double time, String name, boolean win) {
+    public Score(int turns, int time, String name, boolean win) {
         this.turns = turns;
         this.time = time;
         this.name = name;
@@ -38,7 +38,7 @@ public class Score implements Serializable {
         return turns;
     }
 
-    public double getTime() {
+    public int getTime() {
         return time;
     }
 

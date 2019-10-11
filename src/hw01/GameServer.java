@@ -80,6 +80,10 @@ public class GameServer {
         return this.objIn.readObject();
     }
 
+    public void sendObject(Object o) throws IOException, ClassNotFoundException {
+        this.objOut.writeObject(o);
+    }
+
     public void closeClientScoket() throws IOException {
         this.clientSocket.close();
     }

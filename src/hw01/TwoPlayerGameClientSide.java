@@ -41,17 +41,25 @@ public class TwoPlayerGameClientSide {
 
         gameClient = new GameClient();
         gameClient.connectToServer(ipadress, portNumber);
-
         System.out.println("Successfully connected to server");
 
-        board = new MasterMindBoard();
+        //Receive secret code and confirm reception
+        int[] code = (int[])gameClient.readObject();
+        gameClient.sendObject(Protocol.RECEIVED);
+
+
+        board = new MasterMindBoard(code);
         board.playCommandLine();
 
         Score score = new Score(board.getGuesses(), board.getPlayTime(), this.clientName, board.checkWin());
 
         gameClient.sendObject(score);
+        System.out.println("Waiting for the server...");
+        Protocol response = (Protocol) gameClient.readObject();
 
-        System.out.println("Score sent");
+        GameResults scores = (GameResults) gameClient.readObject();
+
+        System.out.println(scores);
 
 
     }
