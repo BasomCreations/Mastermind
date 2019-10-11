@@ -35,7 +35,7 @@ public class TwoPlayerGameClientSide {
 
         System.out.print("Please enter the host's ip address: ");
         String ipadress = in.nextLine();
-        System.out.println("Please enter the host's port number: ");
+        System.out.print("Please enter the host's port number: ");
         int portNumber = (int)in.nextInt();
         //TODO add validations
 
@@ -59,6 +59,7 @@ public class TwoPlayerGameClientSide {
 
         GameResults scores = (GameResults) gameClient.readObject();
 
+        System.out.println("\nResults:");
         System.out.println(scores);
 
 

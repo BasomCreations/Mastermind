@@ -18,10 +18,11 @@
  */
 package hw01;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GameResults {
+public class GameResults implements Serializable {
 
     private List<Score> scores;
 
@@ -64,7 +65,7 @@ public class GameResults {
         int counter = 1;
         for (Score sc:
              this.scores) {
-            s += counter++ + sc.toString() + "\n";
+            s += counter++ + ". " + sc.toString() + "\n";
         }
         return s;
     }

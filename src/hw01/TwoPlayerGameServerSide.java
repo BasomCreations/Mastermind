@@ -69,10 +69,8 @@ public class TwoPlayerGameServerSide {
 
         server.sendObject(scores);
 
-        System.out.println("The results are:");
+        System.out.println("\nResults:");
         System.out.println(scores);
-
-
 
 
     }
