@@ -19,6 +19,7 @@
 package hw01;
 
 import java.io.IOException;
+import java.util.Scanner;
 
 public class TwoPlayerGameServerSide {
 
@@ -43,36 +44,62 @@ public class TwoPlayerGameServerSide {
 
         System.out.println("Connection established successfully");
 
+        boolean play = true;
 
-        //Send secret code to client
-        server.sendObject(this.getSecretCode());
-        Protocol response = (Protocol)server.readObject();
-        if (!response.equals(Protocol.RECEIVED)){
-            System.out.println("Something went wrong...");
-            return;
+        while (play) {
+            //Send secret code to client
+            server.sendObject(this.getSecretCode());
+            Protocol response = (Protocol)server.readObject();
+            if (!response.equals(Protocol.RECEIVED)){
+                System.out.println("Something went wrong...");
+                return;
+            }
+
+
+            board.playCommandLine();
+            Score score = new Score(board.getGuesses(), board.getPlayTime(), this.hostPlayerName, board.checkWin());
+
+            System.out.println("\nWaiting for other player...");
+            Score clientScore = (Score) server.readObject();
+            server.sendObject(Protocol.RECEIVED);
+
+
+            GameResults scores = new GameResults();
+            scores.addScore(score);
+            scores.addScore(clientScore);
+
+            scores.sortByMoves();
+
+            server.sendObject(scores);
+
+            System.out.println("\nResults:");
+            System.out.println(scores);
+
+            // See if Host wants to play again
+            System.out.println("Do you want to play again? [yes/no]");
+            Scanner in = new Scanner(System.in);
+            String answer = in.nextLine();
+            // If Host does not want to play again, quit
+            if (answer.equalsIgnoreCase("no")) {
+                play = false;
+            }
+            // Otherwise, make sure Client also wants to play again
+            else {
+                System.out.println("Waiting for opponent...");
+                Protocol playAgain = (Protocol) server.readObject();
+                // If Client does not want to play again, quit
+                if (!playAgain.equals(Protocol.RECEIVED)) {
+                    play = false;
+                    System.out.println("Opponent has left the game");
+                }
+                // Otherwise, both want to play again, and generate new code
+                else {
+                    this.secretCode = this.board.generateRandomSecretCode();
+                    server.sendObject(Protocol.READY);
+                }
+            }
         }
-
-
-        board.playCommandLine();
-        Score score = new Score(board.getGuesses(), board.getPlayTime(), this.hostPlayerName, board.checkWin());
-
-        System.out.println("\nWaiting for other player...");
-        Score clientScore = (Score) server.readObject();
-        server.sendObject(Protocol.RECEIVED);
-
-
-        GameResults scores = new GameResults();
-        scores.addScore(score);
-        scores.addScore(clientScore);
-
-        scores.sortByMoves();
-
-        server.sendObject(scores);
-
-        System.out.println("\nResults:");
-        System.out.println(scores);
-
-
+        System.out.println("Thank you for playing. Goodbye!");
     }
 
 
