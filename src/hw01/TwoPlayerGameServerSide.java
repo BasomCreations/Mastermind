@@ -31,7 +31,6 @@ public class TwoPlayerGameServerSide {
     public TwoPlayerGameServerSide(String hostPlayerName) throws IOException {
 
         this.secretCode = MasterMindBoard.generateRandomSecretCode();
-        this.board = new MasterMindBoard(secretCode);
         this.server = new GameServer();
         this.hostPlayerName = hostPlayerName;
     }
@@ -55,6 +54,7 @@ public class TwoPlayerGameServerSide {
                 return;
             }
 
+            board = new MasterMindBoard(secretCode);
 
             board.playCommandLine();
             Score score = new Score(board.getGuesses(), board.getPlayTime(), this.hostPlayerName, board.checkWin());
@@ -81,6 +81,7 @@ public class TwoPlayerGameServerSide {
             String answer = in.nextLine();
             // If Host does not want to play again, quit
             if (answer.equalsIgnoreCase("no")) {
+                server.sendObject(Protocol.QUIT);
                 play = false;
             }
             // Otherwise, make sure Client also wants to play again
@@ -88,7 +89,7 @@ public class TwoPlayerGameServerSide {
                 System.out.println("Waiting for opponent...");
                 Protocol playAgain = (Protocol) server.readObject();
                 // If Client does not want to play again, quit
-                if (!playAgain.equals(Protocol.RECEIVED)) {
+                if (!playAgain.equals(Protocol.READY)) {
                     play = false;
                     System.out.println("Opponent has left the game");
                 }

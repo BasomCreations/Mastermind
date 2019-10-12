@@ -36,7 +36,7 @@ public class TwoPlayerGameClientSide {
         System.out.print("Please enter the host's ip address: ");
         String ipadress = in.nextLine();
         System.out.print("Please enter the host's port number: ");
-        int portNumber = (int)in.nextInt();
+        int portNumber = Integer.parseInt(in.nextLine());
         //TODO add validations
 
         gameClient = new GameClient();
@@ -81,6 +81,7 @@ public class TwoPlayerGameClientSide {
                 System.out.println("Waiting for host...");
                 // If host does not want to play again, quit
                 if (!((Protocol) gameClient.readObject()).equals(Protocol.READY)) {
+                    System.out.println("Host does not want to play :/");
                     play = false;
                 }
                 // Otherwise, both want to play again
