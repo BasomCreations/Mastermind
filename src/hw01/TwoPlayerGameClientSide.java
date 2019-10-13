@@ -18,30 +18,46 @@
  */
 package hw01;
 
+import java.io.IOException;
 import java.net.SocketException;
 import java.util.Scanner;
 
+/**
+ * Class to manage game on client side
+ */
 public class TwoPlayerGameClientSide {
 
+    /**
+     * Name of player
+     */
     private String clientName;
+
+    /**
+     * Game client object to manage networking
+     */
     private GameClient gameClient;
+
+    /**
+     * Mastermind board object
+     */
     private MasterMindBoard board;
 
+    /**
+     * Constructor
+     * @param playername name of the player
+     */
     public TwoPlayerGameClientSide(String playername) {
         this.clientName = playername;
     }
 
+    /**
+     * Play game in command line interface
+     * @throws Exception
+     */
     void playCommandLine() throws Exception {
         Scanner in = new Scanner(System.in);
+        this.gameClient = createGameClient(in);
 
-        System.out.print("Please enter the host's ip address: ");
-        String ipadress = in.nextLine();
-        System.out.print("Please enter the host's port number: ");
-        int portNumber = Integer.parseInt(in.nextLine());
-        //TODO add validations
-
-        gameClient = new GameClient();
-        gameClient.connectToServer(ipadress, portNumber);
         System.out.println("Successfully connected to server");
 
         boolean play = true;
@@ -92,5 +108,35 @@ public class TwoPlayerGameClientSide {
         } catch (SocketException e) {
             System.out.println("Opponent has disconnected");
         }
+    }
+
+
+    /**
+     * Repeatedly prompts user with ip and port until it gets proper credentials
+     * to connect to host
+     * @param in scanner
+     * @return GameClient object successfully connected to port
+     */
+    private GameClient createGameClient (Scanner in){
+
+
+        while(true){
+
+            try {
+
+                System.out.print("Please enter the host's ip address: ");
+                String ipadress = in.nextLine();
+                System.out.print("Please enter the host's port number: ");
+                int portNumber = UsefullFunctions.getIntegerInput(in);
+                GameClient client = new GameClient();
+                client.connectToServer(ipadress, portNumber);
+                return client;
+
+            } catch (Exception e) {
+                System.out.println("Error: Please enter valid IP and port number");
+            }
+
+        }
+
     }
 }

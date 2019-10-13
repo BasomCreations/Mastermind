@@ -226,6 +226,7 @@ public class MasterMindBoard {
             } else {
                 if (this.currentRow > MAXIMUM_ROWS){
                     System.out.println("    You Lost! You run out of attempts!");
+                    System.out.println("The code was " + Arrays.toString(this.secretCode).replaceAll("[\\s\\[\\],]", ""));
                 } else {
                     System.out.printf("    Try again. %d guesses left\n", MAXIMUM_ROWS - this.currentRow + 1);
                 }

@@ -26,8 +26,19 @@ package hw01;
  */
 public class Row {
 
+    /**
+     * NUmber of correct pegs
+     */
     private int correctPegs;
+
+    /**
+     * NUmber of pegs in incorrect position
+     */
     private int pegsInCorrectPosition;
+
+    /**
+     * Number of incorrect pegs
+     */
     private int incorrectPegs;
 
     /**

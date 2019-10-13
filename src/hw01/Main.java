@@ -49,7 +49,7 @@ public class Main {
             //two player game
             if (answer.equals("2")){
 
-                System.out.print("host or client?");
+                System.out.print("host or client? ");
                 answer = UsefullFunctions.getValidInput(in, new String[]{"host", "client"});
 
                 if (answer.equals("host")) {

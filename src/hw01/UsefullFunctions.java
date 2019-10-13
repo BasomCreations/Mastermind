@@ -20,6 +20,9 @@ package hw01;
 
 import java.util.Scanner;
 
+/**
+ * Utility class for useful functions
+ */
 public final class UsefullFunctions {
 
     /**
@@ -37,7 +40,25 @@ public final class UsefullFunctions {
                     return s;
                 }
             }
-            System.out.println("Error: Please enter valid input");
+            System.out.print("Error: Please enter valid input: ");
         }
+    }
+
+    /**
+     * Repeatedly asks the user to enter an input until it is numeric and integer
+     * @param in scanner
+     * @return numeric input
+     */
+    public static int getIntegerInput(Scanner in){
+        while (true){
+            String inp = in.nextLine();
+            try{
+                int intInput = Integer.parseInt(inp);
+                return intInput;
+            } catch (Exception e){
+                System.out.print("Error: Please enter numeric input: ");
+            }
+        }
+
     }
 }

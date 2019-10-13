@@ -22,13 +22,37 @@ import java.io.IOException;
 import java.net.SocketException;
 import java.util.Scanner;
 
+
+/**
+ * Class to manage game on server side
+ */
 public class TwoPlayerGameServerSide {
 
+    /**
+     * Mastermind board object
+     */
     private MasterMindBoard board;
+
+    /**
+     * Secret code (shared between both players)
+     */
     private int[] secretCode;
+
+    /**
+     * GameServer object to manage networking
+     */
     private GameServer server;
+
+    /**
+     * Host player name
+     */
     private String hostPlayerName;
 
+    /**
+     * Constructor
+     * @param hostPlayerName
+     * @throws IOException
+     */
     public TwoPlayerGameServerSide(String hostPlayerName) throws IOException {
 
         this.secretCode = MasterMindBoard.generateRandomSecretCode();
@@ -36,6 +60,10 @@ public class TwoPlayerGameServerSide {
         this.hostPlayerName = hostPlayerName;
     }
 
+    /**
+     * Method to play game in command line interface
+     * @throws Exception
+     */
     public void playCommandLine() throws Exception {
         System.out.println("Your ip is: " + server.getIp());
         System.out.println("The port is: " + server.getPort());
@@ -51,10 +79,7 @@ public class TwoPlayerGameServerSide {
                 //Send secret code to client
                 server.sendObject(this.getSecretCode());
                 Protocol response = (Protocol)server.readObject();
-                if (!response.equals(Protocol.RECEIVED)){
-                    System.out.println("Something went wrong...");
-                    return;
-                }
+
 
                 board = new MasterMindBoard(secretCode);
 

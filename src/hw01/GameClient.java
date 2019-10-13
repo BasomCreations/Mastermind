@@ -21,14 +21,28 @@ package hw01;
 import java.io.*;
 import java.net.Socket;
 
+
+/**
+ * Class to manage the sockets on the client side
+ */
 public class GameClient {
 
+    /**Socket object */
     Socket clientSocket;
+
+    /**Object Output Stream */
     ObjectOutputStream objOut;
+
+    /**Object input stream */
     ObjectInputStream objIn;
 
 
-
+    /**
+     * Connects to server
+     * @param ipadress ip adress of the server
+     * @param port port
+     * @throws IOException if something goes wrong when trying to connect
+     */
     public void connectToServer(String ipadress, int port) throws IOException {
         clientSocket = new Socket(ipadress, port);
 
@@ -38,16 +52,30 @@ public class GameClient {
     }
 
 
+    /**
+     * Read object sent from host
+     * @return object received
+     * @throws IOException
+     * @throws ClassNotFoundException
+     */
     public Object readObject() throws IOException, ClassNotFoundException {
         return objIn.readObject();
     }
 
-
+    /**
+     * Send object to host
+     * @param o object to be sent
+     * @throws IOException
+     */
     public void sendObject(Object o) throws IOException {
         objOut.writeObject(o);
     }
 
 
+    /**
+     * Close connection
+     * @throws IOException
+     */
     public void close() throws IOException {
         clientSocket.close();
     }

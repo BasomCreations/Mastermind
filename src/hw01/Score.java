@@ -20,13 +20,38 @@ package hw01;
 
 import java.io.Serializable;
 
+/**
+ * Class for score objects
+ */
 public class Score implements Serializable {
 
+    /**
+     * Number of turns taken to beat the game
+     */
     private int turns;
+
+    /**
+     * Time (in seconds) taken to beat the game
+     */
     private int time;
+
+    /**
+     * Name of the player
+     */
     private String name;
+
+    /**
+     * Wether the game was beaten or not
+     */
     private boolean win;
 
+    /**
+     * Constructor
+     * @param turns turns to beat the game
+     * @param time time taken (s)
+     * @param name name of player
+     * @param win whether the game was beaten or not
+     */
     public Score(int turns, int time, String name, boolean win) {
         this.turns = turns;
         this.time = time;
@@ -46,6 +71,10 @@ public class Score implements Serializable {
         return name;
     }
 
+    /**
+     * Nice String representation of a players results
+     * @return
+     */
     @Override
     public String toString() {
         int intTime = (int) time;
