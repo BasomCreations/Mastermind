@@ -118,7 +118,7 @@ public class TwoPlayerGameServerSide {
                     // If Client does not want to play again, quit
                     if (!playAgain.equals(Protocol.READY)) {
                         play = false;
-                        System.out.println("Opponent has left the game");
+                        System.out.println("Opponent has disconnected");
                     }
                     // Otherwise, both want to play again, and generate new code
                     else {
@@ -130,6 +130,10 @@ public class TwoPlayerGameServerSide {
         } catch (SocketException e) {
             System.out.println("Opponent has disconnected");;
         }
+
+        //Close connections
+        server.closeClientScoket();
+        server.closeServerSocket();
     }
 
 

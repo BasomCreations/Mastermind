@@ -99,7 +99,7 @@ public class TwoPlayerGameClientSide {
                     System.out.println("Waiting for host...");
                     // If host does not want to play again, quit
                     if (!((Protocol) gameClient.readObject()).equals(Protocol.READY)) {
-                        System.out.println("Host does not want to play :/");
+                        System.out.println("Opponent has disconnected");
                         play = false;
                     }
                     // Otherwise, both want to play again
@@ -108,6 +108,8 @@ public class TwoPlayerGameClientSide {
         } catch (SocketException e) {
             System.out.println("Opponent has disconnected");
         }
+
+        gameClient.close();
     }
 
 
