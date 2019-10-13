@@ -78,9 +78,9 @@ public class TwoPlayerGameServerSide {
                 System.out.println(scores);
 
                 // See if Host wants to play again
-                System.out.println("Do you want to play again? [yes/no]");
+                System.out.println("Do you want to rematch your opponent? [yes/no]");
                 Scanner in = new Scanner(System.in);
-                String answer = in.nextLine();
+                String answer = UsefullFunctions.getValidInput(in, new String[]{"yes", "no"});
                 // If Host does not want to play again, quit
                 if (answer.equalsIgnoreCase("no")) {
                     server.sendObject(Protocol.QUIT);
@@ -104,8 +104,6 @@ public class TwoPlayerGameServerSide {
             }
         } catch (SocketException e) {
             System.out.println("Opponent has disconnected");;
-        } finally {
-            System.out.println("Thank you for playing. Goodbye!");
         }
     }
 

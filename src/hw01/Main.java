@@ -69,11 +69,12 @@ public class Main {
             }
 
             //Check if the player wants to play another game
-            System.out.println("\n Do you want to do a new game? [yes/no]");
+            System.out.println("\n Do you want to start a new game? [yes/no]");
             answer = UsefullFunctions.getValidInput(in, new String[]{"yes", "no"});
             if (answer.equals("no")){break;}
 
         }
+        System.out.println("Thank you for playing. Goodbye!");
     }
 
 

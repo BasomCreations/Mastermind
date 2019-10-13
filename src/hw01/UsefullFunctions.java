@@ -30,7 +30,7 @@ public final class UsefullFunctions {
      */
     public static String getValidInput(Scanner in, String[] inputOptions){
         while (true) {
-            String inp = in.nextLine();
+            String inp = in.nextLine().trim();
             for (String s :
                     inputOptions) {
                 if (s.equals(inp)) {
