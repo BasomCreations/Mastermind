@@ -18,6 +18,7 @@
  */
 package hw01;
 
+import java.net.SocketException;
 import java.util.Scanner;
 
 public class TwoPlayerGameClientSide {
@@ -45,48 +46,53 @@ public class TwoPlayerGameClientSide {
 
         boolean play = true;
 
-        while (play) {
-            //Receive secret code and confirm reception
-            int[] code = (int[])gameClient.readObject();
-            gameClient.sendObject(Protocol.RECEIVED);
+        try {
+            while (play) {
+                //Receive secret code and confirm reception
+                int[] code = (int[])gameClient.readObject();
+                gameClient.sendObject(Protocol.RECEIVED);
 
 
-            board = new MasterMindBoard(code);
-            board.playCommandLine();
+                board = new MasterMindBoard(code);
+                board.playCommandLine();
 
-            Score score = new Score(board.getGuesses(), board.getPlayTime(), this.clientName, board.checkWin());
+                Score score = new Score(board.getGuesses(), board.getPlayTime(), this.clientName, board.checkWin());
 
-            gameClient.sendObject(score);
-            System.out.println("Waiting for the server...");
-            Protocol response = (Protocol) gameClient.readObject();
+                gameClient.sendObject(score);
+                System.out.println("Waiting for the server...");
+                Protocol response = (Protocol) gameClient.readObject();
 
-            GameResults scores = (GameResults) gameClient.readObject();
+                GameResults scores = (GameResults) gameClient.readObject();
 
-            System.out.println("\nResults:");
-            System.out.println(scores);
+                System.out.println("\nResults:");
+                System.out.println(scores);
 
-            // See if Client wants to play again
-            System.out.println("Do you want to play again? [yes/no]");
-            String answer = in.nextLine();
-            // If Client does not want to play again, quit
-            if (answer.equalsIgnoreCase("no")) {
-                play = false;
-                Protocol quit = Protocol.QUIT;
-                gameClient.sendObject(quit);
-            }
-            // Otherwise, see if host wants to play again
-            else {
-                Protocol again = Protocol.READY;
-                gameClient.sendObject(again);
-                System.out.println("Waiting for host...");
-                // If host does not want to play again, quit
-                if (!((Protocol) gameClient.readObject()).equals(Protocol.READY)) {
-                    System.out.println("Host does not want to play :/");
+                // See if Client wants to play again
+                System.out.println("Do you want to play again? [yes/no]");
+                String answer = in.nextLine();
+                // If Client does not want to play again, quit
+                if (answer.equalsIgnoreCase("no")) {
                     play = false;
+                    Protocol quit = Protocol.QUIT;
+                    gameClient.sendObject(quit);
                 }
-                // Otherwise, both want to play again
+                // Otherwise, see if host wants to play again
+                else {
+                    Protocol again = Protocol.READY;
+                    gameClient.sendObject(again);
+                    System.out.println("Waiting for host...");
+                    // If host does not want to play again, quit
+                    if (!((Protocol) gameClient.readObject()).equals(Protocol.READY)) {
+                        System.out.println("Host does not want to play :/");
+                        play = false;
+                    }
+                    // Otherwise, both want to play again
+                }
             }
+        } catch (SocketException e) {
+            System.out.println("Opponent has disconnected");
+        } finally {
+            System.out.println("Thank you for playing. Goodbye!");
         }
-        System.out.println("Thank you for playing. Goodbye!");
     }
 }
