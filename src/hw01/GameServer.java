@@ -128,7 +128,7 @@ public class GameServer {
      * Closes connection with client
      * @throws IOException
      */
-    public void closeClientScoket() throws IOException {
+    public void closeClientSocket() throws IOException {
         this.clientSocket.close();
     }
 

@@ -132,7 +132,7 @@ public class TwoPlayerGameServerSide {
         }
 
         //Close connections
-        server.closeClientScoket();
+        server.closeClientSocket();
         server.closeServerSocket();
     }
 
