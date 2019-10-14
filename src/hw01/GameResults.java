@@ -38,7 +38,7 @@ public class GameResults implements Serializable {
 
     /**
      * Add a new score to the list
-     * @param score
+     * @param score Score object
      */
     public void addScore(Score score) {
         scores.add(score);
@@ -64,7 +64,7 @@ public class GameResults implements Serializable {
     public void sortByTime() {
         scores.sort((Score s1, Score s2) -> {
             if (s1.getTime() != s2.getTime()) {
-                return Integer.compare(s1.getTurns(), s2.getTurns());
+                return Integer.compare(s1.getTime(), s2.getTime());
             } else {
                 return Integer.compare(s1.getTurns(), s2.getTurns());
             }
@@ -87,5 +87,13 @@ public class GameResults implements Serializable {
             s += counter++ + ". " + sc.toString() + "\n";
         }
         return s;
+    }
+
+    /**
+     * Retrieves the List of Scores
+     * @return List of Scores
+     */
+    public List<Score> getScores() {
+        return scores;
     }
 }
