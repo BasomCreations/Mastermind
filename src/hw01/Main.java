@@ -43,14 +43,14 @@ public class Main {
         //After each game the player can either keep playing or terminate the program
         while (true){
 
-            System.out.println("Do you want a single or 2 player game? [1/2]");
+            System.out.println("Do you want to play a single or multi-player game? [1/2]");
             String answer = UsefullFunctions.getValidInput(in, new String[]{"1", "2"});
 
             //two player game
             if (answer.equals("2")){
 
-                System.out.print("host or client? ");
-                answer = UsefullFunctions.getValidInput(in, new String[]{"host", "client"});
+                System.out.print("Are you hosting the game or joining? [host/join]");
+                answer = UsefullFunctions.getValidInput(in, new String[]{"host", "join"});
 
                 if (answer.equals("host")) {
                     TwoPlayerGameServerSide hostBoard = new TwoPlayerGameServerSide(name);
