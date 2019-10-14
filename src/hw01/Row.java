@@ -22,17 +22,17 @@ package hw01;
 /**
  * Row class
  * row objects store the number of correct pegs, pegs in incorrect position and incorrect pegs
- * from a user's guess in the masterMind game
+ * from a user's guess in the MasterMind game
  */
 public class Row {
 
     /**
-     * NUmber of correct pegs
+     * Number of correct pegs
      */
     private int correctPegs;
 
     /**
-     * NUmber of pegs in incorrect position
+     * Number of pegs in incorrect position
      */
     private int pegsInCorrectPosition;
 
