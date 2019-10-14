@@ -40,6 +40,9 @@ class MasterMindBoardTest {
         guessResult = board.guess(new int[]{3, 3, 0, 3});
         assertEquals("*+--", guessResult.toString());
 
+        guessResult = board.guess(new int[]{1, 3, 3, 5});
+        assertEquals("****", guessResult.toString());
+
     }
 
 
@@ -54,5 +57,30 @@ class MasterMindBoardTest {
         assertThrows(IllegalArgumentException.class, () -> new MasterMindBoard(new int[]{7, 7, 7, 7}));
     }
 
+    /**
+     * Test checkWin method
+     */
+    @Test
+    void checkWin() throws Exception {
+        assertEquals(false, board.checkWin());
 
+        board.guess(new int[] {1,3,4,4});
+        assertEquals(false, board.checkWin());
+
+        board.guess(new int[]{1, 3, 3, 5});
+        assertEquals(true, board.checkWin());
+    }
+
+    /**
+     * Test getGuesses method
+     */
+    @Test
+    void getGuesses() throws Exception {
+        assertEquals(0, board.getGuesses());
+        board.guess(new int[] {1,3,4,4});
+        board.guess(new int[] {1,2,3,4});
+        board.guess(new int[]{1, 3, 3, 5});
+        assertEquals(3, board.getGuesses());
+
+    }
 }

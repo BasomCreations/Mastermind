@@ -221,18 +221,16 @@ public class MasterMindBoard {
             System.out.print(inputStr + " --> " + result.toString());
 
             if(this.win){
-                System.out.println("    Congratulations you guessed!");
+                System.out.printf("%46s\n", "Congratulations you guessed correctly!");
                 break;
             } else {
                 if (this.currentRow > MAXIMUM_ROWS){
-                    System.out.println("    You Lost! You run out of attempts!");
+                    System.out.printf("%42s\n", "You Lost! You ran out of attempts!");
                     System.out.println("The code was " + Arrays.toString(this.secretCode).replaceAll("[\\s\\[\\],]", ""));
                 } else {
-                    System.out.printf("    Try again. %d guesses left\n", MAXIMUM_ROWS - this.currentRow + 1);
+                    System.out.printf("%18s %d guesses left\n", "Try again.", MAXIMUM_ROWS - this.currentRow + 1);
                 }
             }
-
-
         }
 
         this.finishTime = System.nanoTime();
