@@ -44,13 +44,13 @@ public class Main {
         while (true){
 
             System.out.println("Do you want to play a single or multi-player game? [1/2]");
-            String answer = UsefullFunctions.getValidInput(in, new String[]{"1", "2"});
+            String answer = MasterMindUtility.getValidInput(in, new String[]{"1", "2"});
 
             //two player game
             if (answer.equals("2")){
 
                 System.out.print("Are you hosting the game or joining? [host/join]");
-                answer = UsefullFunctions.getValidInput(in, new String[]{"host", "join"});
+                answer = MasterMindUtility.getValidInput(in, new String[]{"host", "join"});
 
                 if (answer.equals("host")) {
                     TwoPlayerGameServerSide hostBoard = new TwoPlayerGameServerSide(name);
@@ -70,7 +70,7 @@ public class Main {
 
             //Check if the player wants to play another game
             System.out.println("\nDo you want to start a new game? [yes/no]");
-            answer = UsefullFunctions.getValidInput(in, new String[]{"yes", "no"});
+            answer = MasterMindUtility.getValidInput(in, new String[]{"yes", "no"});
             if (answer.equals("no")){break;}
 
         }

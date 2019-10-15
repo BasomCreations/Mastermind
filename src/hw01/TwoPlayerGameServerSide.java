@@ -3,7 +3,7 @@
  * Fall 2019
  * Instructor: Prof. Brian King
  *
- * Name: Sebastian Ascoli
+ * Name: Sebastian Ascoli and Jonathan Basom
  * Section: 11 am
  * Date: 10/10/2019
  * Time: 1:12 PM
@@ -55,7 +55,7 @@ public class TwoPlayerGameServerSide {
      */
     public TwoPlayerGameServerSide(String hostPlayerName) throws IOException {
 
-        this.secretCode = MasterMindBoard.generateRandomSecretCode();
+        this.secretCode = MasterMindUtility.generateRandomSecretCode();
         this.server = new GameServer();
         this.hostPlayerName = hostPlayerName;
     }
@@ -105,7 +105,7 @@ public class TwoPlayerGameServerSide {
                 // See if Host wants to play again
                 System.out.println("Do you want to rematch your opponent? [yes/no]");
                 Scanner in = new Scanner(System.in);
-                String answer = UsefullFunctions.getValidInput(in, new String[]{"yes", "no"});
+                String answer = MasterMindUtility.getValidInput(in, new String[]{"yes", "no"});
                 // If Host does not want to play again, quit
                 if (answer.equalsIgnoreCase("no")) {
                     server.sendObject(Protocol.QUIT);
@@ -122,7 +122,7 @@ public class TwoPlayerGameServerSide {
                     }
                     // Otherwise, both want to play again, and generate new code
                     else {
-                        this.secretCode = this.board.generateRandomSecretCode();
+                        this.secretCode = MasterMindUtility.generateRandomSecretCode();
                         server.sendObject(Protocol.READY);
                     }
                 }

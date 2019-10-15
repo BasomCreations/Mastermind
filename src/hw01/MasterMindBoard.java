@@ -21,7 +21,6 @@ package hw01;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.Random;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 
@@ -66,7 +65,6 @@ public class MasterMindBoard {
      */
     private int[] secretCode = new int[ROW_SIZE];
 
-
     /**
      * Start time
      */
@@ -83,46 +81,27 @@ public class MasterMindBoard {
     public MasterMindBoard() {
         this.currentRow = 1;
         this.win = false;
-        int [] code = this.generateRandomSecretCode();
+        int [] code = MasterMindUtility.generateRandomSecretCode();
         this.secretCode = code;
-
     }
 
     /**
      * Alternate constructor in which you specify the secret code
-     * @param secretCode
+     * @param secretCode Array of 4 int that represent the secret code
      */
     public MasterMindBoard(int[] secretCode) throws IllegalArgumentException {
         this.currentRow = 1;
         this.win = false;
 
         //Make sure secret code is valid
-        if (!this.isSecretCodeValid(secretCode)){throw new IllegalArgumentException("Invalid Secret code");}
+        if (!MasterMindUtility.isSecretCodeValid(secretCode)){throw new IllegalArgumentException("Invalid Secret code");}
 
         this.secretCode = secretCode;
-
     }
 
     /**
-     * Cehck is secret code provided in the constructor is valid
-     * @param secretCode secret code array of integers
-     * @return boolean stating weather code is valid or not
-     */
-    private boolean isSecretCodeValid(int[] secretCode){
-        if (secretCode.length != ROW_SIZE) {return false;}
-        for (int digit:
-                secretCode) {
-            if (digit < MIN_SLOT_VALUE || digit > MAX_SLOT_VALUE) {
-                return false;
-            }
-        }
-        return true;
-    }
-
-
-    /**
-     * Method to guess the secret code, returns a row object containing the correect/correct but incorrect position /
-     * incorrect results from the guess
+     * Method to guess the secret code, returns a row object containing the correct peg and position, correct peg but incorrect position,
+     * and incorrect results from the guess
      * @param guesses the array of ints the user is guessing
      * @return a row object which contains the number of correct, correct but wrong position and incorrect
      * guesses from the user
@@ -139,33 +118,16 @@ public class MasterMindBoard {
             throw new IllegalArgumentException("Number of guesses must be " + ROW_SIZE);
         }
 
-        //Get list of temporary list of secret code elements
-        List<Integer> tempCode = Arrays.stream(this.secretCode).boxed().collect(Collectors.toList());
-        int correctPegs = 0;
-        for (int i = 0; i < guesses.length; i++) {
-            if (guesses[i] == this.secretCode[i]){
-                correctPegs++;
-                //Cast to object to make sure it removes the actual value instead of the index
-                tempCode.remove((Object)guesses[i]);
-                guesses[i] = -1;
-            }
-        }
+        //Get temporary list of guessed secret code elements
+        List<Integer> guessList = Arrays.stream(this.secretCode).boxed().collect(Collectors.toList());
 
-        int pegsIncorrectPosition = 0;
-        for (int guess:
-             guesses) {
-            if (tempCode.contains(guess)){
-                pegsIncorrectPosition++;
-                //Cast to object to make sure it removes the actual value instead of the index
-                tempCode.remove((Object)guess);
-            }
-        }
+        int correctPegs = findNumberCorrectPegs(guessList, guesses);
+        int pegsIncorrectPosition = findNumberIncorrectPegs(guessList, guesses);
 
         this.currentRow++;
 
         if (correctPegs == ROW_SIZE) {
             this.win = true;
-
         }
 
         return new Row(correctPegs, pegsIncorrectPosition, ROW_SIZE - correctPegs - pegsIncorrectPosition);
@@ -181,22 +143,6 @@ public class MasterMindBoard {
     }
 
     /**
-     * Generate random secret code
-     */
-
-    public static int[] generateRandomSecretCode() {
-
-        int[] secretCode = new int[ROW_SIZE];
-
-        Random rand = new Random();
-        for (int i = 0; i < secretCode.length; i++) {
-            secretCode[i] = rand.nextInt(MAX_SLOT_VALUE) + MIN_SLOT_VALUE;
-        }
-        return secretCode;
-    }
-
-
-    /**
      * Method to play the game in a command line interface
      */
     public void playCommandLine() throws Exception {
@@ -210,13 +156,13 @@ public class MasterMindBoard {
         for (int i = 1; i <= this.MAXIMUM_ROWS; i++) {
             System.out.print("Guess " + i + ": ");
             String inputStr = in.nextLine();
-            while (!isValidInput(inputStr)) {
+            while (!MasterMindUtility.isValidInput(inputStr)) {
                 System.out.println("Please provide valid input");
                 System.out.print("Guess " + i + ": ");
                 inputStr = in.nextLine();
             }
 
-            int[] inputArray = convertStrToArray(inputStr);
+            int[] inputArray = MasterMindUtility.convertStrToArray(inputStr);
             Row result = this.guess(inputArray);
             System.out.print(inputStr + " --> " + result.toString());
 
@@ -238,37 +184,6 @@ public class MasterMindBoard {
     }
 
     /**
-     * Checks if the guess code string is in the right format
-     * @param input input string
-     * @return boolean
-     */
-    private static boolean isValidInput(String input) {
-        if (input.length() != ROW_SIZE) {
-            return false;
-        }
-        String pattern = String.format("[%d-%d]{%d}", MIN_SLOT_VALUE, MAX_SLOT_VALUE, ROW_SIZE);
-        return input.matches(pattern);
-    }
-
-
-    /**
-     * Converts guess string (which should be already validated) into an array that the guess method
-     * can take as a parameter
-     * @param input string with user's guess
-     * @return array of integers the guess method can take as parameter
-     */
-    private static int[] convertStrToArray(String input) {
-        int[] intArray = new int[ROW_SIZE];
-        for (int i = 0; i < input.length(); i++) {
-
-            char c = input.charAt(i);
-            intArray[i] = Integer.parseInt(String.valueOf(c));
-        }
-
-        return intArray;
-    }
-
-    /**
      * Sets start time
      */
     private void setStartTime(){
@@ -284,7 +199,6 @@ public class MasterMindBoard {
         return time;
     }
 
-
     /**
      * Returns the number of guesses the player has taken
      * @return number of guesses
@@ -293,7 +207,41 @@ public class MasterMindBoard {
         return this.currentRow - 1;
     }
 
+    /**
+     * Determine the number of correct pegs in the correct position
+     * @param guessList List of int that contains the user's guesses
+     * @param guesses int[] containing all the user's guesses
+     * @return int representing number of correct pegs in the correct position
+     */
+    private int findNumberCorrectPegs(List<Integer> guessList, int[] guesses) {
+        int correctPegs = 0;
+        for (int i = 0; i < guesses.length; i++) {
+            if (guesses[i] == this.secretCode[i]) {
+                correctPegs++;
+                //Cast to object to make sure it removes the actual value instead of the index
+                guessList.remove((Object) guesses[i]);
+                guesses[i] = -1;
+            }
+        }
+        return correctPegs;
+    }
 
-
-
+    /**
+     * Determine the number of correct pegs in the incorrect position
+     * @param guessList List of int that contains user's guesses, excluding the correct pegs in the correct position
+     * @param guesses int[] containing all the user's guesses
+     * @return int representing number of correct pegs in the incorrect position
+     */
+    private int findNumberIncorrectPegs(List<Integer> guessList, int[] guesses) {
+        int pegsIncorrectPosition = 0;
+        for (int guess:
+                guesses) {
+            if (guessList.contains(guess)){
+                pegsIncorrectPosition++;
+                //Cast to object to make sure it removes the actual value instead of the index
+                guessList.remove((Object)guess);
+            }
+        }
+        return pegsIncorrectPosition;
+    }
 }

@@ -18,7 +18,6 @@
  */
 package hw01;
 
-import java.io.IOException;
 import java.net.SocketException;
 import java.util.Scanner;
 
@@ -85,7 +84,7 @@ public class TwoPlayerGameClientSide {
 
                 // See if Client wants to play again
                 System.out.println("Do you want to rematch your opponent? [yes/no]");
-                String answer = UsefullFunctions.getValidInput(in, new String[]{"yes", "no"});
+                String answer = MasterMindUtility.getValidInput(in, new String[]{"yes", "no"});
                 // If Client does not want to play again, quit
                 if (answer.equalsIgnoreCase("no")) {
                     play = false;
@@ -129,7 +128,7 @@ public class TwoPlayerGameClientSide {
                 System.out.print("Please enter the host's ip address: ");
                 String ipadress = in.nextLine();
                 System.out.print("Please enter the host's port number: ");
-                int portNumber = UsefullFunctions.getIntegerInput(in);
+                int portNumber = MasterMindUtility.getIntegerInput(in);
                 GameClient client = new GameClient();
                 client.connectToServer(ipadress, portNumber);
                 return client;
