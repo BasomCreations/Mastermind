@@ -22,6 +22,8 @@ import java.io.*;
 import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Class to manage socket on the server side
@@ -144,6 +146,22 @@ public class GameServer {
     public InetAddress getIp() {
         return ip;
     }
+
+    /**
+     * returns ip address of server
+     * @see
+     * <a href = "https://stackoverflow.com/questions/4662215/how-to-extract-a-substring-using-regex">
+     * https://stackoverflow.com/questions/4662215/how-to-extract-a-substring-using-regex</a>
+     *
+     * @return String ip address
+     */
+    public String getFormattedIP(){
+        Pattern pattern = Pattern.compile("[1-9]{1,3}\\.[1-9]{1,3}\\.[1-9]{1,3}\\.[1-9]{1,3}");
+        Matcher matcher = pattern.matcher(ip.toString());
+        matcher.find();
+        return matcher.group();
+    }
+
 
     public int getPort() {
         return port;

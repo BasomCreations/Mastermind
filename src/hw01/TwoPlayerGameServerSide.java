@@ -65,7 +65,7 @@ public class TwoPlayerGameServerSide {
      * @throws Exception
      */
     public void playCommandLine() throws Exception {
-        System.out.println("Your ip is: " + server.getIp());
+        System.out.println("Your ip is: " + server.getFormattedIP());
         System.out.println("The port is: " + server.getPort());
         System.out.println("Waiting for client to connect...");
         server.connectToClient();
