@@ -51,6 +51,8 @@ public class Score implements Serializable {
      * @param time time taken (s)
      * @param name name of player
      * @param win whether the game was beaten or not
+     * @author Jonathan
+     * @author Sebastian
      */
     public Score(int turns, int time, String name, boolean win) {
         this.turns = turns;
@@ -74,6 +76,8 @@ public class Score implements Serializable {
     /**
      * Nice String representation of a players results
      * @return
+     * @author Jonathan
+     * @author Sebastian
      */
     @Override
     public String toString() {

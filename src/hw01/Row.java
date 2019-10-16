@@ -46,6 +46,8 @@ public class Row {
      * @param correctPegs number of correct pegs (red or *)
      * @param pegsInCorrectPosition number of pegs in incorrect position (white or +)
      * @param incorrectPegs number of incorrect pegs (-)
+     * @author Jonathan
+     * @author Sebastian
      */
     public Row(int correctPegs, int pegsInCorrectPosition, int incorrectPegs) {
         this.correctPegs = correctPegs;
@@ -71,6 +73,8 @@ public class Row {
      * for example: a row object with 2 correct pegs, 1 peg in incorrect position and
      * 1 incorrect peg would be represented as **+-
      * @return
+     * @author Jonathan
+     * @author Sebastian
      */
     @Override
     public String toString() {

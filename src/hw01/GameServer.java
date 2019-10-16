@@ -81,6 +81,7 @@ public class GameServer {
      * Default constructor with default port number
      * @throws IOException
      * @author Sebastian
+     * @author Jonnathan
      */
     public GameServer() throws IOException {
         this.ip = InetAddress.getLocalHost();
@@ -136,6 +137,8 @@ public class GameServer {
      * @param o
      * @throws IOException
      * @throws ClassNotFoundException
+     * @author Jonathan
+     * @author Sebastian
      */
     public void sendObject(Object o) throws IOException, ClassNotFoundException {
         this.objOut.writeObject(o);
@@ -144,6 +147,8 @@ public class GameServer {
     /**
      * Closes connection with client
      * @throws IOException
+     * @author Jonathan
+     * @author Sebastian
      */
     public void closeClientSocket() throws IOException {
         this.clientSocket.close();
@@ -152,6 +157,8 @@ public class GameServer {
     /**
      * Closes server socket
      * @throws IOException
+     * @author Jonathan
+     * @author Sebastian
      */
     public void closeServerSocket() throws IOException {
         this.serverSocket.close();
@@ -179,7 +186,6 @@ public class GameServer {
         matcher.find();
         return matcher.group();
     }
-
 
     public int getPort() {
         return port;

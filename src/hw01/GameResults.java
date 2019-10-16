@@ -31,6 +31,8 @@ public class GameResults implements Serializable {
 
     /**
      * Constructor
+     * @author Jonathan
+     * @author Sebastian
      */
     public GameResults() {
         scores = new ArrayList<>();
@@ -39,6 +41,8 @@ public class GameResults implements Serializable {
     /**
      * Add a new score to the list
      * @param score Score object
+     * @author Jonathan
+     * @author Sebastian
      */
     public void addScore(Score score) {
         scores.add(score);
@@ -46,6 +50,8 @@ public class GameResults implements Serializable {
 
     /**
      * Sort scores by number of moves
+     * @author Jonathan
+     * @author Sebastian
      */
     public void sortByMoves() {
         scores.sort((Score s1, Score s2) -> {
@@ -60,6 +66,8 @@ public class GameResults implements Serializable {
 
     /**
      * Sort scores by time
+     * @author Jonathan
+     * @author Sebastian
      */
     public void sortByTime() {
         scores.sort((Score s1, Score s2) -> {
@@ -75,6 +83,8 @@ public class GameResults implements Serializable {
 
     /**
      * Convert to string displaying the results in a nice looking way
+     * @author Jonathan
+     * @author Sebastian
      * @return
      */
     @Override
@@ -92,6 +102,8 @@ public class GameResults implements Serializable {
     /**
      * Retrieves the List of Scores
      * @return List of Scores
+     * @author Jonathan
+     * @author Sebastian
      */
     public List<Score> getScores() {
         return scores;

@@ -52,6 +52,8 @@ public class GameClient {
      * @param ipadress ip adress of the server
      * @param port port
      * @throws IOException if something goes wrong when trying to connect
+     * @author Jonathan
+     * @author Sebastian
      */
     public void connectToServer(String ipadress, int port) throws IOException {
         clientSocket = new Socket(ipadress, port);
@@ -67,6 +69,8 @@ public class GameClient {
      * @return object received
      * @throws IOException
      * @throws ClassNotFoundException
+     * @author Jonathan
+     * @author Sebastian
      */
     public Object readObject() throws IOException, ClassNotFoundException {
         return objIn.readObject();
@@ -76,6 +80,8 @@ public class GameClient {
      * Send object to host
      * @param o object to be sent
      * @throws IOException
+     * @author Jonathan
+     * @author Sebastian
      */
     public void sendObject(Object o) throws IOException {
         objOut.writeObject(o);
@@ -85,6 +91,7 @@ public class GameClient {
     /**
      * Close connection
      * @throws IOException
+     * @author Sebastian
      */
     public void close() throws IOException {
         clientSocket.close();

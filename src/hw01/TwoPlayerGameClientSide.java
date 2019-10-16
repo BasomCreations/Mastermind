@@ -44,6 +44,8 @@ public class TwoPlayerGameClientSide {
     /**
      * Constructor
      * @param playername name of the player
+     * @author Jonathan
+     * @author Sebastian
      */
     public TwoPlayerGameClientSide(String playername) {
         this.clientName = playername;
@@ -52,6 +54,8 @@ public class TwoPlayerGameClientSide {
     /**
      * Play game in command line interface
      * @throws Exception
+     * @author Jonathan
+     * @author Sebastian
      */
     void playCommandLine() throws Exception {
         Scanner in = new Scanner(System.in);
@@ -117,6 +121,7 @@ public class TwoPlayerGameClientSide {
      * to connect to host
      * @param in scanner
      * @return GameClient object successfully connected to port
+     * @author Sebastian
      */
     private GameClient createGameClient (Scanner in){
 

@@ -69,6 +69,7 @@ public final class MasterMindUtility {
      * can take as a parameter
      * @param input string with user's guess
      * @return array of integers the guess method can take as parameter
+     * @author Jonathan
      */
     static int[] convertStrToArray(String input) {
         int[] intArray = new int[MasterMindBoard.ROW_SIZE];
@@ -85,6 +86,7 @@ public final class MasterMindUtility {
      * Checks if the guessed code string is in the right format
      * @param input input string
      * @return boolean
+     * @author Jonathan
      */
     static boolean isValidInput(String input) {
         if (input.length() != MasterMindBoard.ROW_SIZE) {
@@ -98,6 +100,7 @@ public final class MasterMindUtility {
      * Check if secret code provided in the constructor is valid
      * @param secretCode secret code array of integers
      * @return boolean stating weather code is valid or not
+     * @author Jonathan
      */
     static boolean isSecretCodeValid(int[] secretCode){
         if (secretCode.length != MasterMindBoard.ROW_SIZE) {return false;}
@@ -112,6 +115,7 @@ public final class MasterMindUtility {
 
     /**
      * Generate random secret code
+     * @author Jonathan
      */
     public static int[] generateRandomSecretCode() {
 
