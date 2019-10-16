@@ -166,6 +166,7 @@ public class GameServer {
      * </a>
      *
      * @return String ip address
+     * @author Sebastian
      */
     public String getFormattedIP(){
         Pattern pattern = Pattern.compile("[1-9]{1,3}\\.[1-9]{1,3}\\.[1-9]{1,3}\\.[1-9]{1,3}");

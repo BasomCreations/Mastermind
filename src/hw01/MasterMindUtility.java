@@ -30,7 +30,8 @@ public final class MasterMindUtility {
      * Repeatedly asks a user to enter an input until the input is valid
      * @param in scanner object
      * @param inputOptions string array wih valid input options
-     * @return
+     * @return String verified input
+     * @author Sebastian
      */
     public static String getValidInput(Scanner in, String[] inputOptions){
         while (true) {
@@ -49,6 +50,7 @@ public final class MasterMindUtility {
      * Repeatedly asks the user to enter an input until it is numeric and integer
      * @param in scanner
      * @return numeric input
+     * @author Sebastian
      */
     public static int getIntegerInput(Scanner in){
         while (true){
