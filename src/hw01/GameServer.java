@@ -3,8 +3,8 @@
  * Fall 2019
  * Instructor: Prof. Brian King
  *
- * Name: Sebastian Ascoli
- * Section: 11 am
+ * Name: Jonathan Basom and Sebastian Ascoli
+ * Section: 9 am / 11 am
  * Date: 10/9/2019
  * Time: 4:09 PM
  *

@@ -4,7 +4,7 @@
  * Instructor: Prof. Brian King
  *
  * Name: Sebastian Ascoli and Jonathan Basom
- * Section: 11 am
+ * Section: 9 am / 11 am
  * Date: 10/10/2019
  * Time: 1:12 PM
  *
