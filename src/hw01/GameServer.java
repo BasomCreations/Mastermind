@@ -159,9 +159,11 @@ public class GameServer {
 
     /**
      * returns ip address of server
+     *
      * @see
-     * <a href = "https://stackoverflow.com/questions/4662215/how-to-extract-a-substring-using-regex">
-     * https://stackoverflow.com/questions/4662215/how-to-extract-a-substring-using-regex</a>
+     * <a href="https://stackoverflow.com/questions/4662215/how-to-extract-a-substring-using-regex">
+     * Stack overflow reference on regex
+     * </a>
      *
      * @return String ip address
      */
