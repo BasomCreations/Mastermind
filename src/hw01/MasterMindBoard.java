@@ -77,6 +77,8 @@ public class MasterMindBoard {
 
     /**
      * Default Constructor
+     * @author Jonathan
+     * @author Sebastian
      */
     public MasterMindBoard() {
         this.currentRow = 1;
@@ -88,6 +90,8 @@ public class MasterMindBoard {
     /**
      * Alternate constructor in which you specify the secret code
      * @param secretCode Array of 4 int that represent the secret code
+     *  @author Jonathan
+     *  @author Sebastian
      */
     public MasterMindBoard(int[] secretCode) throws MasterMindBoardException {
         this.currentRow = 1;
@@ -114,6 +118,8 @@ public class MasterMindBoard {
      * guesses from the user
      * @throws Exception if the array does not have the correct size, or if the user tries to guess after
      * exceeding the maximum number of guesses
+     * @author Jonathan
+     * @author Sebastian
      */
     public Row guess(int[] guesses) throws Exception {
         if (this.currentRow > this.MAXIMUM_ROWS) {
@@ -143,7 +149,9 @@ public class MasterMindBoard {
 
     /**
      * Checks if the user has won the game
-     * @return
+     * @return boolean - true if the player has won the game
+     * @author Jonathan
+     * @author Sebastian
      */
     public boolean checkWin() {
         return this.win;
@@ -151,6 +159,8 @@ public class MasterMindBoard {
 
     /**
      * Method to play the game in a command line interface
+     * @author Jonathan
+     * @author Sebastian
      */
     public void playCommandLine() throws Exception {
 
@@ -192,6 +202,8 @@ public class MasterMindBoard {
 
     /**
      * Sets start time
+     * @author Jonathan
+     * @author Sebastian
      */
     private void setStartTime(){
         this.startTime = System.nanoTime();
@@ -200,6 +212,8 @@ public class MasterMindBoard {
     /**
      * Get total elapsed time in seconds
      * @return time
+     * @author Jonathan
+     * @author Sebastian
      */
     public int getPlayTime(){
         int time = (int)((this.finishTime - this.startTime) * Math.pow(10, -9));
@@ -209,6 +223,8 @@ public class MasterMindBoard {
     /**
      * Returns the number of guesses the player has taken
      * @return number of guesses
+     * @author Jonathan
+     * @author Sebastian
      */
     public int getGuesses(){
         return this.currentRow - 1;
@@ -219,6 +235,8 @@ public class MasterMindBoard {
      * @param guessList List of int that contains the user's guesses
      * @param guesses int[] containing all the user's guesses
      * @return int representing number of correct pegs in the correct position
+     * @author Jonathan
+     * @author Sebastian
      */
     private int findNumberCorrectPegs(List<Integer> guessList, int[] guesses) {
         int correctPegs = 0;
@@ -238,6 +256,8 @@ public class MasterMindBoard {
      * @param guessList List of int that contains user's guesses, excluding the correct pegs in the correct position
      * @param guesses int[] containing all the user's guesses
      * @return int representing number of correct pegs in the incorrect position
+     * @author Jonathan
+     * @author Sebastian
      */
     private int findNumberIncorrectPegs(List<Integer> guessList, int[] guesses) {
         int pegsIncorrectPosition = 0;
@@ -253,9 +273,16 @@ public class MasterMindBoard {
     }
 }
 
-
+/**
+ * Exception for MasterMindBoard object
+ * @author Sebastian
+ */
 class MasterMindBoardException extends Exception{
 
+    /**
+     * Constructor
+     * @param m String message to be displayed
+     */
     MasterMindBoardException(String m){
         super(m);
     }

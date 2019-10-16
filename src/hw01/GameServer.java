@@ -80,6 +80,7 @@ public class GameServer {
     /**
      * Default constructor with default port number
      * @throws IOException
+     * @author Sebastian
      */
     public GameServer() throws IOException {
         this.ip = InetAddress.getLocalHost();
@@ -89,9 +90,11 @@ public class GameServer {
     }
 
     /**
-     * COnstructor in which you specify port number
+     * Constructor in which you specify port number
      * @param port port number
      * @throws IOException
+     * @author Sebastian
+     * @author Jonathan
      */
     public GameServer(int port) throws IOException {
         this.ip = InetAddress.getLocalHost();
@@ -106,6 +109,7 @@ public class GameServer {
      * and then creates a client socket, it creates output and input
      * streams writers and readers
      * @throws IOException
+     * @author Sebastian
      */
     public void connectToClient() throws IOException {
         clientSocket = serverSocket.accept();
@@ -121,6 +125,7 @@ public class GameServer {
      * @return
      * @throws IOException
      * @throws ClassNotFoundException
+     * @author Sebastian
      */
     public Object readObject() throws IOException, ClassNotFoundException {
         return this.objIn.readObject();

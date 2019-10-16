@@ -31,6 +31,8 @@ public class Main {
     /**
      * Method containing all the game logic
      * @throws Exception
+     * @author Jonathan
+     * @author Sebastian
      */
     private static void playGame() throws Exception {
         Scanner in = new Scanner(System.in);

@@ -52,6 +52,8 @@ public class TwoPlayerGameServerSide {
      * Constructor
      * @param hostPlayerName
      * @throws IOException
+     * @author Sebastian
+     * @author Jonathan
      */
     public TwoPlayerGameServerSide(String hostPlayerName) throws IOException {
 
@@ -63,6 +65,8 @@ public class TwoPlayerGameServerSide {
     /**
      * Method to play game in command line interface
      * @throws Exception
+     * @author Sebastian
+     * @author Jonathan
      */
     public void playCommandLine() throws Exception {
         System.out.println("Your ip is: " + server.getFormattedIP());
