@@ -5,6 +5,11 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * JUnit tests to test the MasterMindBoard class
+ * @author Sebastian
+ * @author Jonathan
+ */
 class MasterMindBoardTest {
 
     MasterMindBoard board;
@@ -19,6 +24,8 @@ class MasterMindBoardTest {
 
     /**
      * Test guess method
+     * @author Sebastian
+     * @author Jonathan
      */
     @Test
     void guessTest() throws Exception {
@@ -48,6 +55,7 @@ class MasterMindBoardTest {
 
     /**
      * Test Constructor Exception
+     * @author Sebastian
      */
     @Test
     void testConstructorException(){
@@ -59,6 +67,7 @@ class MasterMindBoardTest {
 
     /**
      * Test checkWin method
+     * @author Jonathan
      */
     @Test
     void checkWin() throws Exception {
@@ -73,6 +82,7 @@ class MasterMindBoardTest {
 
     /**
      * Test getGuesses method
+     * @author Jonathan
      */
     @Test
     void getGuesses() throws Exception {

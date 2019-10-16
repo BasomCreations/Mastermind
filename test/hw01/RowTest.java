@@ -4,11 +4,18 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * JUnit test to test the Row class
+ * @author Sebastian
+ * @author Jonathan
+ */
 class RowTest {
 
 
     /**
      * Verify toString method of Row object
+     * @author Sebastian
+     * @author Jonathan
      */
     @Test
     void testToString() {

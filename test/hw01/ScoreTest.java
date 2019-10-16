@@ -4,10 +4,15 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * JUnit test to test the Score class
+ * @author Jonathan
+ */
 class ScoreTest {
 
     /**
      * Verify toString method of Score object
+     * @author Jonathan
      */
     @Test
     void testToString() {

@@ -8,6 +8,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * JUnit test for the GameResults object
+ * @author Jonathan
  */
 class GameResultsTest {
 

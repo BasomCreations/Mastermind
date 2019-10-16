@@ -8,6 +8,10 @@ import java.io.IOException;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * JUnit tests to test the GameServer and GameClient objects
+ * @author Sebastian
+ */
 class GameServerAndGameClientTests {
 
     GameServer server;
