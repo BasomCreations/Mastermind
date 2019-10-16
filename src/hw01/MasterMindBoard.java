@@ -89,12 +89,12 @@ public class MasterMindBoard {
      * Alternate constructor in which you specify the secret code
      * @param secretCode Array of 4 int that represent the secret code
      */
-    public MasterMindBoard(int[] secretCode) throws IllegalArgumentException {
+    public MasterMindBoard(int[] secretCode) throws MasterMindBoardException {
         this.currentRow = 1;
         this.win = false;
 
         //Make sure secret code is valid
-        if (!MasterMindUtility.isSecretCodeValid(secretCode)){throw new IllegalArgumentException("Invalid Secret code");}
+        if (!MasterMindUtility.isSecretCodeValid(secretCode)){throw new MasterMindBoardException("Invalid Secret code");}
 
         this.secretCode = secretCode;
     }
@@ -110,12 +110,12 @@ public class MasterMindBoard {
      */
     public Row guess(int[] guesses) throws Exception {
         if (this.currentRow > this.MAXIMUM_ROWS) {
-            throw new Exception("Exceeded maximum number of guesses");
+            throw new MasterMindBoardException("Exceeded maximum number of guesses");
         }
 
         //Verify dimension of guesses array
         if (guesses.length != ROW_SIZE) {
-            throw new IllegalArgumentException("Number of guesses must be " + ROW_SIZE);
+            throw new MasterMindBoardException("Number of guesses must be " + ROW_SIZE);
         }
 
         //Get temporary list of guessed secret code elements
@@ -244,4 +244,13 @@ public class MasterMindBoard {
         }
         return pegsIncorrectPosition;
     }
+}
+
+
+class MasterMindBoardException extends Exception{
+
+    MasterMindBoardException(String m){
+        super(m);
+    }
+
 }
