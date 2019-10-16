@@ -18,3 +18,7 @@ TCP/IP Sockets in Java by Michael J. Donahoo, Kenneth L. Calvert
 <a href="https://stackoverflow.com/questions/1073919/how-to-convert-int-into-listinteger-in-java">
 StackOverflow.com - How to convert int[] into List&lt;Integer&gt; in Java?
 </a>
+<br>
+<a href="https://stackoverflow.com/questions/4662215/how-to-extract-a-substring-using-regex">
+Stack Overflow Reference on Regex
+</a>
