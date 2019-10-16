@@ -102,6 +102,13 @@ public class MasterMindBoard {
     /**
      * Method to guess the secret code, returns a row object containing the correct peg and position, correct peg but incorrect position,
      * and incorrect results from the guess
+     *
+     * Part of this code was based on information found at www.stackoverflow.com
+     *
+     * @see
+     * <a href="https://stackoverflow.com/questions/1073919/how-to-convert-int-into-listinteger-in-java">
+     *     https://stackoverflow.com/questions/1073919/how-to-convert-int-into-listinteger-in-java</a>
+     *
      * @param guesses the array of ints the user is guessing
      * @return a row object which contains the number of correct, correct but wrong position and incorrect
      * guesses from the user

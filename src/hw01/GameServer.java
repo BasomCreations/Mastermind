@@ -25,6 +25,16 @@ import java.net.Socket;
 
 /**
  * Class to manage socket on the server side
+ *
+ * Ideas for this class and its code came from docs.oracle.com and learning.oreilly.com
+ *
+ * @see
+ * <a href="https://docs.oracle.com/javase/tutorial/networking/index.html.">
+ * Oracle's tutorial on networking
+ * </a>
+ * <a href="https://learning.oreilly.com/library/view/tcpip-sockets-in/9780080568782/ch02.html">
+ * TCP/IP Sockets in Java by Michael J. Donahoo, Kenneth L. Calvert
+ * </a>
  */
 public class GameServer {
 
@@ -105,7 +115,7 @@ public class GameServer {
 
 
     /**
-     * Reads oject sent from client
+     * Reads object sent from client
      * @return
      * @throws IOException
      * @throws ClassNotFoundException

@@ -24,6 +24,16 @@ import java.net.Socket;
 
 /**
  * Class to manage the sockets on the client side
+ *
+ * Ideas for this class and its code came from docs.oracle.com and learning.oreilly.com
+ *
+ * @see
+ * <a href="https://docs.oracle.com/javase/tutorial/networking/index.html.">
+ * Oracle's tutorial on networking
+ * </a>
+ * <a href="https://learning.oreilly.com/library/view/tcpip-sockets-in/9780080568782/ch02.html">
+ * TCP/IP Sockets in Java by Michael J. Donahoo, Kenneth L. Calvert
+ * </a>
  */
 public class GameClient {
 

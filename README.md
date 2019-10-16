@@ -14,3 +14,7 @@ Oracle's tutorial on networking
 <a href="https://learning.oreilly.com/library/view/tcpip-sockets-in/9780080568782/ch02.html">
 TCP/IP Sockets in Java by Michael J. Donahoo, Kenneth L. Calvert
 </a>
+<br>
+<a href="https://stackoverflow.com/questions/1073919/how-to-convert-int-into-listinteger-in-java">
+StackOverflow.com - How to convert int[] into List&lt;Integer&gt; in Java?
+</a>
