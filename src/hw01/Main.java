@@ -19,6 +19,11 @@
 package hw01;
 
 
+import hw01.game.MasterMindBoard;
+import hw01.game.MasterMindUtility;
+import hw01.game.TwoPlayerGameClientSide;
+import hw01.game.TwoPlayerGameServerSide;
+
 import java.util.Scanner;
 
 public class Main {

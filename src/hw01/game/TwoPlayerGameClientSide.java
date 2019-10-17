@@ -16,7 +16,10 @@
  *
  * ****************************************
  */
-package hw01;
+package hw01.game;
+
+import hw01.net.Protocol;
+import hw01.net.GameClient;
 
 import java.net.SocketException;
 import java.util.Scanner;
@@ -57,7 +60,7 @@ public class TwoPlayerGameClientSide {
      * @author Jonathan
      * @author Sebastian
      */
-    void playCommandLine() throws Exception {
+    public void playCommandLine() throws Exception {
         Scanner in = new Scanner(System.in);
         this.gameClient = createGameClient(in);
 

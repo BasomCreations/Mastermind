@@ -16,7 +16,10 @@
  *
  * ****************************************
  */
-package hw01;
+package hw01.game;
+
+import hw01.net.Protocol;
+import hw01.net.GameServer;
 
 import java.io.IOException;
 import java.net.SocketException;

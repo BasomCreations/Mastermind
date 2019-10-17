@@ -1,5 +1,7 @@
 package hw01;
 
+import hw01.game.GameResults;
+import hw01.game.Score;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

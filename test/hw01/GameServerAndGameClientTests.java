@@ -1,5 +1,8 @@
 package hw01;
 
+import hw01.net.GameClient;
+import hw01.net.GameServer;
+import hw01.net.Protocol;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

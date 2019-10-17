@@ -16,7 +16,7 @@
  *
  * ****************************************
  */
-package hw01;
+package hw01.game;
 
 
 import java.util.Arrays;
@@ -53,7 +53,12 @@ public class MasterMindBoard {
     /**
      * Max value of rows in the game
      */
-    final static int MAXIMUM_ROWS = 12;
+    final static int DEFAULT_MAXIMUM_ATTEMPTS = 12;
+
+    /**
+     * Determines if the user should have unlimited guesses
+     */
+    boolean unlimitedAttempts;
 
     /**
      * Size of each row
@@ -85,6 +90,7 @@ public class MasterMindBoard {
         this.win = false;
         int [] code = MasterMindUtility.generateRandomSecretCode();
         this.secretCode = code;
+        this.unlimitedAttempts = false;
     }
 
     /**
@@ -101,6 +107,22 @@ public class MasterMindBoard {
         if (!MasterMindUtility.isSecretCodeValid(secretCode)){throw new MasterMindBoardException("Invalid Secret code");}
 
         this.secretCode = secretCode;
+        this.unlimitedAttempts = false;
+    }
+
+    /**
+     * Alternate constructor in which you specify if the user has unlimited guesses
+     * @param unlimitedAttempts boolean to determine if the user has unlimited guesses
+     *  @author Jonathan
+     *  @author Sebastian
+     */
+    public MasterMindBoard(boolean unlimitedAttempts) throws MasterMindBoardException {
+        this.currentRow = 1;
+        this.win = false;
+
+        int [] code = MasterMindUtility.generateRandomSecretCode();
+        this.secretCode = code;
+        this.unlimitedAttempts = unlimitedAttempts;
     }
 
     /**
@@ -122,7 +144,7 @@ public class MasterMindBoard {
      * @author Sebastian
      */
     public Row guess(int[] guesses) throws Exception {
-        if (this.currentRow > this.MAXIMUM_ROWS) {
+        if (this.unlimitedAttempts == false && this.currentRow > this.DEFAULT_MAXIMUM_ATTEMPTS) {
             throw new MasterMindBoardException("Exceeded maximum number of guesses");
         }
 
@@ -166,11 +188,11 @@ public class MasterMindBoard {
 
         this.setStartTime();
 
-        System.out.printf("Guess my code using numbers between %d and %d. You have %d guesses\n", MIN_SLOT_VALUE, MAX_SLOT_VALUE, MAXIMUM_ROWS);
+        System.out.printf("Guess my code using numbers between %d and %d. You have %d guesses\n", MIN_SLOT_VALUE, MAX_SLOT_VALUE, DEFAULT_MAXIMUM_ATTEMPTS);
         Scanner in = new Scanner(System.in);
 
 
-        for (int i = 1; i <= this.MAXIMUM_ROWS; i++) {
+        for (int i = 1; i <= this.DEFAULT_MAXIMUM_ATTEMPTS; i++) {
             System.out.print("Guess " + i + ": ");
             String inputStr = in.nextLine();
             while (!MasterMindUtility.isValidInput(inputStr)) {
@@ -187,11 +209,11 @@ public class MasterMindBoard {
                 System.out.printf("%46s\n", "Congratulations you guessed correctly!");
                 break;
             } else {
-                if (this.currentRow > MAXIMUM_ROWS){
+                if (this.currentRow > DEFAULT_MAXIMUM_ATTEMPTS){
                     System.out.printf("%42s\n", "You Lost! You ran out of attempts!");
                     System.out.println("The code was " + Arrays.toString(this.secretCode).replaceAll("[\\s\\[\\],]", ""));
                 } else {
-                    System.out.printf("%18s %d guesses left\n", "Try again.", MAXIMUM_ROWS - this.currentRow + 1);
+                    System.out.printf("%18s %d guesses left\n", "Try again.", DEFAULT_MAXIMUM_ATTEMPTS - this.currentRow + 1);
                 }
             }
         }
@@ -273,18 +295,3 @@ public class MasterMindBoard {
     }
 }
 
-/**
- * Exception for MasterMindBoard object
- * @author Sebastian
- */
-class MasterMindBoardException extends Exception{
-
-    /**
-     * Constructor
-     * @param m String message to be displayed
-     */
-    MasterMindBoardException(String m){
-        super(m);
-    }
-
-}

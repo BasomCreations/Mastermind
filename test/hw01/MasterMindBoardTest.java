@@ -1,6 +1,9 @@
 package hw01;
 
 
+import hw01.game.MasterMindBoard;
+import hw01.game.MasterMindBoardException;
+import hw01.game.Row;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;

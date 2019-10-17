@@ -1,5 +1,6 @@
 package hw01;
 
+import hw01.game.Row;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
