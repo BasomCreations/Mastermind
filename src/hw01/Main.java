@@ -23,11 +23,16 @@ import hw01.game.MasterMindBoard;
 import hw01.game.MasterMindUtility;
 import hw01.game.TwoPlayerGameClientSide;
 import hw01.game.TwoPlayerGameServerSide;
+import hw01.solver.RandomSolver;
 
 import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) throws Exception {
+        System.out.println("Welcome to MasterMind!\n");
+        Scanner in = new Scanner(System.in);
+        System.out.println("Do you want to play or enter solver mode?");
+
         playGame();
 
     }
@@ -41,7 +46,7 @@ public class Main {
      */
     private static void playGame() throws Exception {
         Scanner in = new Scanner(System.in);
-        System.out.println("Welcome to MasterMind!\n");
+
 
         System.out.print("Please Enter Your Name: ");
         String name = in.nextLine();
@@ -50,8 +55,8 @@ public class Main {
         //After each game the player can either keep playing or terminate the program
         while (true){
 
-            System.out.println("Do you want to play a single or multi-player game? [1/2]");
-            String answer = MasterMindUtility.getValidInput(in, new String[]{"1", "2"});
+            System.out.println("Do you want to play single player, multi-player, or enter solver mode? [1/2/solver]");
+            String answer = MasterMindUtility.getValidInput(in, new String[]{"1", "2", "solver"});
 
             //two player game
             if (answer.equals("2")){
@@ -68,11 +73,14 @@ public class Main {
                 }
 
 
-            } else {
+            } else if (answer.equals("1")){
                 // Single player game
                 MasterMindBoard board = new MasterMindBoard();
                 board.playCommandLine();
 
+            } else {
+                // Solver mode
+                playSolverMode();
             }
 
             //Check if the player wants to play another game
@@ -82,6 +90,12 @@ public class Main {
 
         }
         System.out.println("Thank you for playing. Goodbye!");
+    }
+
+    private static void playSolverMode() throws Exception {
+        RandomSolver randSolver = new RandomSolver();
+        randSolver.simulate(100);
+        System.out.println(randSolver.getStats().toString());
     }
 
 

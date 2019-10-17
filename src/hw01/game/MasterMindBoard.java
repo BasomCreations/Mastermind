@@ -43,12 +43,12 @@ public class MasterMindBoard {
     /**
      * Max value of the slots (inclusive)
      */
-    final static int MAX_SLOT_VALUE = 6;
+    public final static int MAX_SLOT_VALUE = 6;
 
     /**
      * Min value of the slot (inclusive)
      */
-    final static int MIN_SLOT_VALUE = 1;
+    public final static int MIN_SLOT_VALUE = 1;
 
     /**
      * Max value of rows in the game
@@ -63,7 +63,7 @@ public class MasterMindBoard {
     /**
      * Size of each row
      */
-    final static int ROW_SIZE = 4;
+    public final static int ROW_SIZE = 4;
 
     /**
      * Secret code the player is supposed to guess
@@ -116,7 +116,7 @@ public class MasterMindBoard {
      *  @author Jonathan
      *  @author Sebastian
      */
-    public MasterMindBoard(boolean unlimitedAttempts) throws MasterMindBoardException {
+    public MasterMindBoard(boolean unlimitedAttempts) {
         this.currentRow = 1;
         this.win = false;
 
