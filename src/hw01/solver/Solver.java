@@ -18,12 +18,8 @@
  */
 package hw01.solver;
 
-import hw01.game.MasterMindBoard;
-import hw01.game.MasterMindBoardException;
-
 import java.util.IntSummaryStatistics;
-import java.util.LinkedList;
-import java.util.List;
+
 
 public abstract class Solver {
     private IntSummaryStatistics stats;
@@ -37,13 +33,16 @@ public abstract class Solver {
         stats = new IntSummaryStatistics();
     }
 
-    protected void addStat(int turns) {
-        stats.accept(turns);
-    }
+
+    public void simulate(int numSimulations) throws Exception{
+        for (int i = 0; i < numSimulations; i++) {
+            this.stats.accept((this.play()));
+        }
+    };
 
     protected abstract int[] getNextMove();
     protected abstract int play() throws Exception;
-    public abstract void simulate(int numSimulations) throws Exception;
+
 
     public IntSummaryStatistics getStats() {
         return stats;

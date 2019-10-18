@@ -44,13 +44,6 @@ public class RandomSolver extends Solver {
         return board.getGuesses();
     }
 
-    @Override
-    public void simulate(int numSimulations) throws Exception {
-        for (int i = 0; i < numSimulations; i++) {
-            this.addStat(this.play());
-        }
-
-    }
 
 
 }
