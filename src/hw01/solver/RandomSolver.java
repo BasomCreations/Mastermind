@@ -19,6 +19,7 @@
 package hw01.solver;
 
 import hw01.game.MasterMindBoard;
+import hw01.game.MasterMindBoardException;
 import hw01.game.MasterMindUtility;
 
 import java.util.Random;
@@ -35,7 +36,7 @@ public class RandomSolver extends Solver {
     }
 
     @Override
-    protected int play() throws Exception {
+    protected int play() throws MasterMindBoardException {
         MasterMindBoard board = new MasterMindBoard(true);
         while (!board.checkWin()) {
             board.guess(this.getNextMove());

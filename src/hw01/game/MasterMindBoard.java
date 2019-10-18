@@ -143,7 +143,7 @@ public class MasterMindBoard {
      * @author Jonathan
      * @author Sebastian
      */
-    public Row guess(int[] guesses) throws Exception {
+    public Row guess(int[] guesses) throws MasterMindBoardException {
         if (this.unlimitedAttempts == false && this.currentRow > this.DEFAULT_MAXIMUM_ATTEMPTS) {
             throw new MasterMindBoardException("Exceeded maximum number of guesses");
         }
