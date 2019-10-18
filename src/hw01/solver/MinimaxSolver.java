@@ -41,6 +41,7 @@ public class MinimaxSolver extends Solver{
      */
     public MinimaxSolver() {
         super();
+        generateAllPossibleCodes();
     }
 
     @Override
@@ -58,6 +59,9 @@ public class MinimaxSolver extends Solver{
     }
 
 
+    /**
+     * Method to generate all possible codes
+     */
     private void generateAllPossibleCodes(){
 
         allPossibleCodes = new ArrayList<>();
@@ -68,6 +72,11 @@ public class MinimaxSolver extends Solver{
 
     }
 
+    /**
+     * Helper mrecursive method for the generateAllPossibleCodes method
+     * @param curCode current code being generated
+     * @param index current index
+     */
     private void generateAllPossibleCodesHelper(int[] curCode, int index){
 
         if (index == curCode.length){
