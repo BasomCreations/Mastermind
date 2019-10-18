@@ -127,4 +127,23 @@ public final class MasterMindUtility {
         }
         return secretCode;
     }
+
+    /**
+     * Verify that user enters a valid number
+     * @param in Scanner object
+     * @return int that is the valid number
+     * @author Jonathan
+     */
+    public static int verifyNumericInput(Scanner in) {
+        while (true) {
+            if (in.hasNextInt()) {
+                int number = in.nextInt();
+                return number;
+            }
+            else {
+                System.out.println("Error! Please enter numeric value.");
+                in.nextLine();
+            }
+        }
+    }
 }

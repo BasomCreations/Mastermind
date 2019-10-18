@@ -25,15 +25,19 @@ import hw01.game.TwoPlayerGameClientSide;
 import hw01.game.TwoPlayerGameServerSide;
 import hw01.solver.RandomSolver;
 
+import java.sql.SQLOutput;
 import java.util.Scanner;
 
 public class Main {
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) {
         System.out.println("Welcome to MasterMind!\n");
-        Scanner in = new Scanner(System.in);
-        System.out.println("Do you want to play or enter solver mode?");
 
-        playGame();
+        try{
+            playGame();
+        }
+        catch (Exception e) {
+            System.out.println("Unexpected Error Occurred - Try Again");
+        }
 
     }
 
@@ -92,10 +96,23 @@ public class Main {
         System.out.println("Thank you for playing. Goodbye!");
     }
 
+    /**
+     * Method to determine how to what solver mode to play
+     * @throws Exception
+     * @author Jonathan
+     * @author Sebastian
+     */
     private static void playSolverMode() throws Exception {
-        RandomSolver randSolver = new RandomSolver();
-        randSolver.simulate(100);
-        System.out.println(randSolver.getStats().toString());
+        System.out.println("What type of solver would you like to use? [random/]");
+        Scanner in = new Scanner(System.in);
+        String response = MasterMindUtility.getValidInput(in, new String[] {"random"});
+        if (response.equals("random")) {
+            RandomSolver randSolver = new RandomSolver();
+            System.out.println("How many games would you like to simulate?");
+            int iterations = MasterMindUtility.verifyNumericInput(in);
+            randSolver.simulate(iterations);
+            System.out.println(randSolver.getStats().toString());
+        }
     }
 
 
