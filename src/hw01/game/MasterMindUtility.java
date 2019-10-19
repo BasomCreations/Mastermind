@@ -137,10 +137,15 @@ public final class MasterMindUtility {
      * @return int that is the valid number
      * @author Jonathan
      */
-    public static int verifyNumericInput(Scanner in) {
+    public static int verifyPositiveNumericInput(Scanner in) {
         while (true) {
-            if (in.hasNextInt()) {
+            checkInt: if (in.hasNextInt()) {
                 int number = in.nextInt();
+                if (number <= 0) {
+                    System.out.println("Must be greater than 0 - Try Again:");
+                    in.nextLine();
+                    break checkInt;
+                }
                 return number;
             }
             else {
@@ -149,7 +154,6 @@ public final class MasterMindUtility {
             }
         }
     }
-
 
     /**
      * Returns a Row object for the results of a guess

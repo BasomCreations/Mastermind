@@ -27,8 +27,6 @@ import hw01.solver.CustomSolver;
 import hw01.solver.MinimaxSolver;
 import hw01.solver.RandomSolver;
 
-import java.sql.SQLOutput;
-import java.util.Random;
 import java.util.Scanner;
 
 public class Main {
@@ -112,20 +110,20 @@ public class Main {
         if (response.equals("random")) {
             RandomSolver randSolver = new RandomSolver();
             System.out.println("How many games would you like to simulate?");
-            int iterations = MasterMindUtility.verifyNumericInput(in);
+            int iterations = MasterMindUtility.verifyPositiveNumericInput(in);
             randSolver.simulate(iterations);
             System.out.println(randSolver.getStats().toString());
         } else if (response.equals("minimax")){
             MinimaxSolver minMaxSolver = new MinimaxSolver();
             System.out.println("How many games would you like to simulate?");
-            int iterations = MasterMindUtility.verifyNumericInput(in);
+            int iterations = MasterMindUtility.verifyPositiveNumericInput(in);
             minMaxSolver.simulate(iterations);
             System.out.println(minMaxSolver.getStats().toString());
 
         } else if (response.equals("custom")){
             CustomSolver customSolver = new CustomSolver();
             System.out.println("How many games would you like to simulate?");
-            int iterations = MasterMindUtility.verifyNumericInput(in);
+            int iterations = MasterMindUtility.verifyPositiveNumericInput(in);
             customSolver.simulate(iterations);
             System.out.println(customSolver.getStats().toString());
 
