@@ -19,6 +19,8 @@
 package hw01.game;
 
 
+import java.util.Objects;
+
 /**
  * Row class
  * row objects store the number of correct pegs, pegs in incorrect position and incorrect pegs
@@ -53,6 +55,22 @@ public class Row {
         this.correctPegs = correctPegs;
         this.pegsInCorrectPosition = pegsInCorrectPosition;
         this.incorrectPegs = incorrectPegs;
+    }
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Row row = (Row) o;
+        return correctPegs == row.correctPegs &&
+                pegsInCorrectPosition == row.pegsInCorrectPosition &&
+                incorrectPegs == row.incorrectPegs;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(correctPegs, pegsInCorrectPosition, incorrectPegs);
     }
 
     public int getCorrectPegs() {

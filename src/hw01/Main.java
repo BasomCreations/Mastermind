@@ -23,12 +23,24 @@ import hw01.game.MasterMindBoard;
 import hw01.game.MasterMindUtility;
 import hw01.game.TwoPlayerGameClientSide;
 import hw01.game.TwoPlayerGameServerSide;
+import hw01.solver.CustomSolver;
+import hw01.solver.MinimaxSolver;
+import hw01.solver.RandomSolver;
 
+import java.sql.SQLOutput;
+import java.util.Random;
 import java.util.Scanner;
 
 public class Main {
-    public static void main(String[] args) throws Exception {
-        playGame();
+    public static void main(String[] args) {
+        System.out.println("Welcome to MasterMind!\n");
+
+        try{
+            playGame();
+        }
+        catch (Exception e) {
+            System.out.println("Unexpected Error Occurred - Try Again");
+        }
 
     }
 
@@ -41,7 +53,7 @@ public class Main {
      */
     private static void playGame() throws Exception {
         Scanner in = new Scanner(System.in);
-        System.out.println("Welcome to MasterMind!\n");
+
 
         System.out.print("Please Enter Your Name: ");
         String name = in.nextLine();
@@ -50,8 +62,8 @@ public class Main {
         //After each game the player can either keep playing or terminate the program
         while (true){
 
-            System.out.println("Do you want to play a single or multi-player game? [1/2]");
-            String answer = MasterMindUtility.getValidInput(in, new String[]{"1", "2"});
+            System.out.println("Do you want to play single player, multi-player, or enter solver mode? [1/2/solver]");
+            String answer = MasterMindUtility.getValidInput(in, new String[]{"1", "2", "solver"});
 
             //two player game
             if (answer.equals("2")){
@@ -68,11 +80,14 @@ public class Main {
                 }
 
 
-            } else {
+            } else if (answer.equals("1")){
                 // Single player game
                 MasterMindBoard board = new MasterMindBoard();
                 board.playCommandLine();
 
+            } else {
+                // Solver mode
+                playSolverMode();
             }
 
             //Check if the player wants to play another game
@@ -82,6 +97,39 @@ public class Main {
 
         }
         System.out.println("Thank you for playing. Goodbye!");
+    }
+
+    /**
+     * Method to determine how to what solver mode to play
+     * @throws Exception
+     * @author Jonathan
+     * @author Sebastian
+     */
+    private static void playSolverMode() throws Exception {
+        System.out.println("What type of solver would you like to use? [random/minimax/custom]");
+        Scanner in = new Scanner(System.in);
+        String response = MasterMindUtility.getValidInput(in, new String[] {"random", "minimax", "custom"});
+        if (response.equals("random")) {
+            RandomSolver randSolver = new RandomSolver();
+            System.out.println("How many games would you like to simulate?");
+            int iterations = MasterMindUtility.verifyNumericInput(in);
+            randSolver.simulate(iterations);
+            System.out.println(randSolver.getStats().toString());
+        } else if (response.equals("minimax")){
+            MinimaxSolver minMaxSolver = new MinimaxSolver();
+            System.out.println("How many games would you like to simulate?");
+            int iterations = MasterMindUtility.verifyNumericInput(in);
+            minMaxSolver.simulate(iterations);
+            System.out.println(minMaxSolver.getStats().toString());
+
+        } else if (response.equals("custom")){
+            CustomSolver customSolver = new CustomSolver();
+            System.out.println("How many games would you like to simulate?");
+            int iterations = MasterMindUtility.verifyNumericInput(in);
+            customSolver.simulate(iterations);
+            System.out.println(customSolver.getStats().toString());
+
+        }
     }
 
 

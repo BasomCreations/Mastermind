@@ -139,13 +139,8 @@ public final class MasterMindUtility {
      */
     public static int verifyNumericInput(Scanner in) {
         while (true) {
-            checkInt: if (in.hasNextInt()) {
+            if (in.hasNextInt()) {
                 int number = in.nextInt();
-                if (number <= 0) {
-                    System.out.println("Must be greater than 0 - Try Again:");
-                    in.nextLine();
-                    break checkInt;
-                }
                 return number;
             }
             else {

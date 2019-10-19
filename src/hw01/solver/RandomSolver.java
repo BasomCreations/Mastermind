@@ -22,11 +22,13 @@ import hw01.game.MasterMindBoard;
 import hw01.game.MasterMindBoardException;
 import hw01.game.MasterMindUtility;
 
+import java.util.Random;
+
 public class RandomSolver extends Solver {
 
-//    public RandomSolver() {
-//        super();
-//    }
+    public RandomSolver() {
+        super();
+    }
 
     @Override
     protected int[] getNextMove() {
