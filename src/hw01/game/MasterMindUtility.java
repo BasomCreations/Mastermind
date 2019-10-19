@@ -18,8 +18,11 @@
  */
 package hw01.game;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 /**
  * Utility class for useful functions
@@ -127,4 +130,72 @@ public final class MasterMindUtility {
         }
         return secretCode;
     }
+
+    /**
+     * Verify that user enters a valid number
+     * @param in Scanner object
+     * @return int that is the valid number
+     * @author Jonathan
+     */
+    public static int verifyNumericInput(Scanner in) {
+        while (true) {
+            checkInt: if (in.hasNextInt()) {
+                int number = in.nextInt();
+                if (number <= 0) {
+                    System.out.println("Must be greater than 0 - Try Again:");
+                    in.nextLine();
+                    break checkInt;
+                }
+                return number;
+            }
+            else {
+                System.out.println("Error! Please enter numeric value.");
+                in.nextLine();
+            }
+        }
+    }
+
+
+    /**
+     * Returns a Row object for the results of a guess
+     * @param thisguess guess made
+     * @param code secret code
+     * @return
+     */
+    public static Row makeGuess(int[] thisguess, int[]  code){
+        int[] guesses = thisguess.clone();
+        int[] secretCode = code.clone();
+
+        if(guesses.length != secretCode.length){
+            throw new IllegalArgumentException("You cant do that!");
+        }
+
+        List<Integer> guessList = Arrays.stream(secretCode).boxed().collect(Collectors.toList());
+
+        int correctPegs = 0;
+        for (int i = 0; i < guesses.length; i++) {
+            if (guesses[i] == secretCode[i]) {
+                correctPegs++;
+                //Cast to object to make sure it removes the actual value instead of the index
+                guessList.remove((Object) guesses[i]);
+                guesses[i] = -1;
+            }
+        }
+
+        int pegsIncorrectPosition = 0;
+        for (int guess:
+                guesses) {
+            if (guessList.contains(guess)){
+                pegsIncorrectPosition++;
+                //Cast to object to make sure it removes the actual value instead of the index
+                guessList.remove((Object)guess);
+            }
+        }
+
+        return new Row(correctPegs, pegsIncorrectPosition, MasterMindBoard.ROW_SIZE - correctPegs - pegsIncorrectPosition);
+
+
+    }
+
+
 }
