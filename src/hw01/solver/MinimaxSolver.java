@@ -21,6 +21,7 @@ package hw01.solver;
 import hw01.game.MasterMindBoard;
 import hw01.game.MasterMindUtility;
 import hw01.game.Row;
+import hw01.game.Score;
 
 import java.util.*;
 
@@ -54,53 +55,60 @@ public class MinimaxSolver extends Solver{
     @Override
     protected int[] getNextMove() {
 
-        int[] scores = new int[allPossibleCodes.size()];
-        Arrays.fill(scores, Integer.MAX_VALUE);
+        Hashtable<Row, Integer>[] scoreTable = new Hashtable[allPossibleCodes.size()];
 
         int index = 0;
         for (int[] possibleGuess:
              allPossibleCodes) {
 
-
-
             for (int[] solution:
                  s) {
 
-                Row result = MasterMindUtility.makeGuess(possibleGuess, solution);
+                Row guess = MasterMindUtility.makeGuess(possibleGuess, solution);
 
-                int possibilitiesEliminated = 0;
-                for (int[] possibility:
-                     s) {
-                    Row possibleResult = MasterMindUtility.makeGuess(possibility, solution);
-                    if (!possibleResult.equals(result)){
-                        possibilitiesEliminated++;
-                    }
+                if (scoreTable[index] == null){
+                    scoreTable[index] = new Hashtable<Row, Integer>();
+                    scoreTable[index].put(guess, 1);
+                }
+                else if (scoreTable[index].contains(guess)){
+                    scoreTable[index].put(guess, scoreTable[index].get(guess) + 1);
+                }
+                else {
+                    scoreTable[index].put(guess, 1);
                 }
 
-                if (possibilitiesEliminated < scores[index]){
-                    scores[index] = possibilitiesEliminated;
-                }
 
             }
-
-
 
             index++;
         }
 
+        int minMaxIndex = 0;
+        int minMax = Integer.MAX_VALUE;
+        index = 0;
+        int[] maximums = new int[allPossibleCodes.size()];
+        for (Hashtable<Row, Integer> column:
+        scoreTable) {
+            int max = 0;
+            for (int element:
+                 column.values()) {
+                if (element > max) {
+                    max = element;
+                }
+            }
+            maximums[index] = max;
 
-        int minScore = Integer.MAX_VALUE;
-        int minScoreIndex = 0;
-        for (int i = 0; i < scores.length; i++) {
-            if (scores[i] < minScore){
-                minScore = scores[i];
-                minScoreIndex = i;
+            if (max < minMax){
+                minMax = max;
+                minMaxIndex = index;
             }
 
+            index++;
         }
 
+        int[] besGuess = allPossibleCodes.get(minMaxIndex);
 
-        return allPossibleCodes.get(minScoreIndex);
+        return besGuess;
     }
 
     @Override
@@ -129,6 +137,7 @@ public class MinimaxSolver extends Solver{
 
 
             curGuess = getNextMove();
+
 
             result = board.guess(curGuess);
 
