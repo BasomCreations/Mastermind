@@ -22,10 +22,7 @@ import hw01.game.MasterMindBoard;
 import hw01.game.MasterMindUtility;
 import hw01.game.Row;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 public class MinimaxSolver extends Solver{
 
@@ -111,6 +108,7 @@ public class MinimaxSolver extends Solver{
 
         s = new ArrayList<>(allPossibleCodes);
 
+
         MasterMindBoard board = new MasterMindBoard(true);
 
         int[] curGuess = FIRSTGUESS;
@@ -130,9 +128,9 @@ public class MinimaxSolver extends Solver{
             s = new ArrayList<>(newS);
 
 
-            int[] guess = getNextMove();
+            curGuess = getNextMove();
 
-            result = board.guess(guess);
+            result = board.guess(curGuess);
 
         }
 
@@ -172,6 +170,14 @@ public class MinimaxSolver extends Solver{
 
     }
 
+    public static void main(String[] args) throws Exception {
+        MinimaxSolver solver = new MinimaxSolver();
 
+        solver.simulate(1);
+        IntSummaryStatistics stats = solver.getStats();
+
+        System.out.println(stats);
+
+    }
 
 }

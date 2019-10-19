@@ -153,11 +153,13 @@ public final class MasterMindUtility {
 
     /**
      * Returns a Row object for the results of a guess
-     * @param guesses guess made
-     * @param secretCode secret code
+     * @param thisguess guess made
+     * @param code secret code
      * @return
      */
-    public static Row makeGuess(int[] guesses, int[] secretCode){
+    public static Row makeGuess(int[] thisguess, int[]  code){
+        int[] guesses = thisguess.clone();
+        int[] secretCode = code.clone();
 
         if(guesses.length != secretCode.length){
             throw new IllegalArgumentException("You cant do that!");
