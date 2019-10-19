@@ -84,11 +84,6 @@ public class CustomSolver extends SmartSolver{
         return board.getGuesses();
     }
 
-    public static void main(String[] args) throws Exception {
-        Solver custom = new CustomSolver();
-        custom.simulate(1000);
-        System.out.println(custom.getStats());
 
-    }
 }
 
