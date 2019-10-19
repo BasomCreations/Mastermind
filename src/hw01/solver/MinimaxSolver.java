@@ -19,14 +19,24 @@
 package hw01.solver;
 
 import hw01.game.MasterMindBoard;
+import hw01.game.MasterMindUtility;
+import hw01.game.Row;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 public class MinimaxSolver extends Solver{
 
     /**
-     * Set of all possible codes
+     * first guess
+     */
+    private final static int[] FIRSTGUESS= {1, 1, 2, 2};
+
+
+    /**
+     * Set of all codes that are still possible
      */
     private List<int[]> s;
 
@@ -46,16 +56,87 @@ public class MinimaxSolver extends Solver{
 
     @Override
     protected int[] getNextMove() {
-        //TODO
-        return new int[0];
+
+        int[] scores = new int[allPossibleCodes.size()];
+        Arrays.fill(scores, Integer.MAX_VALUE);
+
+        int index = 0;
+        for (int[] possibleGuess:
+             allPossibleCodes) {
+
+
+
+            for (int[] solution:
+                 s) {
+
+                Row result = MasterMindUtility.makeGuess(possibleGuess, solution);
+
+                int possibilitiesEliminated = 0;
+                for (int[] possibility:
+                     s) {
+                    Row possibleResult = MasterMindUtility.makeGuess(possibility, solution);
+                    if (!possibleResult.equals(result)){
+                        possibilitiesEliminated++;
+                    }
+                }
+
+                if (possibilitiesEliminated < scores[index]){
+                    scores[index] = possibilitiesEliminated;
+                }
+
+            }
+
+
+
+            index++;
+        }
+
+
+        int minScore = Integer.MAX_VALUE;
+        int minScoreIndex = 0;
+        for (int i = 0; i < scores.length; i++) {
+            if (scores[i] < minScore){
+                minScore = scores[i];
+                minScoreIndex = i;
+            }
+
+        }
+
+
+        return allPossibleCodes.get(minScoreIndex);
     }
 
     @Override
     protected int play() throws Exception {
 
+        s = new ArrayList<>(allPossibleCodes);
 
-        //TODO
-        return 0;
+        MasterMindBoard board = new MasterMindBoard(true);
+
+        int[] curGuess = FIRSTGUESS;
+        Row result = board.guess(curGuess);
+
+        while (!board.checkWin()){
+
+            List<int[]> newS = new ArrayList<>();
+            for (int[] possibleSolution:
+                 s) {
+                Row resultForPossibleSolution = MasterMindUtility.makeGuess(curGuess, possibleSolution);
+                if (resultForPossibleSolution.equals(result)){
+                    newS.add(possibleSolution);
+                }
+
+            }
+            s = new ArrayList<>(newS);
+
+
+            int[] guess = getNextMove();
+
+            result = board.guess(guess);
+
+        }
+
+        return board.getGuesses();
     }
 
 
@@ -73,7 +154,7 @@ public class MinimaxSolver extends Solver{
     }
 
     /**
-     * Helper mrecursive method for the generateAllPossibleCodes method
+     * Helper recursive method for the generateAllPossibleCodes method
      * @param curCode current code being generated
      * @param index current index
      */

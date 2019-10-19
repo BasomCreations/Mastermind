@@ -23,9 +23,11 @@ import hw01.game.MasterMindBoard;
 import hw01.game.MasterMindUtility;
 import hw01.game.TwoPlayerGameClientSide;
 import hw01.game.TwoPlayerGameServerSide;
+import hw01.solver.MinimaxSolver;
 import hw01.solver.RandomSolver;
 
 import java.sql.SQLOutput;
+import java.util.Random;
 import java.util.Scanner;
 
 public class Main {
@@ -105,13 +107,20 @@ public class Main {
     private static void playSolverMode() throws Exception {
         System.out.println("What type of solver would you like to use? [random/]");
         Scanner in = new Scanner(System.in);
-        String response = MasterMindUtility.getValidInput(in, new String[] {"random"});
+        String response = MasterMindUtility.getValidInput(in, new String[] {"random", "minimax"});
         if (response.equals("random")) {
             RandomSolver randSolver = new RandomSolver();
             System.out.println("How many games would you like to simulate?");
             int iterations = MasterMindUtility.verifyNumericInput(in);
             randSolver.simulate(iterations);
             System.out.println(randSolver.getStats().toString());
+        } else if (response.equals("minimax")){
+            MinimaxSolver solver = new MinimaxSolver();
+            System.out.println("How many games would you like to simulate?");
+            int iterations = MasterMindUtility.verifyNumericInput(in);
+            solver.simulate(iterations);
+            System.out.println(solver.getStats().toString());
+
         }
     }
 

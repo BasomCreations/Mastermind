@@ -153,19 +153,19 @@ public class MasterMindBoard {
             throw new MasterMindBoardException("Number of guesses must be " + ROW_SIZE);
         }
 
-        //Get temporary list of guessed secret code elements
-        List<Integer> guessList = Arrays.stream(this.secretCode).boxed().collect(Collectors.toList());
 
-        int correctPegs = findNumberCorrectPegs(guessList, guesses);
-        int pegsIncorrectPosition = findNumberIncorrectPegs(guessList, guesses);
+        Row guessResult = MasterMindUtility.makeGuess(guesses, this.secretCode);
+
+
+
 
         this.currentRow++;
 
-        if (correctPegs == ROW_SIZE) {
+        if (guessResult.getCorrectPegs() == ROW_SIZE) {
             this.win = true;
         }
 
-        return new Row(correctPegs, pegsIncorrectPosition, ROW_SIZE - correctPegs - pegsIncorrectPosition);
+        return guessResult;
 
     }
 
@@ -252,46 +252,8 @@ public class MasterMindBoard {
         return this.currentRow - 1;
     }
 
-    /**
-     * Determine the number of correct pegs in the correct position
-     * @param guessList List of int that contains the user's guesses
-     * @param guesses int[] containing all the user's guesses
-     * @return int representing number of correct pegs in the correct position
-     * @author Jonathan
-     * @author Sebastian
-     */
-    private int findNumberCorrectPegs(List<Integer> guessList, int[] guesses) {
-        int correctPegs = 0;
-        for (int i = 0; i < guesses.length; i++) {
-            if (guesses[i] == this.secretCode[i]) {
-                correctPegs++;
-                //Cast to object to make sure it removes the actual value instead of the index
-                guessList.remove((Object) guesses[i]);
-                guesses[i] = -1;
-            }
-        }
-        return correctPegs;
-    }
 
-    /**
-     * Determine the number of correct pegs in the incorrect position
-     * @param guessList List of int that contains user's guesses, excluding the correct pegs in the correct position
-     * @param guesses int[] containing all the user's guesses
-     * @return int representing number of correct pegs in the incorrect position
-     * @author Jonathan
-     * @author Sebastian
-     */
-    private int findNumberIncorrectPegs(List<Integer> guessList, int[] guesses) {
-        int pegsIncorrectPosition = 0;
-        for (int guess:
-                guesses) {
-            if (guessList.contains(guess)){
-                pegsIncorrectPosition++;
-                //Cast to object to make sure it removes the actual value instead of the index
-                guessList.remove((Object)guess);
-            }
-        }
-        return pegsIncorrectPosition;
-    }
+
+
 }
 
