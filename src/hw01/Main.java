@@ -23,6 +23,7 @@ import hw01.game.MasterMindBoard;
 import hw01.game.MasterMindUtility;
 import hw01.game.TwoPlayerGameClientSide;
 import hw01.game.TwoPlayerGameServerSide;
+import hw01.solver.CustomSolver;
 import hw01.solver.MinimaxSolver;
 import hw01.solver.RandomSolver;
 
@@ -105,9 +106,9 @@ public class Main {
      * @author Sebastian
      */
     private static void playSolverMode() throws Exception {
-        System.out.println("What type of solver would you like to use? [random/minimax/surprise]");
+        System.out.println("What type of solver would you like to use? [random/minimax/custom]");
         Scanner in = new Scanner(System.in);
-        String response = MasterMindUtility.getValidInput(in, new String[] {"random", "minimax"});
+        String response = MasterMindUtility.getValidInput(in, new String[] {"random", "minimax", "custom"});
         if (response.equals("random")) {
             RandomSolver randSolver = new RandomSolver();
             System.out.println("How many games would you like to simulate?");
@@ -115,11 +116,18 @@ public class Main {
             randSolver.simulate(iterations);
             System.out.println(randSolver.getStats().toString());
         } else if (response.equals("minimax")){
-            MinimaxSolver solver = new MinimaxSolver();
+            MinimaxSolver minMaxSolver = new MinimaxSolver();
             System.out.println("How many games would you like to simulate?");
             int iterations = MasterMindUtility.verifyNumericInput(in);
-            solver.simulate(iterations);
-            System.out.println(solver.getStats().toString());
+            minMaxSolver.simulate(iterations);
+            System.out.println(minMaxSolver.getStats().toString());
+
+        } else if (response.equals("custom")){
+            CustomSolver customSolver = new CustomSolver();
+            System.out.println("How many games would you like to simulate?");
+            int iterations = MasterMindUtility.verifyNumericInput(in);
+            customSolver.simulate(iterations);
+            System.out.println(customSolver.getStats().toString());
 
         }
     }

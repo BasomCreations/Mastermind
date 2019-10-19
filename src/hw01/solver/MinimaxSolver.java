@@ -25,7 +25,7 @@ import hw01.game.Score;
 
 import java.util.*;
 
-public class MinimaxSolver extends Solver{
+public class MinimaxSolver extends SmartSolver{
 
     /**
      * first guess
@@ -38,18 +38,12 @@ public class MinimaxSolver extends Solver{
      */
     private List<int[]> s;
 
-    /**
-     * All possible codes
-     */
-    private List<int[]> allPossibleCodes;
-
 
     /**
      * Constructor
      */
     public MinimaxSolver() {
         super();
-        generateAllPossibleCodes();
     }
 
     @Override
@@ -151,37 +145,6 @@ public class MinimaxSolver extends Solver{
     }
 
 
-    /**
-     * Method to generate all possible codes
-     */
-    private void generateAllPossibleCodes(){
 
-        allPossibleCodes = new ArrayList<>();
-
-        int[] curCode = new int[MasterMindBoard.ROW_SIZE];
-        generateAllPossibleCodesHelper(curCode, 0);
-
-
-    }
-
-    /**
-     * Helper recursive method for the generateAllPossibleCodes method
-     * @param curCode current code being generated
-     * @param index current index
-     */
-    private void generateAllPossibleCodesHelper(int[] curCode, int index){
-
-        if (index == curCode.length){
-            allPossibleCodes.add(curCode.clone());
-        }
-        else {
-            for (int val = MasterMindBoard.MIN_SLOT_VALUE; val <= MasterMindBoard.MAX_SLOT_VALUE; val++) {
-                curCode[index] = val;
-                generateAllPossibleCodesHelper(curCode, index + 1);
-            }
-        }
-
-    }
-    
 
 }

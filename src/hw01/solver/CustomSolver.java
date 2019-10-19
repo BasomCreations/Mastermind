@@ -18,14 +18,15 @@
  */
 package hw01.solver;
 
+import hw01.game.MasterMindBoard;
+import hw01.game.MasterMindUtility;
+import hw01.game.Row;
+
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
-public class CustomSolver extends Solver{
-
-    /**
-     * first guess
-     */
-    private final static int[] FIRSTGUESS= {1, 1, 2, 2};
+public class CustomSolver extends SmartSolver{
 
 
     /**
@@ -38,17 +39,56 @@ public class CustomSolver extends Solver{
      */
     public CustomSolver() {
         super();
-        //generateAllPossibleCodes();
     }
 
 
     @Override
     protected int[] getNextMove() {
-        return new int[0];
+        Random rand = new Random();
+        int index = rand.nextInt(s.size());
+        return s.get(index);
+
     }
 
     @Override
     protected int play() throws Exception {
-        return 0;
+        s = new ArrayList<>(allPossibleCodes);
+
+
+        MasterMindBoard board = new MasterMindBoard(true);
+
+        int[] curGuess = getNextMove();
+        Row result = board.guess(curGuess);
+
+        while (!board.checkWin()){
+
+            List<int[]> newS = new ArrayList<>();
+            for (int[] possibleSolution:
+                    s) {
+                Row resultForPossibleSolution = MasterMindUtility.makeGuess(curGuess, possibleSolution);
+                if (resultForPossibleSolution.equals(result)){
+                    newS.add(possibleSolution);
+                }
+
+            }
+            s = new ArrayList<>(newS);
+
+
+            curGuess = getNextMove();
+
+
+            result = board.guess(curGuess);
+
+        }
+
+        return board.getGuesses();
+    }
+
+    public static void main(String[] args) throws Exception {
+        Solver custom = new CustomSolver();
+        custom.simulate(1000);
+        System.out.println(custom.getStats());
+
     }
 }
+
