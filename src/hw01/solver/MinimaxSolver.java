@@ -21,7 +21,6 @@ package hw01.solver;
 import hw01.game.MasterMindBoard;
 import hw01.game.MasterMindUtility;
 import hw01.game.Row;
-import hw01.game.Score;
 
 import java.util.*;
 
@@ -36,7 +35,7 @@ public class MinimaxSolver extends SmartSolver{
     /**
      * Set of all codes that are still possible
      */
-    private List<int[]> s;
+    private HashSet<int[]> s;
 
 
     /**
@@ -50,7 +49,7 @@ public class MinimaxSolver extends SmartSolver{
     protected int[] getNextMove() {
 
         if(s.size() == 1){
-            return s.get(0);
+            return (int[])s.toArray()[0];
         }
 
         Hashtable<Row, Integer>[] scoreTable = new Hashtable[allPossibleCodes.size()];
@@ -84,7 +83,6 @@ public class MinimaxSolver extends SmartSolver{
         int minMaxIndex = 0;
         int minMax = Integer.MAX_VALUE;
         index = 0;
-        int[] maximums = new int[allPossibleCodes.size()];
         for (Hashtable<Row, Integer> column:
         scoreTable) {
             int max = 0;
@@ -94,11 +92,14 @@ public class MinimaxSolver extends SmartSolver{
                     max = element;
                 }
             }
-            maximums[index] = max;
 
             if (max < minMax){
                 minMax = max;
                 minMaxIndex = index;
+            } else if (max == minMax){
+                if (s.contains(allPossibleCodes.get(index))){
+                    minMaxIndex = index;
+                }
             }
 
             index++;
@@ -112,7 +113,7 @@ public class MinimaxSolver extends SmartSolver{
     @Override
     protected int play() throws Exception {
 
-        s = new ArrayList<>(allPossibleCodes);
+        s = new HashSet(allPossibleCodes);
 
 
         MasterMindBoard board = new MasterMindBoard(true);
@@ -131,7 +132,7 @@ public class MinimaxSolver extends SmartSolver{
                 }
 
             }
-            s = new ArrayList<>(newS);
+            s = new HashSet<>(newS);
 
 
             curGuess = getNextMove();
@@ -143,7 +144,6 @@ public class MinimaxSolver extends SmartSolver{
 
         return board.getGuesses();
     }
-
 
 
 
