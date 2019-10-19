@@ -55,6 +55,10 @@ public class MinimaxSolver extends Solver{
     @Override
     protected int[] getNextMove() {
 
+        if(s.size() == 1){
+            return s.get(0);
+        }
+
         Hashtable<Row, Integer>[] scoreTable = new Hashtable[allPossibleCodes.size()];
 
         int index = 0;
@@ -70,7 +74,7 @@ public class MinimaxSolver extends Solver{
                     scoreTable[index] = new Hashtable<Row, Integer>();
                     scoreTable[index].put(guess, 1);
                 }
-                else if (scoreTable[index].contains(guess)){
+                else if (scoreTable[index].containsKey(guess)){
                     scoreTable[index].put(guess, scoreTable[index].get(guess) + 1);
                 }
                 else {
@@ -178,15 +182,6 @@ public class MinimaxSolver extends Solver{
         }
 
     }
-
-    public static void main(String[] args) throws Exception {
-        MinimaxSolver solver = new MinimaxSolver();
-
-        solver.simulate(1);
-        IntSummaryStatistics stats = solver.getStats();
-
-        System.out.println(stats);
-
-    }
+    
 
 }

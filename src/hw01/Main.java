@@ -105,7 +105,7 @@ public class Main {
      * @author Sebastian
      */
     private static void playSolverMode() throws Exception {
-        System.out.println("What type of solver would you like to use? [random/]");
+        System.out.println("What type of solver would you like to use? [random/minimax/surprise]");
         Scanner in = new Scanner(System.in);
         String response = MasterMindUtility.getValidInput(in, new String[] {"random", "minimax"});
         if (response.equals("random")) {
