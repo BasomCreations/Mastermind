@@ -98,8 +98,8 @@ public class MasterMindBoard {
     /**
      * Alternate constructor in which you specify the secret code
      * @param secretCode Array of 4 int that represent the secret code
-     *  @author Jonathan
-     *  @author Sebastian
+     * @author Jonathan
+     * @author Sebastian
      */
     public MasterMindBoard(int[] secretCode) throws MasterMindBoardException {
         this.currentRow = 1;
@@ -110,6 +110,8 @@ public class MasterMindBoard {
 
         this.secretCode = secretCode;
         this.unlimitedAttempts = false;
+
+        this.startTime = System.nanoTime();
     }
 
     /**
@@ -125,6 +127,8 @@ public class MasterMindBoard {
         int [] code = MasterMindUtility.generateRandomSecretCode();
         this.secretCode = code;
         this.unlimitedAttempts = unlimitedAttempts;
+
+        this.startTime = System.nanoTime();
     }
 
     /**
@@ -160,11 +164,7 @@ public class MasterMindBoard {
             throw new MasterMindBoardException("Number of guesses must be " + ROW_SIZE);
         }
 
-
         Row guessResult = MasterMindUtility.makeGuess(guesses, this.secretCode);
-
-
-
 
         this.currentRow++;
 
@@ -176,7 +176,6 @@ public class MasterMindBoard {
         }
 
         return guessResult;
-
     }
 
     /**
@@ -229,11 +228,7 @@ public class MasterMindBoard {
                 }
             }
         }
-
-
     }
-
-
 
     /**
      * Get total elapsed time in seconds
@@ -242,8 +237,7 @@ public class MasterMindBoard {
      * @author Sebastian
      */
     public int getPlayTime(){
-        int time = (int)((this.finishTime - this.startTime) * Math.pow(10, -9));
-        return time;
+        return MasterMindUtility.findElapsedTime(this.startTime, this.finishTime);
     }
 
     /**
@@ -255,9 +249,6 @@ public class MasterMindBoard {
     public int getGuesses(){
         return this.currentRow - 1;
     }
-
-
-
 
 }
 

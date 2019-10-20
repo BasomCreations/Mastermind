@@ -193,7 +193,18 @@ public final class MasterMindUtility {
 
         return new Row(correctPegs, pegsIncorrectPosition, MasterMindBoard.ROW_SIZE - correctPegs - pegsIncorrectPosition);
 
+    }
 
+    /**
+     * Determines how much time has elapsed in seconds
+     * @param startTime long representing nanoseconds
+     * @param finishTime long representing nanoseconds
+     * @return elapsed time as an int representing seconds
+     * @author Jonathan
+     */
+    public static int findElapsedTime(long startTime, long finishTime) {
+        int time = (int)((finishTime - startTime) * Math.pow(10, -9));
+        return time;
     }
 
 

@@ -18,6 +18,8 @@
  */
 package hw01.solver;
 
+import hw01.game.MasterMindUtility;
+
 import java.util.IntSummaryStatistics;
 
 
@@ -29,6 +31,11 @@ public abstract class Solver {
      * Stats object
      */
     private IntSummaryStatistics stats;
+
+    /**
+     * Time of simulation in seconds
+     */
+    private int simTime;
 
 
     /**
@@ -49,7 +56,6 @@ public abstract class Solver {
         stats = new IntSummaryStatistics();
     }
 
-
     /**
      * Simulate game a fixed amount of times
      * @param numSimulations number of simulations
@@ -58,10 +64,20 @@ public abstract class Solver {
      * @throws Exception
      */
     public void simulate(int numSimulations) throws Exception{
+        long startTime = System.nanoTime();
         for (int i = 0; i < numSimulations; i++) {
             this.stats.accept((this.play()));
         }
-    };
+        simTime = MasterMindUtility.findElapsedTime(startTime, System.nanoTime());
+    }
+
+    /**
+     * Get the total simulation time in seconds
+     * @return simTime in seconds
+     */
+    public int getSimTime() {
+        return simTime;
+    }
 
     /**
      * Get next move
@@ -87,4 +103,17 @@ public abstract class Solver {
         return stats;
     }
 
+    /**
+     * Returns the string of the Solver as a summary of the results
+     * @return string representing the Solver
+     * @author Jonathan
+     */
+    @Override
+    public String toString() {
+        String results = String.format("RESULTS:\n%s - Statistics on number of plays:\n" +
+                "Number of games: %d\nAverage: %.2f Turns\n" +
+                "Shortest: %d Turns\nLongest: %d Turns\nTOTAL TIME: " +
+                "%d seconds\nGoodbye!", this.getClass().getSimpleName(), stats.getCount(), stats.getAverage(), stats.getMin(), stats.getMax(), this.getSimTime());
+        return results;
+    }
 }

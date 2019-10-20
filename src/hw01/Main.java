@@ -41,9 +41,7 @@ public class Main {
         catch (Exception e) {
             System.out.println("Unexpected Error Occurred - Try Again");
         }
-
     }
-
 
     /**
      * Method containing all the game logic
@@ -54,10 +52,8 @@ public class Main {
     private static void playGame() throws Exception {
         Scanner in = new Scanner(System.in);
 
-
         System.out.print("Please Enter Your Name: ");
         String name = in.nextLine();
-
 
         //After each game the player can either keep playing or terminate the program
         while (true){
@@ -110,29 +106,27 @@ public class Main {
         System.out.println("What type of solver would you like to use? [random/minimax/custom]");
         Scanner in = new Scanner(System.in);
         String response = MasterMindUtility.getValidInput(in, new String[] {"random", "minimax", "custom"});
+        System.out.println("How many games would you like to simulate?");
+        int iterations = MasterMindUtility.verifyPositiveNumericInput(in);
+        // Random Solver selected
         if (response.equals("random")) {
             RandomSolver randSolver = new RandomSolver();
-            System.out.println("How many games would you like to simulate?");
-            int iterations = MasterMindUtility.verifyPositiveNumericInput(in);
             randSolver.simulate(iterations);
-            System.out.println(randSolver.getStats().toString());
-        } else if (response.equals("minimax")){
+            System.out.println(randSolver);
+        }
+        // Minimax Solver selected
+        else if (response.equals("minimax")){
             MinimaxSolver minMaxSolver = new MinimaxSolver();
-            System.out.println("How many games would you like to simulate?");
-            int iterations = MasterMindUtility.verifyPositiveNumericInput(in);
             minMaxSolver.simulate(iterations);
-            System.out.println(minMaxSolver.getStats().toString());
-
-        } else if (response.equals("custom")){
+            System.out.println(minMaxSolver);
+        }
+        // Custom Solver selected
+        else if (response.equals("custom")){
             CustomSolver customSolver = new CustomSolver();
-            System.out.println("How many games would you like to simulate?");
-            int iterations = MasterMindUtility.verifyPositiveNumericInput(in);
             customSolver.simulate(iterations);
-            System.out.println(customSolver.getStats().toString());
-
+            System.out.println(customSolver);
         }
     }
-
 
 }
 
