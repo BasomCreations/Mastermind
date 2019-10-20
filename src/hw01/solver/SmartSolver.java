@@ -3,8 +3,8 @@
  * Fall 2019
  * Instructor: Prof. Brian King
  *
- * Name: Sebastian Ascoli
- * Section: 11 am
+ * Name: Jonathan Basom / Sebastian Ascoli
+ * Section: 11 am / 9 am
  * Date: 10/19/2019
  * Time: 4:16 PM
  *
@@ -23,12 +23,23 @@ import hw01.game.MasterMindBoard;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ *Abstract class for smart solvers
+ * This class contains behavior that most
+ * smart algorithms would require like generating
+ * a list with all possible combinations
+ */
 public abstract class SmartSolver extends Solver {
 
+    /**
+     * All possible codes
+     */
     protected List<int[]> allPossibleCodes;
 
     /**
      * Constructor
+     * @author Sebastian
+     * @author Jonathan
      */
     public SmartSolver() {
         super();
@@ -39,6 +50,7 @@ public abstract class SmartSolver extends Solver {
 
     /**
      * Method to generate all possible codes
+     * @author Sebastian
      */
     private void generateAllPossibleCodes(){
 
@@ -52,6 +64,7 @@ public abstract class SmartSolver extends Solver {
 
     /**
      * Helper recursive method for the generateAllPossibleCodes method
+     * @author Sebastian
      * @param curCode current code being generated
      * @param index current index
      */

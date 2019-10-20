@@ -22,3 +22,7 @@ StackOverflow.com - How to convert int[] into List&lt;Integer&gt; in Java?
 <a href="https://stackoverflow.com/questions/4662215/how-to-extract-a-substring-using-regex">
 Stack Overflow Reference on Regex
 </a>
+<br>
+<a href="https://puzzling.stackexchange.com/questions/546/clever-ways-to-solve-mastermind">
+Stackexchange discussion on Mastermind algorithms
+</a>

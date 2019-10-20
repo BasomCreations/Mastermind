@@ -40,11 +40,20 @@ public class MinimaxSolver extends SmartSolver{
 
     /**
      * Constructor
+     * @author Sebastian
+     * @author Jonathan
      */
     public MinimaxSolver() {
         super();
     }
 
+
+    /**
+     * Get next move using Knuth's algorithm
+     * @author Sebastian
+     * @author Jonathan
+     * @return int array with next move
+     */
     @Override
     protected int[] getNextMove() {
 
@@ -110,6 +119,14 @@ public class MinimaxSolver extends SmartSolver{
         return besGuess;
     }
 
+
+    /**
+     * Plays one game using Knuth's algorithm
+     * @author Sebastian
+     * @author Jonathan
+     * @return Score of the game
+     * @throws Exception
+     */
     @Override
     protected int play() throws Exception {
 

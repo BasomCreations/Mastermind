@@ -91,6 +91,8 @@ public class MasterMindBoard {
         int [] code = MasterMindUtility.generateRandomSecretCode();
         this.secretCode = code;
         this.unlimitedAttempts = false;
+
+        this.startTime = System.nanoTime();
     }
 
     /**
@@ -147,6 +149,11 @@ public class MasterMindBoard {
         if (this.unlimitedAttempts == false && this.currentRow > this.DEFAULT_MAXIMUM_ATTEMPTS) {
             throw new MasterMindBoardException("Exceeded maximum number of guesses");
         }
+        else if (this.unlimitedAttempts == false && this.currentRow == this.DEFAULT_MAXIMUM_ATTEMPTS){
+            //Sets finish time if this is the last attempt
+            this.finishTime = System.nanoTime();
+        }
+
 
         //Verify dimension of guesses array
         if (guesses.length != ROW_SIZE) {
@@ -163,6 +170,9 @@ public class MasterMindBoard {
 
         if (guessResult.getCorrectPegs() == ROW_SIZE) {
             this.win = true;
+
+            //Sets finish time when player beats the game
+            this.finishTime = System.nanoTime();
         }
 
         return guessResult;
@@ -186,7 +196,9 @@ public class MasterMindBoard {
      */
     public void playCommandLine() throws Exception {
 
-        this.setStartTime();
+        //Sets start time again if player is playing in command line mode to make sure it records time
+        //from when the player starts playing and not from when the object is initialized
+        this.startTime = System.nanoTime();
 
         System.out.printf("Guess my code using numbers between %d and %d. You have %d guesses\n", MIN_SLOT_VALUE, MAX_SLOT_VALUE, DEFAULT_MAXIMUM_ATTEMPTS);
         Scanner in = new Scanner(System.in);
@@ -218,18 +230,10 @@ public class MasterMindBoard {
             }
         }
 
-        this.finishTime = System.nanoTime();
 
     }
 
-    /**
-     * Sets start time
-     * @author Jonathan
-     * @author Sebastian
-     */
-    private void setStartTime(){
-        this.startTime = System.nanoTime();
-    }
+
 
     /**
      * Get total elapsed time in seconds

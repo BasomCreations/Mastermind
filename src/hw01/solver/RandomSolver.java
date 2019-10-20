@@ -22,19 +22,40 @@ import hw01.game.MasterMindBoard;
 import hw01.game.MasterMindBoardException;
 import hw01.game.MasterMindUtility;
 
-import java.util.Random;
-
+/**
+ * Randomly solves mastermind
+ */
 public class RandomSolver extends Solver {
 
+    /**
+     * Constructor
+     * @author Sebastian
+     * @author Jonathan
+     */
     public RandomSolver() {
         super();
     }
 
+
+    /**
+     * Gets next move by generating a random code
+     * @author Sebastian
+     * @author Jonathan
+     * @return random code
+     */
     @Override
     protected int[] getNextMove() {
         return MasterMindUtility.generateRandomSecretCode();
     }
 
+
+    /**
+     * Plays game by doing random guesses
+     * @author Sebastian
+     * @author Jonathan
+     * @return Score
+     * @throws MasterMindBoardException
+     */
     @Override
     protected int play() throws MasterMindBoardException {
         MasterMindBoard board = new MasterMindBoard(true);

@@ -36,6 +36,8 @@ public class Main {
         try{
             playGame();
         }
+
+        //This should never happen (unless you run 2 programs in parallel and try to be host in both)
         catch (Exception e) {
             System.out.println("Unexpected Error Occurred - Try Again");
         }
@@ -82,6 +84,7 @@ public class Main {
                 // Single player game
                 MasterMindBoard board = new MasterMindBoard();
                 board.playCommandLine();
+                System.out.println("Your play time was "+board.getPlayTime() + " seconds");
 
             } else {
                 // Solver mode
