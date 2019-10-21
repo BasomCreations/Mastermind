@@ -35,7 +35,7 @@ import java.util.Random;
  *
  * By doing 10,000 simulations we got an average of 4.64 moves per game with a minimum of 1 and maximum of 8.
  *
- * @see <a href="https://puzzling.stackexchange.com/questions/546/clever-ways-to-solve-mastermind">this link</a>
+ * @see <a href="https://puzzling.stackexchange.com/questions/546/clever-ways-to-solve-mastermind">Clever Ways to Solve Mastermind</a>
  */
 public class CustomSolver extends SmartSolver{
 
@@ -72,13 +72,12 @@ public class CustomSolver extends SmartSolver{
      * Plays one game
      * @author Sebastian
      * @author Jonnathan
-     * @return score
+     * @return score represented by an int
      * @throws Exception
      */
     @Override
     protected int play() throws Exception {
         s = new ArrayList<>(allPossibleCodes);
-
 
         MasterMindBoard board = new MasterMindBoard(true);
 
@@ -98,9 +97,7 @@ public class CustomSolver extends SmartSolver{
             }
             s = new ArrayList<>(newS);
 
-
             curGuess = getNextMove();
-
 
             result = board.guess(curGuess);
 

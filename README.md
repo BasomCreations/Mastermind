@@ -26,3 +26,11 @@ Stack Overflow Reference on Regex
 <a href="https://puzzling.stackexchange.com/questions/546/clever-ways-to-solve-mastermind">
 Stackexchange discussion on Mastermind algorithms
 </a>
+<br>
+<a href="https://github.com/nattydredd/Mastermind-Five-Guess-Algorithm/blob/master/README.md">
+GitHub Mastermind-Five-Guess-Algorithm
+</a>
+<br>
+<a href="https://github.com/nattydredd/Mastermind-Five-Guess-Algorithm/blob/master/Five-Guess-Algorithm.cpp">
+GitHub Mastermind-Five-Guess-Algorithm / Five-Guess-Algorithm.cpp
+</a>

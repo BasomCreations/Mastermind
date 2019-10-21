@@ -157,16 +157,16 @@ public final class MasterMindUtility {
 
     /**
      * Returns a Row object for the results of a guess
-     * @param thisguess guess made
+     * @param userGuess guess made
      * @param code secret code
-     * @return
+     * @return Row containing the results of the guess
      */
-    public static Row makeGuess(int[] thisguess, int[]  code){
-        int[] guesses = thisguess.clone();
+    public static Row makeGuess(int[] userGuess, int[]  code){
+        int[] guesses = userGuess.clone();
         int[] secretCode = code.clone();
 
         if(guesses.length != secretCode.length){
-            throw new IllegalArgumentException("You cant do that!");
+            throw new IllegalArgumentException("Invalid Guess!");
         }
 
         List<Integer> guessList = Arrays.stream(secretCode).boxed().collect(Collectors.toList());

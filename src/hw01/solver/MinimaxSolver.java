@@ -24,6 +24,17 @@ import hw01.game.Row;
 
 import java.util.*;
 
+/**
+ * This class is a Solver class that uses Donald Knuth's
+ * Five-Guess algorithm to solve a game of MasterMind in
+ * 5 or less moves.  Ideas for this class came from GitHub
+ * at the following links.
+ *
+ * @see <a href="https://github.com/nattydredd/Mastermind-Five-Guess-Algorithm/blob/master/README.md">
+ *     Mastermind-Five-Guess-Algorithm</a>
+ * @see <a href="https://github.com/nattydredd/Mastermind-Five-Guess-Algorithm/blob/master/Five-Guess-Algorithm.cpp">
+ *     Mastermind-Five-Guess-Algorithm / Five-Guess-Algorithm.cpp</a>
+ */
 public class MinimaxSolver extends SmartSolver{
 
     /**
@@ -31,12 +42,10 @@ public class MinimaxSolver extends SmartSolver{
      */
     private final static int[] FIRSTGUESS= {1, 1, 2, 2};
 
-
     /**
      * Set of all codes that are still possible
      */
     private HashSet<int[]> s;
-
 
     /**
      * Constructor
@@ -46,7 +55,6 @@ public class MinimaxSolver extends SmartSolver{
     public MinimaxSolver() {
         super();
     }
-
 
     /**
      * Get next move using Knuth's algorithm
@@ -82,8 +90,6 @@ public class MinimaxSolver extends SmartSolver{
                 else {
                     scoreTable[index].put(guess, 1);
                 }
-
-
             }
 
             index++;
@@ -119,7 +125,6 @@ public class MinimaxSolver extends SmartSolver{
         return besGuess;
     }
 
-
     /**
      * Plays one game using Knuth's algorithm
      * @author Sebastian
@@ -131,7 +136,6 @@ public class MinimaxSolver extends SmartSolver{
     protected int play() throws Exception {
 
         s = new HashSet(allPossibleCodes);
-
 
         MasterMindBoard board = new MasterMindBoard(true);
 
@@ -147,21 +151,15 @@ public class MinimaxSolver extends SmartSolver{
                 if (resultForPossibleSolution.equals(result)){
                     newS.add(possibleSolution);
                 }
-
             }
             s = new HashSet<>(newS);
 
-
             curGuess = getNextMove();
 
-
             result = board.guess(curGuess);
-
         }
 
         return board.getGuesses();
     }
-
-
 
 }

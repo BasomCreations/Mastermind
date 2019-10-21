@@ -50,6 +50,13 @@ public abstract class SmartSolver extends Solver {
 
     /**
      * Method to generate all possible codes
+     *
+     * Idea to generate all possible codes came from Donald Knuth's
+     * Five-Guess algorithm found on GitHub
+     *
+     * @see <a href="https://github.com/nattydredd/Mastermind-Five-Guess-Algorithm/blob/master/README.md">
+     *     Mastermind-Five-Guess-Algorithm</a>
+     *
      * @author Sebastian
      */
     private void generateAllPossibleCodes(){
