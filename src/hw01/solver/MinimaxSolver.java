@@ -111,10 +111,9 @@ public class MinimaxSolver extends SmartSolver{
             if (max < minMax){
                 minMax = max;
                 minMaxIndex = index;
-            } else if (max == minMax){
-                if (s.contains(allPossibleCodes.get(index))){
-                    minMaxIndex = index;
-                }
+            } else if (max == minMax && !s.contains(allPossibleCodes.get(minMaxIndex))){
+                minMaxIndex = index;
+
             }
 
             index++;
