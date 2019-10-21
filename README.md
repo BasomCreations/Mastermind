@@ -51,13 +51,16 @@ have. From this class we also inherited another abstract class called
 SmartSolver, which implemented behavior we believed all "Smart" Algorithms 
 should have, such as generating a list of all possible combinations.
 The solvers we implemented where the following:
+<ul>
 <li>Random solver: Basically guesses randomly. It would guess the
 solution on an average of around 1300 moves. Its only advantage is
 its speed (it can do 100000 simulations in around 35 seconds).
+</li>
 <li>Minimax Solver: Uses Donald Knuth's Five-Guess algorithm to
 solve the game. Its main advantage is that it solves the game
 in an average of around 4.5 moves, its main disadvantage is that
 it is slow (doing 100 simulations takes around 9 seconds).
+</li>
 <li>Custom Solver: We implemented a hybrid combination of the 
 previous 2 algorithms (based on an algorithm provided in Stackexcange 
 discussion with the link provided above). The algorithm consists 
@@ -68,6 +71,8 @@ around 4.64 moves. Its main advantage is that it provides a great
 average at a very high performance as it provides an average really
 close to that of minimax's but it has essentially the same speed as
 the random solver.
+</li>
+</ul>
 
 
 
