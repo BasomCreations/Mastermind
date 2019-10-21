@@ -41,7 +41,7 @@ public final class MasterMindUtility {
             String inp = in.nextLine().trim();
             for (String s :
                     inputOptions) {
-                if (s.equals(inp)) {
+                if (s.equalsIgnoreCase(inp)) {
                     return s;
                 }
             }
