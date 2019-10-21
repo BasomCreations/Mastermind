@@ -54,9 +54,6 @@ public class Main {
             System.out.println(e.getMessage());
             System.out.println("Unexpected Error Occurred - Try Again");
         }
-        finally {
-            in.close();
-        }
     }
 
     /**
@@ -104,7 +101,6 @@ public class Main {
             if (answer.equals("no")){break;}
 
         }
-        in.close();
     }
 
     /**
@@ -145,7 +141,6 @@ public class Main {
             String answer = MasterMindUtility.getValidInput(in, new String[]{"yes", "no"});
             if (answer.equals("no")){break;}
         }
-        in.close();
     }
 
 }
