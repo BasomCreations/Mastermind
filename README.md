@@ -35,6 +35,6 @@ GitHub Mastermind-Five-Guess-Algorithm
 GitHub Mastermind-Five-Guess-Algorithm / Five-Guess-Algorithm.cpp
 </a>
 <br>
-![Test](https://gitlab.bucknell.edu/jab108/csci205_hw/blob/README_Edits/src/UML_Game&Server.png)
+
 
 
