@@ -35,5 +35,8 @@ GitHub Mastermind-Five-Guess-Algorithm / Five-Guess-Algorithm.cpp
 </a>
 <br>
 <img src="src/hw01/diagrams/topLevelUML_Game_Server.png">
+<br>
+<br>
+<img src="src/hw01/diagrams/topLevelUML_Solvers.png">
 
 
