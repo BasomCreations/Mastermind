@@ -136,7 +136,7 @@ public class TwoPlayerGameClientSide {
                 System.out.print("Please enter the host's ip address: ");
                 String ipadress = in.nextLine();
                 System.out.print("Please enter the host's port number: ");
-                int portNumber = MasterMindUtility.getIntegerInput(in);
+                int portNumber = MasterMindUtility.getIntegerPositiveInput(in);
                 GameClient client = new GameClient();
                 client.connectToServer(ipadress, portNumber);
                 return client;

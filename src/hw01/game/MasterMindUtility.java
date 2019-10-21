@@ -55,31 +55,21 @@ public final class MasterMindUtility {
      * @return numeric input
      * @author Sebastian
      */
-    public static int getIntegerInput(Scanner in){
+    public static int getIntegerPositiveInput(Scanner in){
         while (true){
             String inp = in.nextLine();
             try{
                 int intInput = Integer.parseInt(inp);
-                return intInput;
+
+                if (intInput > 0){
+                    return intInput;
+                } else {
+                    System.out.print("Error: Please enter positive number: ");
+                }
+
+
             } catch (Exception e){
                 System.out.print("Error: Please enter numeric input: ");
-            }
-        }
-    }
-
-
-    /**
-     * Verify that user enters a valid number
-     * @param in Scanner object
-     * @return int that is the valid number
-     * @author Jonathan
-     */
-    public static int verifyPositiveNumericInput(Scanner in) {
-        while (true) {
-            int inp = getIntegerInput(in);
-            if (inp > 0){return inp;}
-            else {
-                System.out.println("Error: Input must be positive");
             }
         }
     }
