@@ -31,7 +31,7 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        System.out.println("Welcome to MasterMind!\n");
+        System.out.println("Welcome to MasterMind!");
         Scanner in = new Scanner(System.in);
 
         try{
