@@ -6,6 +6,9 @@ import java.util.IntSummaryStatistics;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * JUnit test for MinimaxSolver class
+ */
 class MinimaxSolverTest {
 
 
