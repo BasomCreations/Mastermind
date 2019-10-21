@@ -54,9 +54,6 @@ public class Main {
             System.out.println(e.getMessage());
             System.out.println("Unexpected Error Occurred - Try Again");
         }
-        finally {
-            in.close();
-        }
     }
 
     /**
@@ -104,7 +101,6 @@ public class Main {
             if (answer.equals("no")){break;}
 
         }
-        in.close();
     }
 
     /**
@@ -120,7 +116,7 @@ public class Main {
             in = new Scanner(System.in);
             String response = MasterMindUtility.getValidInput(in, new String[] {"random", "minimax", "custom"});
             System.out.println("How many games would you like to simulate?");
-            int iterations = MasterMindUtility.verifyPositiveNumericInput(in);
+            int iterations = MasterMindUtility.getIntegerPositiveInput(in);
             // Random Solver selected
             if (response.equals("random")) {
                 RandomSolver randSolver = new RandomSolver();
@@ -145,7 +141,6 @@ public class Main {
             String answer = MasterMindUtility.getValidInput(in, new String[]{"yes", "no"});
             if (answer.equals("no")){break;}
         }
-        in.close();
     }
 
 }

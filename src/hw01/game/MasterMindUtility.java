@@ -55,17 +55,25 @@ public final class MasterMindUtility {
      * @return numeric input
      * @author Sebastian
      */
-    public static int getIntegerInput(Scanner in){
+    public static int getIntegerPositiveInput(Scanner in){
         while (true){
             String inp = in.nextLine();
             try{
                 int intInput = Integer.parseInt(inp);
-                return intInput;
+
+                if (intInput > 0){
+                    return intInput;
+                } else {
+                    System.out.print("Error: Please enter positive number: ");
+                }
+
+
             } catch (Exception e){
                 System.out.print("Error: Please enter numeric input: ");
             }
         }
     }
+
 
     /**
      * Converts guess string (which should be already validated) into an array that the guess method
@@ -131,29 +139,7 @@ public final class MasterMindUtility {
         return secretCode;
     }
 
-    /**
-     * Verify that user enters a valid number
-     * @param in Scanner object
-     * @return int that is the valid number
-     * @author Jonathan
-     */
-    public static int verifyPositiveNumericInput(Scanner in) {
-        while (true) {
-            checkInt: if (in.hasNextInt()) {
-                int number = in.nextInt();
-                if (number <= 0) {
-                    System.out.println("Must be greater than 0 - Try Again:");
-                    in.nextLine();
-                    break checkInt;
-                }
-                return number;
-            }
-            else {
-                System.out.println("Error! Please enter numeric value.");
-                in.nextLine();
-            }
-        }
-    }
+
 
     /**
      * Returns a Row object for the results of a guess
