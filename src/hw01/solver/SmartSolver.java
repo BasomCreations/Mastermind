@@ -24,7 +24,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- *Abstract class for smart solvers
+ * Abstract class for smart solvers
  * This class contains behavior that most
  * smart algorithms would require like generating
  * a list with all possible combinations
