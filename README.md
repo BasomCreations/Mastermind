@@ -39,8 +39,10 @@ GitHub Mastermind-Five-Guess-Algorithm / Five-Guess-Algorithm.cpp
 <br>
 <br>
 <img src="src/hw01/diagrams/topLevelUML_Solvers.png" alt="UML Diagram 2">
-
 <br>
+<h4>Description</h4>
+<br>
+<h5>Game Classes</h5>
 <p>
 The central class for the game is the MasterMindBoard class. This board is an abstraction
 for an actual game board where users can play games by making guesses. A MasterMindBoard object can be 
@@ -59,6 +61,7 @@ host have finished their games, the host creates a GameResults object that takes
 results for both players.  The host then shares the GameResults object with the client as described below in the networking information.
 </p>
 <br>
+<h5>Networking CLasses</h5>
 <p>
 The networking classes consist of three primary classes - two classes to represent a server and a client (GameServer and GameClient) and 
 one to represent the protocol between them (Protocol).  GameServer has two constructors that can be instantiated.  The first one takes
@@ -74,8 +77,6 @@ GameResults object from the server to the client. Protocol objects were also sen
 it had properly received the sent object from the other side, and if the other side had decided to quit. The Protocol object was designed
 as an Enumeration, and the three constants to describe the following states are READY, RECEIVED, and QUIT.
 </p>
-<br>
-<h4>Description</h4>
 <br>
 <h5>Solvers</h5>
 To implement the solvers we first created an abstract class called
