@@ -61,7 +61,13 @@ an int for a port number, and the second does not have any parameters and uses 2
 also has the ability to connect to a client (connectToClient) and send and received Protocol and other objects (sendObject and 
 readObject).  Another important aspect of GameServer is its getFormattedIP function which returns the IP address so that a client
 knows how to connect.  As for the GameClient, there is only one no parameter constructor.  In order to connect to a server, the 
-connectToServer method must be called with the server's IP address as a String and the server's port number as an int.
+connectToServer method must be called with the server's IP address as a String and the server's port number as an int. GameClient also
+has sendObject and readObject methods in order to send and receive objects such as Protocol objects. The TwoPlayerGameServerSide
+and TwoPlayerGameClient side classes use GameServer and GameClient objects respectively to connect to one another for a multiplayer game
+and send objects such as the secret code from the server to the client, the Score object from the client to the server, and the
+GameResults object from the server to the client. Protocol objects were also sent in order to verify that each side was ready to play, if
+it had properly received the sent object from the other side, and if the other side had decided to quit. The Protocol object was designed
+as an Enumeration, and the three constants to describe the following states are READY, RECEIVED, and QUIT.
 </p>
 <br>
 <img src="src/hw01/diagrams/topLevelUML_Solvers.png">
