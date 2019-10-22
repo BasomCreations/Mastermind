@@ -61,7 +61,7 @@ host have finished their games, the host creates a GameResults object that takes
 results for both players.  The host then shares the GameResults object with the client as described below in the networking information.
 </p>
 <br>
-<h5>Networking CLasses</h5>
+<h5>Networking Classes</h5>
 <p>
 The networking classes consist of three primary classes - two classes to represent a server and a client (GameServer and GameClient) and 
 one to represent the protocol between them (Protocol).  GameServer has two constructors that can be instantiated.  The first one takes
@@ -96,9 +96,9 @@ in an average of around 4.5 moves, its main disadvantage is that
 it is slow (doing 100 simulations takes around 9 seconds).
 </li>
 <li>Custom Solver: We implemented a hybrid combination of the 
-previous 2 algorithms (based on an algorithm provided in Stackexcange 
+previous 2 algorithms (based on an algorithm provided in a StackOverflow 
 discussion with the link provided above). The algorithm consists 
-on making a random guesses within the set of solutions that are 
+of making random guesses within the set of solutions that are 
 still possible (it eliminates impossible solutions based on the 
 responses it gets). This algorithm solves the game in an average of
 around 4.64 moves. Its main advantage is that it provides a great
