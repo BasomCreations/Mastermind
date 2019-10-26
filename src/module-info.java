@@ -1,4 +1,4 @@
-module csci205_labs {
+module csci205_hw {
     requires javafx.graphics;
     requires javafx.controls;
     requires javafx.fxml;
