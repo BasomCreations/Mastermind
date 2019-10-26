@@ -16,40 +16,30 @@
  *
  * ****************************************
  */
-package hw01.GUI;
+package hw01.GUI.onePlayerGameView;
+
 
 import hw01.game.MasterMindBoard;
 import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
-import javafx.geometry.Rectangle2D;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Separator;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
-import javafx.scene.shape.Rectangle;
-import javafx.scene.text.Font;
-import javafx.scene.text.FontWeight;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 
 public class OnePlayerGameView {
 
 
-    final public static int WIDTH = StartMenuView.WIDTH;
-    final public static int HEIGHT = StartMenuView.HEIGHT;
-    final static int TITLESZE = 50;
-
     private BorderPane root;
     private OnePlayerGameModel model;
     private GridPane board;
+    private Button goBackBtn;
+
 
     public String TITLE = "Single Player Game";
 
@@ -61,6 +51,14 @@ public class OnePlayerGameView {
         root.setPrefHeight(h);
 
         Label title = new Label(TITLE);
+        title.setStyle("-fx-font-size: 15");
+        goBackBtn = new Button("Main Menu");
+        goBackBtn.setStyle("-fx-background-color: WHITE");
+        HBox options = new HBox();
+        options.getChildren().addAll(goBackBtn, title);
+        options.setAlignment(Pos.CENTER);
+
+        root.setTop(options);
 
         board = new GridPane();
         board.setHgap(10);
@@ -83,7 +81,6 @@ public class OnePlayerGameView {
         root.setBottom(new Separator(Orientation.HORIZONTAL));
         root.setCenter(board);
 
-        root.setTop(title);
 
     }
 

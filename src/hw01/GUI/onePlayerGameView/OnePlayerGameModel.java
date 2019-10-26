@@ -16,7 +16,7 @@
  *
  * ****************************************
  */
-package hw01.GUI;
+package hw01.GUI.onePlayerGameView;
 
 import hw01.game.MasterMindBoard;
 

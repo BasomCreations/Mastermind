@@ -16,8 +16,9 @@
  *
  * ****************************************
  */
-package hw01.GUI;
+package hw01.GUI.startMenu;
 
+import hw01.GUI.startMenu.StartMenuView;
 import javafx.scene.control.Button;
 
 

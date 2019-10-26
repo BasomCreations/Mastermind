@@ -16,9 +16,8 @@
  *
  * ****************************************
  */
-package hw01.GUI;
+package hw01.GUI.startMenu;
 
-import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;

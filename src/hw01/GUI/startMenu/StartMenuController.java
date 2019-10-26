@@ -16,8 +16,11 @@
  *
  * ****************************************
  */
-package hw01.GUI;
+package hw01.GUI.startMenu;
 
+import hw01.GUI.onePlayerGameView.OnePlayerGameModel;
+import hw01.GUI.onePlayerGameView.OnePlayerGameView;
+import hw01.GUI.startMenu.StartMenuView;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
