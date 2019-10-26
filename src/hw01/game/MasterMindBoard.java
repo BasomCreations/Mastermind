@@ -43,17 +43,17 @@ public class MasterMindBoard {
     /**
      * Max value of the slots (inclusive)
      */
-    public final static int MAX_SLOT_VALUE = 6;
+    public static int MAX_SLOT_VALUE = 6;
 
     /**
      * Min value of the slot (inclusive)
      */
-    public final static int MIN_SLOT_VALUE = 1;
+    public static int MIN_SLOT_VALUE = 1;
 
     /**
      * Max value of rows in the game
      */
-    final static int DEFAULT_MAXIMUM_ATTEMPTS = 12;
+    public static int DEFAULT_MAXIMUM_ATTEMPTS = 12;
 
     /**
      * Determines if the user should have unlimited guesses
@@ -63,7 +63,7 @@ public class MasterMindBoard {
     /**
      * Size of each row
      */
-    public final static int ROW_SIZE = 4;
+    public static int ROW_SIZE = 4;
 
     /**
      * Secret code the player is supposed to guess
@@ -249,6 +249,8 @@ public class MasterMindBoard {
     public int getGuesses(){
         return this.currentRow - 1;
     }
+
+
 
 }
 
