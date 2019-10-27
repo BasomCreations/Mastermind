@@ -41,6 +41,7 @@ public class StartMenuView {
 
     public String TITLE = "Mastermind";
     private final Button singleBtn;
+    private final Button configBtn;
 
     public StartMenuView() {
 
@@ -68,7 +69,7 @@ public class StartMenuView {
         imageView.setPreserveRatio(true);
 
         singleBtn = new StartMenuButton("Single");
-        Button configBtn = new StartMenuButton("Settings");
+        configBtn = new StartMenuButton("Settings");
 
 
         root.getChildren().addAll(title, imageView, singleBtn, configBtn);
@@ -83,5 +84,9 @@ public class StartMenuView {
 
     public Button getSingleBtn() {
         return singleBtn;
+    }
+
+    public Button getConfigBtn() {
+        return configBtn;
     }
 }

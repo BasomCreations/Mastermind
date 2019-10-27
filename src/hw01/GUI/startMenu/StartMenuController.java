@@ -18,10 +18,11 @@
  */
 package hw01.GUI.startMenu;
 
-import hw01.GUI.onePlayerGameView.OnePlayerGameController;
-import hw01.GUI.onePlayerGameView.OnePlayerGameModel;
-import hw01.GUI.onePlayerGameView.OnePlayerGameView;
-import hw01.GUI.startMenu.StartMenuView;
+import hw01.GUI.onePlayerGame.OnePlayerGameController;
+import hw01.GUI.onePlayerGame.OnePlayerGameModel;
+import hw01.GUI.onePlayerGame.OnePlayerGameView;
+import hw01.GUI.settings.SettingsController;
+import hw01.GUI.settings.SettingsView;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
@@ -36,11 +37,22 @@ public class StartMenuController {
 
         //Switch to one player view when button is pressed
         this.startMenuView.getSingleBtn().setOnAction(event -> {
-            OnePlayerGameView onePlayerGameView = new OnePlayerGameView(startMenuView.getRoot().getWidth(), startMenuView.getRoot().getHeight(), new OnePlayerGameModel());
-            OnePlayerGameController onePlayerGameController = new OnePlayerGameController(stage, stage.getScene(), onePlayerGameView);
+            OnePlayerGameModel onePlayerGameModel = new OnePlayerGameModel();
+            OnePlayerGameView onePlayerGameView = new OnePlayerGameView(startMenuView.getRoot().getWidth(), startMenuView.getRoot().getHeight(), onePlayerGameModel);
+            OnePlayerGameController onePlayerGameController = new OnePlayerGameController(stage, stage.getScene(), onePlayerGameView, onePlayerGameModel);
 
             primaryStage.setScene(new Scene(onePlayerGameView.getRoot()));
         });
+
+
+        this.startMenuView.getConfigBtn().setOnAction(event -> {
+            SettingsView settingsView = new SettingsView(startMenuView.getRoot().getWidth(), startMenuView.getRoot().getHeight());
+            SettingsController settingsController = new SettingsController(stage, stage.getScene(), settingsView);
+
+            primaryStage.setScene(new Scene(settingsView.getRoot()));
+
+        });
+
     }
 
 }

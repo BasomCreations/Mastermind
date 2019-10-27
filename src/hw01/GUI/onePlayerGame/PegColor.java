@@ -1,4 +1,4 @@
-package hw01.GUI.onePlayerGameView;
+package hw01.GUI.onePlayerGame;
 
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;

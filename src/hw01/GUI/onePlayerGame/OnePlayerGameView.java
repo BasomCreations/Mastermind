@@ -16,7 +16,7 @@
  *
  * ****************************************
  */
-package hw01.GUI.onePlayerGameView;
+package hw01.GUI.onePlayerGame;
 
 
 import hw01.GUI.sceneTemplate.SceneViewTemplate;
@@ -44,7 +44,7 @@ public class OnePlayerGameView extends SceneViewTemplate {
 
         super(w, h);
         BorderPane root = getRoot();
-        getTitle().setText("Single Player Game");
+        getTitle().setText(TITLE);
 
 
         board = new GridPane();
@@ -58,6 +58,7 @@ public class OnePlayerGameView extends SceneViewTemplate {
 
             }
         }
+
 
 
         board.setAlignment(Pos.CENTER);

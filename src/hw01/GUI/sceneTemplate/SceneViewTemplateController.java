@@ -18,6 +18,8 @@
  */
 package hw01.GUI.sceneTemplate;
 
+
+import javafx.beans.binding.Bindings;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
@@ -28,6 +30,7 @@ public abstract class SceneViewTemplateController {
 
     public SceneViewTemplateController(Stage primaryStage, Scene prevScene, SceneViewTemplate view) {
         theView = view;
+
         prevScene = prevScene;
 
         Scene finalPrevScene = prevScene;
