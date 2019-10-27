@@ -20,4 +20,8 @@ public enum PegColor {
     public Paint getColor() {
         return color;
     }
+
+    public Paint getNextColor(){
+        return PegColor.values()[(this.ordinal() + 1) % PegColor.values().length].getColor();
+    }
 }
