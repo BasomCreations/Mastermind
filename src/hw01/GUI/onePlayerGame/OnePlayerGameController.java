@@ -18,14 +18,43 @@
  */
 package hw01.GUI.onePlayerGame;
 
-import hw01.GUI.sceneTemplate.SceneViewTemplate;
+
 import hw01.GUI.sceneTemplate.SceneViewTemplateController;
+import hw01.game.MasterMindBoard;
 import javafx.scene.Scene;
+import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
+
+import java.util.Arrays;
+
 
 public class OnePlayerGameController extends SceneViewTemplateController {
 
-    public OnePlayerGameController(Stage primaryStage, Scene prevScene, SceneViewTemplate view, OnePlayerGameModel model) {
+    private int curRow;
+
+    public OnePlayerGameController(Stage primaryStage, Scene prevScene, OnePlayerGameView view, OnePlayerGameModel model) {
         super(primaryStage, prevScene, view);
+
+        curRow = 0;
+
+
+        for (int x = 0; x < MasterMindBoard.ROW_SIZE; x++) {
+            for (int y = 0; y < MasterMindBoard.DEFAULT_MAXIMUM_ATTEMPTS; y++) {
+
+                int finalY = y;
+                Circle curCircle = view.getPegGrid()[y][x];
+                curCircle.setOnMouseClicked(event -> {
+
+                    if (curRow == finalY) {
+                        Arrays.asList(PegColor.values());
+                        curCircle.setFill(PegColor.getNextColor(curCircle.getFill()));
+                    }
+
+                });
+
+            }
+        }
+
+
     }
 }

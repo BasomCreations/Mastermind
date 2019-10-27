@@ -79,7 +79,7 @@ public class OnePlayerGameView extends SceneViewTemplate {
                 StackPane stack = new StackPane();
                 stack.setAlignment(Pos.CENTER);
                 stack.getChildren().add(new Rectangle(30,30, Color.GRAY));
-                Circle circle = new Circle(10, Color.BLUE);
+                Circle circle = new Circle(10, Color.WHITE);
                 stack.getChildren().add(circle);
                 board.add(stack,x+1,y);
                 pegGrid[y][x] = circle;
@@ -105,6 +105,19 @@ public class OnePlayerGameView extends SceneViewTemplate {
 
     }
 
+    public GridPane getBoard() {
+        return board;
+    }
 
+    public Circle[][] getPegGrid() {
+        return pegGrid;
+    }
 
+    public Circle[][] getResultsGrid() {
+        return resultsGrid;
+    }
+
+    public Polygon[] getArrows() {
+        return arrows;
+    }
 }
