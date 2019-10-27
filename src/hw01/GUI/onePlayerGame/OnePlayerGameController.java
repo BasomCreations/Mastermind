@@ -24,7 +24,9 @@ import hw01.game.MasterMindBoard;
 import javafx.scene.Scene;
 import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
-
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
+import java.io.File;
 import java.util.Arrays;
 
 
@@ -37,6 +39,9 @@ public class OnePlayerGameController extends SceneViewTemplateController {
 
         curRow = 0;
 
+        //Sound effect when clicking peg
+        Media sound = new Media(new File("sound/sound1.wav").toURI().toString());
+        MediaPlayer clickSound = new MediaPlayer(sound);
 
         for (int x = 0; x < MasterMindBoard.ROW_SIZE; x++) {
             for (int y = 0; y < MasterMindBoard.DEFAULT_MAXIMUM_ATTEMPTS; y++) {
@@ -46,8 +51,10 @@ public class OnePlayerGameController extends SceneViewTemplateController {
                 curCircle.setOnMouseClicked(event -> {
 
                     if (curRow == finalY) {
+                        clickSound.stop();
                         Arrays.asList(PegColor.values());
                         curCircle.setFill(PegColor.getNextColor(curCircle.getFill()));
+                        clickSound.play();
                     }
 
                 });
