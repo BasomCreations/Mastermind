@@ -19,23 +19,19 @@
 package hw01.GUI.onePlayerGameView;
 
 
+import hw01.GUI.sceneTemplate.SceneViewTemplate;
 import hw01.game.MasterMindBoard;
-import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.Separator;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 
 
-public class OnePlayerGameView {
+public class OnePlayerGameView extends SceneViewTemplate {
 
 
-    private BorderPane root;
     private OnePlayerGameModel model;
     private GridPane board;
     private Button goBackBtn;
@@ -46,19 +42,10 @@ public class OnePlayerGameView {
 
     public OnePlayerGameView(double w, double h, OnePlayerGameModel model) {
 
-        root = new BorderPane();
-        root.setPrefWidth(w);
-        root.setPrefHeight(h);
+        super(w, h);
+        BorderPane root = getRoot();
+        getTitle().setText("Single Player Game");
 
-        Label title = new Label(TITLE);
-        title.setStyle("-fx-font-size: 15");
-        goBackBtn = new Button("Main Menu");
-        goBackBtn.setStyle("-fx-background-color: WHITE");
-        HBox options = new HBox();
-        options.getChildren().addAll(goBackBtn, title);
-        options.setAlignment(Pos.CENTER);
-
-        root.setTop(options);
 
         board = new GridPane();
         board.setHgap(10);
@@ -76,15 +63,11 @@ public class OnePlayerGameView {
         board.setAlignment(Pos.CENTER);
 
 
-        root.setLeft(new Separator(Orientation.VERTICAL));
-        root.setRight(new Separator(Orientation.VERTICAL));
-        root.setBottom(new Separator(Orientation.HORIZONTAL));
         root.setCenter(board);
 
 
     }
 
-    public BorderPane getRoot() {
-        return root;
-    }
+
+
 }

@@ -42,7 +42,7 @@ public class StartMenuView {
     public String TITLE = "Mastermind";
     private final Button singleBtn;
 
-    public StartMenuView() throws FileNotFoundException {
+    public StartMenuView() {
 
         root = new VBox();
         root.setPrefWidth(WIDTH);
@@ -57,7 +57,12 @@ public class StartMenuView {
        // title.setPrefSize(root.getWidth() / 3, root.getHeight() / 10);
         title.setFont(Font.font(null, FontWeight.BOLD, null, TITLESZE));
 
-        Image image = new Image(new FileInputStream("images/icon1.png"));
+        Image image = null;
+        try {
+            image = new Image(new FileInputStream("images/icon1.png"));
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
         ImageView imageView = new ImageView(image);
         imageView.setFitHeight(HEIGHT / 4);
         imageView.setPreserveRatio(true);

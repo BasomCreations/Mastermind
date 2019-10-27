@@ -35,17 +35,18 @@ public class MastermindGameMain extends Application {
         primaryStage.setTitle("Mastermind");
         primaryStage.getIcons().add(new Image("file:images/icon1.png"));
 
-
-        //Start Scene
-        Scene startScene = new Scene(startView.getRoot());
-        primaryStage.setScene(startScene);
-
-
-
-
-        // Display the scene
+        // Set min dimensions
         primaryStage.setMinHeight(StartMenuView.HEIGHT);
         primaryStage.setMinWidth(StartMenuView.WIDTH);
+
+        //Start Scene
+        Scene scene = new Scene(startView.getRoot());
+        primaryStage.setScene(scene);
+
+
+
+
+        //Display scene
         primaryStage.show();
     }
 }

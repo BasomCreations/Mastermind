@@ -18,6 +18,14 @@
  */
 package hw01.GUI.onePlayerGameView;
 
-public class OnePlayerGameController {
+import hw01.GUI.sceneTemplate.SceneViewTemplate;
+import hw01.GUI.sceneTemplate.SceneViewTemplateController;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
 
+public class OnePlayerGameController extends SceneViewTemplateController {
+
+    public OnePlayerGameController(Stage primaryStage, Scene prevScene, SceneViewTemplate view) {
+        super(primaryStage, prevScene, view);
+    }
 }
