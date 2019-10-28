@@ -22,17 +22,13 @@ package hw01.GUI.onePlayerGame;
 import hw01.GUI.sceneTemplate.SceneViewTemplate;
 import hw01.game.MasterMindBoard;
 import javafx.geometry.Pos;
-import javafx.scene.control.Button;
-import javafx.scene.layout.Border;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
-import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Polygon;
 import javafx.scene.shape.Rectangle;
-import javafx.scene.shape.Sphere;
 
 
 public class OnePlayerGameView extends SceneViewTemplate {
@@ -40,12 +36,12 @@ public class OnePlayerGameView extends SceneViewTemplate {
 
     private OnePlayerGameModel model;
     private GridPane board;
-    private Button goBackBtn;
-    private Peg[][] pegGrid;
+    private PegSphere[][] pegGrid;
     private Circle[][] resultsGrid;
     private Polygon[] arrows;
 
-    private static String BGCOLOR = "#4b6a80";
+    private final static String BGCOLOR = "#4b6a80";
+    public final static int GRIDSQUARESIZE = 30;
 
 
     public String TITLE = "Single Player Game";
@@ -59,12 +55,10 @@ public class OnePlayerGameView extends SceneViewTemplate {
 
 
         board = new GridPane();
-        //board.setHgap(10);
-        //board.setVgap(10);
         board.setStyle("-fx-background-color:" + BGCOLOR);
         board.setAlignment(Pos.CENTER);
 
-        pegGrid = new Peg[MasterMindBoard.DEFAULT_MAXIMUM_ATTEMPTS][MasterMindBoard.ROW_SIZE];
+        pegGrid = new PegSphere[MasterMindBoard.DEFAULT_MAXIMUM_ATTEMPTS][MasterMindBoard.ROW_SIZE];
         arrows = new Polygon[MasterMindBoard.DEFAULT_MAXIMUM_ATTEMPTS];
         resultsGrid = new Circle[MasterMindBoard.DEFAULT_MAXIMUM_ATTEMPTS][MasterMindBoard.ROW_SIZE];
 
@@ -79,10 +73,10 @@ public class OnePlayerGameView extends SceneViewTemplate {
 
                 StackPane stack = new StackPane();
                 stack.setAlignment(Pos.CENTER);
-                stack.getChildren().add(new Rectangle(30,30, Color.GRAY));
+                stack.getChildren().add(new Rectangle(GRIDSQUARESIZE,GRIDSQUARESIZE, Color.GRAY));
 
 
-                Peg curPeg = new Peg( 10);
+                PegSphere curPeg = new PegSphere( GRIDSQUARESIZE / 3);
                 stack.getChildren().add(curPeg);
 
                 board.add(stack,x+1,y);
@@ -116,7 +110,7 @@ public class OnePlayerGameView extends SceneViewTemplate {
         return board;
     }
 
-    public Peg[][] getPegGrid() {
+    public PegSphere[][] getPegGrid() {
         return pegGrid;
     }
 

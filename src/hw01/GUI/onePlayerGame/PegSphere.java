@@ -23,7 +23,7 @@ import javafx.scene.paint.Paint;
 import javafx.scene.paint.PhongMaterial;
 import javafx.scene.shape.Sphere;
 
-public class Peg extends Sphere {
+public class PegSphere extends Sphere {
 
     private Paint color;
 
@@ -33,7 +33,7 @@ public class Peg extends Sphere {
      *
      * @param radius Radius
      */
-    public Peg(double radius) {
+    public PegSphere(double radius) {
         super(radius);
         color = Color.WHITE;
     }

@@ -22,15 +22,10 @@ package hw01.GUI.onePlayerGame;
 import hw01.GUI.sceneTemplate.SceneViewTemplateController;
 import hw01.game.MasterMindBoard;
 import javafx.scene.Scene;
-import javafx.scene.paint.Color;
-import javafx.scene.paint.PhongMaterial;
-import javafx.scene.shape.Circle;
-import javafx.scene.shape.Sphere;
 import javafx.stage.Stage;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import java.io.File;
-import java.util.Arrays;
 
 
 public class OnePlayerGameController extends SceneViewTemplateController {
@@ -50,7 +45,7 @@ public class OnePlayerGameController extends SceneViewTemplateController {
             for (int y = 0; y < MasterMindBoard.DEFAULT_MAXIMUM_ATTEMPTS; y++) {
 
                 int finalY = y;
-                Peg curPeg = view.getPegGrid()[y][x];
+                PegSphere curPeg = view.getPegGrid()[y][x];
                 curPeg.setOnMouseClicked(event -> {
 
                     if (curRow == finalY) {
