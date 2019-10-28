@@ -32,6 +32,7 @@ import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Polygon;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.shape.Sphere;
 
 
 public class OnePlayerGameView extends SceneViewTemplate {
@@ -40,7 +41,7 @@ public class OnePlayerGameView extends SceneViewTemplate {
     private OnePlayerGameModel model;
     private GridPane board;
     private Button goBackBtn;
-    private Circle[][] pegGrid;
+    private Peg[][] pegGrid;
     private Circle[][] resultsGrid;
     private Polygon[] arrows;
 
@@ -63,7 +64,7 @@ public class OnePlayerGameView extends SceneViewTemplate {
         board.setStyle("-fx-background-color:" + BGCOLOR);
         board.setAlignment(Pos.CENTER);
 
-        pegGrid = new Circle[MasterMindBoard.DEFAULT_MAXIMUM_ATTEMPTS][MasterMindBoard.ROW_SIZE];
+        pegGrid = new Peg[MasterMindBoard.DEFAULT_MAXIMUM_ATTEMPTS][MasterMindBoard.ROW_SIZE];
         arrows = new Polygon[MasterMindBoard.DEFAULT_MAXIMUM_ATTEMPTS];
         resultsGrid = new Circle[MasterMindBoard.DEFAULT_MAXIMUM_ATTEMPTS][MasterMindBoard.ROW_SIZE];
 
@@ -79,10 +80,16 @@ public class OnePlayerGameView extends SceneViewTemplate {
                 StackPane stack = new StackPane();
                 stack.setAlignment(Pos.CENTER);
                 stack.getChildren().add(new Rectangle(30,30, Color.GRAY));
-                Circle circle = new Circle(10, Color.WHITE);
-                stack.getChildren().add(circle);
+
+
+                Peg curPeg = new Peg( 10);
+                stack.getChildren().add(curPeg);
+
                 board.add(stack,x+1,y);
-                pegGrid[y][x] = circle;
+                pegGrid[y][x] = curPeg;
+
+
+
 
             }
 
@@ -109,7 +116,7 @@ public class OnePlayerGameView extends SceneViewTemplate {
         return board;
     }
 
-    public Circle[][] getPegGrid() {
+    public Peg[][] getPegGrid() {
         return pegGrid;
     }
 
