@@ -40,5 +40,7 @@ public abstract class SceneViewTemplateController {
         });
     }
 
-
+    public SceneViewTemplate getTheView() {
+        return theView;
+    }
 }
