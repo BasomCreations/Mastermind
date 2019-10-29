@@ -21,7 +21,11 @@ package hw01.GUI.onePlayerGame;
 
 import hw01.GUI.sceneTemplate.SceneViewTemplateController;
 import hw01.game.MasterMindBoard;
+import hw01.game.MasterMindBoardException;
+import hw01.game.Row;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
@@ -57,6 +61,53 @@ public class OnePlayerGameController extends SceneViewTemplateController {
                 });
 
             }
+        }
+
+        // Initialize guess button clicks
+        Button[] buttons = view.getButtons().clone();
+        for (int i = 0; i < buttons.length; i++) {
+
+            int finalI = i;
+            int finalI1 = i;
+            buttons[i].setOnAction(event -> {
+                // Get guesses
+                int[] guesses = new int[MasterMindBoard.ROW_SIZE];
+                PegSphere[] rowOfPegs = new PegSphere[curRow];
+                rowOfPegs = view.getPegGrid()[curRow].clone();
+
+                for (int j = 0; j < rowOfPegs.length; j++) {
+                    PegColor pegColor = rowOfPegs[j].getCurrentPegColorProperty();
+                    guesses[j] = pegColor.ordinal() + 1;
+                }
+
+                // Make guess
+                try {
+                    Row result = model.guess(guesses);
+                    int count = 0;
+                    for (int j = 0; j < result.getCorrectPegs(); j++) {
+                        view.getResultsGrid()[curRow][count].setFill(Color.RED);
+                        count++;
+                    }
+                    for (int j = 0; j < result.getPegsIncorrectPosition(); j++) {
+                        view.getResultsGrid()[curRow][count].setFill(Color.WHITE);
+                        count++;
+                    }
+                    for (int j = 0; j < result.getIncorrectPegs(); j++) {
+                        view.getResultsGrid()[curRow][count].setFill(Color.BLACK);
+                    }
+
+                } catch (MasterMindBoardException e) {
+                    view.getErrrorMsg().setContentText("Invalid number of guesses!");
+                    view.getErrrorMsg().show();
+                }
+
+                // Make next button visible if not currently on last button
+                if (finalI != buttons.length - 1) {
+                    buttons[finalI + 1].setVisible(true);
+                }
+                buttons[finalI].setVisible(false);
+            });
+
         }
 
 

@@ -36,7 +36,7 @@ public class Row {
     /**
      * Number of pegs in incorrect position
      */
-    private int pegsInCorrectPosition;
+    private int pegsIncorrectPosition;
 
     /**
      * Number of incorrect pegs
@@ -53,7 +53,7 @@ public class Row {
      */
     public Row(int correctPegs, int pegsInCorrectPosition, int incorrectPegs) {
         this.correctPegs = correctPegs;
-        this.pegsInCorrectPosition = pegsInCorrectPosition;
+        this.pegsIncorrectPosition = pegsInCorrectPosition;
         this.incorrectPegs = incorrectPegs;
     }
 
@@ -64,21 +64,21 @@ public class Row {
         if (o == null || getClass() != o.getClass()) return false;
         Row row = (Row) o;
         return correctPegs == row.correctPegs &&
-                pegsInCorrectPosition == row.pegsInCorrectPosition &&
+                pegsIncorrectPosition == row.pegsIncorrectPosition &&
                 incorrectPegs == row.incorrectPegs;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(correctPegs, pegsInCorrectPosition, incorrectPegs);
+        return Objects.hash(correctPegs, pegsIncorrectPosition, incorrectPegs);
     }
 
     public int getCorrectPegs() {
         return correctPegs;
     }
 
-    public int getPegsInCorrectPosition() {
-        return pegsInCorrectPosition;
+    public int getPegsIncorrectPosition() {
+        return pegsIncorrectPosition;
     }
 
     public int getIncorrectPegs() {
@@ -100,7 +100,7 @@ public class Row {
         for (int i = 0; i < this.correctPegs; i++) {
             s += "*";
         }
-        for (int i = 0; i < this.pegsInCorrectPosition; i++) {
+        for (int i = 0; i < this.pegsIncorrectPosition; i++) {
             s += "+";
         }
         for (int i = 0; i < this.incorrectPegs; i++) {

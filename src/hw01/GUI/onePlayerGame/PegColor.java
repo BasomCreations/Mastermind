@@ -34,6 +34,15 @@ public enum PegColor {
         }
     }
 
+    public static PegColor getNextPegColor(PegColor color) {
+        if (color == null) {
+            return PegColor.BLUE;
+        } else {
+            int ordinal = color.ordinal();
+            return PegColor.values()[(ordinal + 1) % PegColor.values().length];
+        }
+    }
+
     private static List<Paint> getColorValues(){
         List<Paint> colorList = new ArrayList<Paint>();
         for (PegColor peg:
@@ -42,5 +51,6 @@ public enum PegColor {
         }
         return colorList;
     }
+
 
 }

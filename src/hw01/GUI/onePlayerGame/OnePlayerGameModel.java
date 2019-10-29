@@ -19,6 +19,11 @@
 package hw01.GUI.onePlayerGame;
 
 import hw01.game.MasterMindBoard;
+import hw01.game.MasterMindBoardException;
+import hw01.game.Row;
+import javafx.scene.paint.Paint;
+
+import java.util.Hashtable;
 
 public class OnePlayerGameModel {
 
@@ -31,8 +36,14 @@ public class OnePlayerGameModel {
 
     }
 
+    public Row guess(int[] guesses) throws MasterMindBoardException {
+        return board.guess(guesses);
+    }
+
 
     public MasterMindBoard getBoard() {
         return board;
     }
+
+
 }

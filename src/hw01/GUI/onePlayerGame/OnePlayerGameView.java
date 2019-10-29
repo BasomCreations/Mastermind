@@ -22,6 +22,8 @@ package hw01.GUI.onePlayerGame;
 import hw01.GUI.sceneTemplate.SceneViewTemplate;
 import hw01.game.MasterMindBoard;
 import javafx.geometry.Pos;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
@@ -39,6 +41,9 @@ public class OnePlayerGameView extends SceneViewTemplate {
     private PegSphere[][] pegGrid;
     private Circle[][] resultsGrid;
     private Polygon[] arrows;
+    private Button[] buttons;
+
+    private Alert errrorMsg;
 
     private final static String BGCOLOR = "#4b6a80";
     public final static int GRIDSQUARESIZE = 30;
@@ -53,6 +58,7 @@ public class OnePlayerGameView extends SceneViewTemplate {
         BorderPane root = getRoot();
         getTitle().setText(TITLE);
 
+        errrorMsg = new Alert(Alert.AlertType.ERROR);
 
         board = new GridPane();
         board.setStyle("-fx-background-color:" + BGCOLOR);
@@ -61,14 +67,13 @@ public class OnePlayerGameView extends SceneViewTemplate {
         pegGrid = new PegSphere[MasterMindBoard.DEFAULT_MAXIMUM_ATTEMPTS][MasterMindBoard.ROW_SIZE];
         arrows = new Polygon[MasterMindBoard.DEFAULT_MAXIMUM_ATTEMPTS];
         resultsGrid = new Circle[MasterMindBoard.DEFAULT_MAXIMUM_ATTEMPTS][MasterMindBoard.ROW_SIZE];
+        buttons = new Button[MasterMindBoard.DEFAULT_MAXIMUM_ATTEMPTS];
 
         for (int y = 0; y < MasterMindBoard.DEFAULT_MAXIMUM_ATTEMPTS; y++) {
-            Polygon triangle = new Polygon();
-            triangle.getPoints().addAll(new Double[] {
-                    0.0, 10.0, 0.0, 20.0, 15.0, 15.0
-            });
-            arrows[y] = triangle;
-            board.add(triangle, 0, y);
+
+            buttons[y] = new Button("Guess");
+            buttons[y].setVisible(false);
+            board.add(buttons[y], 0, y);
             for (int x = 0; x < MasterMindBoard.ROW_SIZE; x++) {
 
                 StackPane stack = new StackPane();
@@ -96,7 +101,8 @@ public class OnePlayerGameView extends SceneViewTemplate {
             }
         }
 
-
+        // Set first button to visible
+        buttons[0].setVisible(true);
 
         board.setAlignment(Pos.CENTER);
 
@@ -120,5 +126,13 @@ public class OnePlayerGameView extends SceneViewTemplate {
 
     public Polygon[] getArrows() {
         return arrows;
+    }
+
+    public Button[] getButtons() {
+        return buttons;
+    }
+
+    public Alert getErrrorMsg() {
+        return errrorMsg;
     }
 }
