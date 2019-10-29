@@ -19,6 +19,7 @@
 package hw01.GUI.onePlayerGame;
 
 
+import hw01.GUI.sceneTemplate.SceneViewTemplate;
 import hw01.GUI.sceneTemplate.SceneViewTemplateController;
 import hw01.game.MasterMindBoard;
 import hw01.game.MasterMindBoardException;
@@ -26,6 +27,7 @@ import hw01.game.Row;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
@@ -35,9 +37,12 @@ import java.io.File;
 public class OnePlayerGameController extends SceneViewTemplateController {
 
     private int curRow;
+    private OnePlayerGameModel model;
+
 
     public OnePlayerGameController(Stage primaryStage, Scene prevScene, OnePlayerGameView view, OnePlayerGameModel model) {
         super(primaryStage, prevScene, view);
+        this.model = model;
 
         curRow = 0;
 
@@ -63,6 +68,11 @@ public class OnePlayerGameController extends SceneViewTemplateController {
             }
         }
 
+        // Initialize Restart Button
+        getTheView().getResetBtn().setOnAction(event -> {
+            clearBoard();
+        });
+
         // Initialize guess button clicks
         Button[] buttons = view.getButtons().clone();
         for (int i = 0; i < buttons.length; i++) {
@@ -83,7 +93,7 @@ public class OnePlayerGameController extends SceneViewTemplateController {
 
                 // Make guess
 
-                    Row result = model.guess(guesses);
+                    Row result = this.model.guess(guesses);
                     int count = 0;
                     // Add correct pegs in the correct position as red result pegs
                     for (int j = 0; j < result.getCorrectPegs(); j++) {
@@ -102,6 +112,7 @@ public class OnePlayerGameController extends SceneViewTemplateController {
 
                     // Check win
                     if (model.checkWin()) {
+                        finishGame();
                         return;
                     }
 
@@ -124,5 +135,42 @@ public class OnePlayerGameController extends SceneViewTemplateController {
         }
 
 
+    }
+
+    public void finishGame() {
+        Media winSoundMedia = new Media(new File("sound/fanfare_x.wav").toURI().toString());
+        MediaPlayer winSoundMediaPlayer = new MediaPlayer(winSoundMedia);
+        winSoundMediaPlayer.play();
+        getTheView().getButtons()[curRow].setVisible(false);
+        curRow = -1;
+    }
+
+    public void clearBoard() {
+        for (PegSphere[] row:
+             getTheView().getPegGrid()) {
+            for (PegSphere peg:
+                 row) {
+                peg.setColor(Color.WHITE);
+            }
+
+        }
+        for (Circle[] resultRow:
+             getTheView().getResultsGrid()) {
+            for (Circle resultPeg: resultRow) {
+                resultPeg.setFill(Color.web(OnePlayerGameView.BGCOLOR));
+            }
+
+        }
+
+        getTheView().getButtons()[curRow].setVisible(false);
+        getTheView().getButtons()[0].setVisible(true);
+        curRow = 0;
+        this.model.createNewGame();
+
+    }
+
+    @Override
+    public OnePlayerGameView getTheView() {
+        return (OnePlayerGameView) super.getTheView();
     }
 }

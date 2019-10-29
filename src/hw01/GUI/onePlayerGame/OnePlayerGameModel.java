@@ -44,6 +44,11 @@ public class OnePlayerGameModel {
         return board.checkWin();
     }
 
+    public void createNewGame() {
+        board = new MasterMindBoard();
+    }
+
+
 
     public MasterMindBoard getBoard() {
         return board;

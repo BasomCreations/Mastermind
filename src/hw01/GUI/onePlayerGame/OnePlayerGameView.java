@@ -45,11 +45,12 @@ public class OnePlayerGameView extends SceneViewTemplate {
 
     private Alert errrorMsg;
 
-    private final static String BGCOLOR = "#4b6a80";
+    public final static String BGCOLOR = "#4b6a80";
     public final static int GRIDSQUARESIZE = 30;
 
 
     public String TITLE = "Single Player Game";
+    private Button resetBtn;
 
 
     public OnePlayerGameView(double w, double h, OnePlayerGameModel model) {
@@ -73,6 +74,7 @@ public class OnePlayerGameView extends SceneViewTemplate {
 
             buttons[y] = new Button("Guess");
             buttons[y].setVisible(false);
+            buttons[y].setStyle("-fx-background-color: tan;");
             board.add(buttons[y], 0, y);
             for (int x = 0; x < MasterMindBoard.ROW_SIZE; x++) {
 
@@ -94,7 +96,7 @@ public class OnePlayerGameView extends SceneViewTemplate {
 
             // Add results for each row
             for (int i = 1; i <= MasterMindBoard.ROW_SIZE; i++) {
-                Circle circle = new Circle(3, Color.web("#ffffff"));
+                Circle circle = new Circle(3, Color.web(BGCOLOR));
                 board.add(circle, MasterMindBoard.ROW_SIZE+i, y);
 
                 resultsGrid[y][i - 1] = circle;
@@ -108,6 +110,10 @@ public class OnePlayerGameView extends SceneViewTemplate {
 
 
         root.setCenter(board);
+
+        // Add reset button
+        resetBtn = new Button("Restart");
+        super.getMenuBar().getChildren().add(resetBtn);
 
 
     }
@@ -134,5 +140,9 @@ public class OnePlayerGameView extends SceneViewTemplate {
 
     public Alert getErrrorMsg() {
         return errrorMsg;
+    }
+
+    public Button getResetBtn() {
+        return resetBtn;
     }
 }
