@@ -79,57 +79,58 @@ public class OnePlayerGameController extends SceneViewTemplateController {
 
 
             int finalI = i;
-            int finalI1 = i;
             buttons[i].setOnAction(event -> {
-                try {
-                    // Get guesses
-                    int[] guesses = new int[MasterMindBoard.ROW_SIZE];
-                    PegSphere[] rowOfPegs = new PegSphere[curRow];
-                    rowOfPegs = view.getPegGrid()[curRow].clone();
+                // Get guesses
+                int[] guesses = new int[MasterMindBoard.ROW_SIZE];
+                PegSphere[] rowOfPegs = view.getPegGrid()[curRow].clone();
 
-                    for (int j = 0; j < rowOfPegs.length; j++) {
-                        PegColor pegColor = rowOfPegs[j].getCurrentPegColorProperty();
-                        guesses[j] = pegColor.ordinal() + 1;
-                    }
+                for (int j = 0; j < rowOfPegs.length; j++) {
+                    int numericGuess = PegColor.getColorNumber(rowOfPegs[j].getColor());
 
-                // Make guess
-
-                    Row result = this.model.guess(guesses);
-                    int count = 0;
-                    // Add correct pegs in the correct position as red result pegs
-                    for (int j = 0; j < result.getCorrectPegs(); j++) {
-                        view.getResultsGrid()[curRow][count].setFill(Color.RED);
-                        count++;
-                    }
-                    // Add correct pegs in the incorrect position as black result pegs
-                    for (int j = 0; j < result.getPegsIncorrectPosition(); j++) {
-                        view.getResultsGrid()[curRow][count].setFill(Color.BLACK);
-                        count++;
-                    }
-                    // All incorrect pegs will remain white
-//                    for (int j = 0; j < result.getIncorrectPegs(); j++) {
-//                        view.getResultsGrid()[curRow][count].setFill(Color.BLACK);
-//                    }
-
-                    // Check win
-                    if (model.checkWin()) {
-                        finishGame();
+                    //The method getColorNumber returns 0 if the color is not selected
+                    if (numericGuess != 0) {
+                        guesses[j] = numericGuess;
+                    } else {
+                        view.getErrrorMsg().setContentText("Invalid number of guesses! Guess must include " + MasterMindBoard.ROW_SIZE + " pegs.");
+                        view.getErrrorMsg().show();
                         return;
                     }
-
-                    // Make next button visible if not currently on last button
-                    if (finalI != buttons.length - 1) {
-                        buttons[finalI + 1].setVisible(true);
-                    }
-                    buttons[finalI].setVisible(false);
-
-                    // Update current row
-                    curRow++;
-
-                } catch (NullPointerException | MasterMindBoardException e) {
-                    view.getErrrorMsg().setContentText("Invalid number of guesses! Guess must include " + MasterMindBoard.ROW_SIZE + " pegs.");
-                    view.getErrrorMsg().show();
                 }
+
+                // Make guess
+                Row result = null;
+                try {
+                    result = this.model.guess(guesses);
+                } catch (MasterMindBoardException e) {
+                    return;
+                }
+                int count = 0;
+                // Add correct pegs in the correct position as red result pegs
+                for (int j = 0; j < result.getCorrectPegs(); j++) {
+                    view.getResultsGrid()[curRow][count].setFill(Color.RED);
+                    count++;
+                }
+                // Add correct pegs in the incorrect position as black result pegs
+                for (int j = 0; j < result.getPegsIncorrectPosition(); j++) {
+                    view.getResultsGrid()[curRow][count].setFill(Color.BLACK);
+                    count++;
+                }
+
+
+                // Check win
+                if (model.checkWin()) {
+                    finishGame();
+                    return;
+                }
+
+                // Make next button visible if not currently on last button
+                if (finalI != buttons.length - 1) {
+                    buttons[finalI + 1].setVisible(true);
+                }
+                buttons[finalI].setVisible(false);
+
+                // Update current row
+                curRow++;
 
             });
 
@@ -147,23 +148,30 @@ public class OnePlayerGameController extends SceneViewTemplateController {
     }
 
     public void clearBoard() {
+        //Clears peg spheres
         for (PegSphere[] row:
              getTheView().getPegGrid()) {
             for (PegSphere peg:
                  row) {
                 peg.setColor(Color.WHITE);
             }
-
         }
+
+        //Clears result pegs
         for (Circle[] resultRow:
              getTheView().getResultsGrid()) {
             for (Circle resultPeg: resultRow) {
                 resultPeg.setFill(Color.web(OnePlayerGameView.BGCOLOR));
             }
-
         }
 
-        getTheView().getButtons()[model.getCurrentTurn()].setVisible(false);
+        try {
+            getTheView().getButtons()[model.getCurrentTurn()].setVisible(false);
+        } catch (IndexOutOfBoundsException e) {
+            //If this is the last move this error will occur,
+            //the button will be already hidden so there is nothing else to do
+        }
+
         getTheView().getButtons()[0].setVisible(true);
         curRow = 0;
         this.model.createNewGame();

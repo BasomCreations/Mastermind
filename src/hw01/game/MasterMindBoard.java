@@ -251,6 +251,9 @@ public class MasterMindBoard {
     }
 
 
-
+    //TODO get rid of this
+    public int[] getSecretCode() {
+        return secretCode;
+    }
 }
 

@@ -28,7 +28,6 @@ public class PegSphere extends Sphere {
 
     private Paint color;
 
-    private SimpleObjectProperty<PegColor> currentPegColorProperty;
 
     /**
      * Creates a new instance of {@code Sphere} with the given radius.
@@ -39,7 +38,6 @@ public class PegSphere extends Sphere {
     public PegSphere(double radius) {
         super(radius);
         color = Color.WHITE;
-        currentPegColorProperty = new SimpleObjectProperty<>(null);
     }
 
     public Paint getColor() {
@@ -53,14 +51,7 @@ public class PegSphere extends Sphere {
         this.color = color;
         this.setMaterial(material);
 
-        currentPegColorProperty.set(PegColor.getNextPegColor(getCurrentPegColorProperty()));
     }
 
-    public PegColor getCurrentPegColorProperty() {
-        return currentPegColorProperty.get();
-    }
 
-    public SimpleObjectProperty<PegColor> currentPegColorPropertyProperty() {
-        return currentPegColorProperty;
-    }
 }

@@ -4,53 +4,33 @@ import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
-public enum PegColor {
-    BLUE(Color.BLUE), GREEN(Color.GREEN), ORANGE(Color.ORANGE), PURPLE(Color.PURPLE), RED(Color.RED), YELLOW(Color.YELLOW);
+public final class PegColor {
+    //BLUE(Color.BLUE), GREEN(Color.GREEN), ORANGE(Color.ORANGE), PURPLE(Color.PURPLE), RED(Color.RED), YELLOW(Color.YELLOW);
+
+    final static List<Paint> colors = new ArrayList<Paint>(Arrays.asList(Color.BLUE, Color.GREEN, Color.ORANGE, Color.PURPLE, Color.RED, Color.YELLOW));
 
 
-    Paint color;
-
-    PegColor(Paint color) {
-        this.color = color;
+    /**
+     * Returns the numeric value of the color
+     * @param color
+     * @return the numeric value of the color or 0 if it is unselected
+     */
+    public static int getColorNumber(Paint color) {
+        return colors.indexOf(color) + 1;
     }
 
-    public int numberValue(){
-        return this.ordinal() + 1;
-    }
-
-    public Paint getColor() {
-        return color;
-    }
-
+    /**
+     * Gets the next color
+     * @param cur
+     * @return
+     */
     public static Paint getNextColor(Paint cur){
-        List<Paint> colorList = getColorValues();
-        if (!colorList.contains(cur)){
-            return PegColor.BLUE.getColor();
-        } else {
-            int index = colorList.indexOf(cur);
-            return PegColor.values()[(index + 1) % PegColor.values().length].getColor();
-        }
+        return colors.get(getColorNumber(cur) % colors.size());
     }
 
-    public static PegColor getNextPegColor(PegColor color) {
-        if (color == null) {
-            return PegColor.BLUE;
-        } else {
-            int ordinal = color.ordinal();
-            return PegColor.values()[(ordinal + 1) % PegColor.values().length];
-        }
-    }
-
-    private static List<Paint> getColorValues(){
-        List<Paint> colorList = new ArrayList<Paint>();
-        for (PegColor peg:
-             PegColor.values()) {
-            colorList.add(peg.getColor());
-        }
-        return colorList;
-    }
 
 
 }

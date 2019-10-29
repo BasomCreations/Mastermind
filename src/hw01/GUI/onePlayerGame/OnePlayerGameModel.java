@@ -33,6 +33,12 @@ public class OnePlayerGameModel {
 
         board = new MasterMindBoard();
 
+        //TODO get rid of this
+        System.out.println();
+        for (int n:
+             board.getSecretCode()) {
+            System.out.print(n);
+        }
 
     }
 
@@ -46,6 +52,13 @@ public class OnePlayerGameModel {
 
     public void createNewGame() {
         board = new MasterMindBoard();
+
+        //TODO get rid of this
+        System.out.println();
+        for (int n:
+                board.getSecretCode()) {
+            System.out.print(n);
+        }
     }
 
     public int getCurrentTurn() {

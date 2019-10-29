@@ -130,10 +130,6 @@ public class OnePlayerGameView extends SceneViewTemplate {
         return resultsGrid;
     }
 
-    public Polygon[] getArrows() {
-        return arrows;
-    }
-
     public Button[] getButtons() {
         return buttons;
     }
@@ -145,4 +141,5 @@ public class OnePlayerGameView extends SceneViewTemplate {
     public Button getResetBtn() {
         return resetBtn;
     }
+
 }
