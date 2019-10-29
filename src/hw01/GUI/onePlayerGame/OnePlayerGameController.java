@@ -154,6 +154,8 @@ public class OnePlayerGameController extends SceneViewTemplateController {
         }
         getTheView().getButtons()[curRow].setVisible(false);
         curRow = -1;
+
+        displayResults();
     }
 
     public void clearBoard() {
@@ -181,10 +183,18 @@ public class OnePlayerGameController extends SceneViewTemplateController {
             //the button will be already hidden so there is nothing else to do
         }
 
+        // Clear the results label
+        getTheView().getResultsLbl().setVisible(false);
+
         getTheView().getButtons()[0].setVisible(true);
         curRow = 0;
         this.model.createNewGame();
 
+    }
+
+    public void displayResults() {
+        getTheView().getResultsLbl().setText(model.getResults());
+        getTheView().getResultsLbl().setVisible(true);
     }
 
     @Override

@@ -61,6 +61,18 @@ public class OnePlayerGameModel {
         }
     }
 
+    public String getResults() {
+        String s;
+        if (board.checkWin()) {
+            s = "Congratulations! You guessed the correct code in " +
+                    board.getGuesses() + " turns.";
+        }
+        else{
+            s = "Game over, you ran out of turns!";
+        }
+        return s;
+    }
+
     public int getCurrentTurn() {
         return board.getGuesses();
     }
