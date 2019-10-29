@@ -40,6 +40,10 @@ public class OnePlayerGameModel {
         return board.guess(guesses);
     }
 
+    public boolean checkWin() {
+        return board.checkWin();
+    }
+
 
     public MasterMindBoard getBoard() {
         return board;

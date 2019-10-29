@@ -70,42 +70,55 @@ public class OnePlayerGameController extends SceneViewTemplateController {
             int finalI = i;
             int finalI1 = i;
             buttons[i].setOnAction(event -> {
-                // Get guesses
-                int[] guesses = new int[MasterMindBoard.ROW_SIZE];
-                PegSphere[] rowOfPegs = new PegSphere[curRow];
-                rowOfPegs = view.getPegGrid()[curRow].clone();
+                try {
+                    // Get guesses
+                    int[] guesses = new int[MasterMindBoard.ROW_SIZE];
+                    PegSphere[] rowOfPegs = new PegSphere[curRow];
+                    rowOfPegs = view.getPegGrid()[curRow].clone();
 
-                for (int j = 0; j < rowOfPegs.length; j++) {
-                    PegColor pegColor = rowOfPegs[j].getCurrentPegColorProperty();
-                    guesses[j] = pegColor.ordinal() + 1;
-                }
+                    for (int j = 0; j < rowOfPegs.length; j++) {
+                        PegColor pegColor = rowOfPegs[j].getCurrentPegColorProperty();
+                        guesses[j] = pegColor.ordinal() + 1;
+                    }
 
                 // Make guess
-                try {
+
                     Row result = model.guess(guesses);
                     int count = 0;
+                    // Add correct pegs in the correct position as red result pegs
                     for (int j = 0; j < result.getCorrectPegs(); j++) {
                         view.getResultsGrid()[curRow][count].setFill(Color.RED);
                         count++;
                     }
+                    // Add correct pegs in the incorrect position as black result pegs
                     for (int j = 0; j < result.getPegsIncorrectPosition(); j++) {
-                        view.getResultsGrid()[curRow][count].setFill(Color.WHITE);
+                        view.getResultsGrid()[curRow][count].setFill(Color.BLACK);
                         count++;
                     }
-                    for (int j = 0; j < result.getIncorrectPegs(); j++) {
-                        view.getResultsGrid()[curRow][count].setFill(Color.BLACK);
+                    // All incorrect pegs will remain white
+//                    for (int j = 0; j < result.getIncorrectPegs(); j++) {
+//                        view.getResultsGrid()[curRow][count].setFill(Color.BLACK);
+//                    }
+
+                    // Check win
+                    if (model.checkWin()) {
+                        return;
                     }
 
-                } catch (MasterMindBoardException e) {
-                    view.getErrrorMsg().setContentText("Invalid number of guesses!");
+                    // Make next button visible if not currently on last button
+                    if (finalI != buttons.length - 1) {
+                        buttons[finalI + 1].setVisible(true);
+                    }
+                    buttons[finalI].setVisible(false);
+
+                    // Update current row
+                    curRow++;
+
+                } catch (NullPointerException | MasterMindBoardException e) {
+                    view.getErrrorMsg().setContentText("Invalid number of guesses! Guess must include " + MasterMindBoard.ROW_SIZE + " pegs.");
                     view.getErrrorMsg().show();
                 }
 
-                // Make next button visible if not currently on last button
-                if (finalI != buttons.length - 1) {
-                    buttons[finalI + 1].setVisible(true);
-                }
-                buttons[finalI].setVisible(false);
             });
 
         }
