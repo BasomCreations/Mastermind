@@ -48,6 +48,10 @@ public class OnePlayerGameModel {
         board = new MasterMindBoard();
     }
 
+    public int getCurrentTurn() {
+        return board.getGuesses();
+    }
+
 
 
     public MasterMindBoard getBoard() {

@@ -77,6 +77,7 @@ public class OnePlayerGameController extends SceneViewTemplateController {
         Button[] buttons = view.getButtons().clone();
         for (int i = 0; i < buttons.length; i++) {
 
+
             int finalI = i;
             int finalI1 = i;
             buttons[i].setOnAction(event -> {
@@ -162,7 +163,7 @@ public class OnePlayerGameController extends SceneViewTemplateController {
 
         }
 
-        getTheView().getButtons()[curRow].setVisible(false);
+        getTheView().getButtons()[model.getCurrentTurn()].setVisible(false);
         getTheView().getButtons()[0].setVisible(true);
         curRow = 0;
         this.model.createNewGame();
