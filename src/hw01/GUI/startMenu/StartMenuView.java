@@ -41,6 +41,7 @@ public class StartMenuView {
 
     public String TITLE = "Mastermind";
     private final Button singleBtn;
+    private final Button twoPlayerBtn;
     private final Button configBtn;
 
     public StartMenuView() {
@@ -69,10 +70,10 @@ public class StartMenuView {
         imageView.setPreserveRatio(true);
 
         singleBtn = new StartMenuButton("Single");
+        twoPlayerBtn = new StartMenuButton("2 players");
         configBtn = new StartMenuButton("Settings");
 
-
-        root.getChildren().addAll(title, imageView, singleBtn, configBtn);
+        root.getChildren().addAll(title, imageView, singleBtn, twoPlayerBtn, configBtn);
 
         root.setStyle("-fx-background-color: #4b6a80");
 
@@ -88,5 +89,9 @@ public class StartMenuView {
 
     public Button getConfigBtn() {
         return configBtn;
+    }
+
+    public Button getTwoPlayerBtn() {
+        return twoPlayerBtn;
     }
 }

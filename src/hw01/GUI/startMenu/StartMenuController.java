@@ -65,6 +65,11 @@ public class StartMenuController {
 
         });
 
+
+
+        this.startMenuView.getTwoPlayerBtn().setOnAction(event -> {
+
+        });
     }
 
 }
