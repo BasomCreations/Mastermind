@@ -64,11 +64,11 @@ public class OnePlayerGameModel {
     public String getResults() {
         String s;
         if (board.checkWin()) {
-            s = "Congratulations! You guessed the correct code in " +
-                    board.getGuesses() + " turns.";
+            s = "Congratulations!\nYou guessed the correct code in:\n" +
+                    board.getGuesses() + " Turns, " + board.getPlayTime() + " Seconds";
         }
         else{
-            s = "Game over, you ran out of turns!";
+            s = "Game over!\nYou ran out of turns!\nPlaytime: " + board.getPlayTime() + " seconds";
         }
         return s;
     }

@@ -33,6 +33,7 @@ import javafx.scene.shape.Polygon;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
+import javafx.scene.text.TextAlignment;
 
 
 public class OnePlayerGameView extends SceneViewTemplate {
@@ -122,6 +123,8 @@ public class OnePlayerGameView extends SceneViewTemplate {
         resultsLbl = new Label();
         resultsLbl.setFont(Font.font("Verdana", FontWeight.BOLD, 12));
         resultsLbl.setTextFill(Color.SILVER);
+        resultsLbl.setTextAlignment(TextAlignment.CENTER);
+        resultsLbl.setWrapText(true);
         resultsLbl.setVisible(false);
 
 
