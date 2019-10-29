@@ -127,6 +127,9 @@ public class OnePlayerGameController extends SceneViewTemplateController {
                 if (finalI != buttons.length - 1) {
                     buttons[finalI + 1].setVisible(true);
                 }
+                else {
+                    finishGame();
+                }
                 buttons[finalI].setVisible(false);
 
                 // Update current row
@@ -140,9 +143,15 @@ public class OnePlayerGameController extends SceneViewTemplateController {
     }
 
     public void finishGame() {
-        Media winSoundMedia = new Media(new File("sound/fanfare_x.wav").toURI().toString());
-        MediaPlayer winSoundMediaPlayer = new MediaPlayer(winSoundMedia);
-        winSoundMediaPlayer.play();
+        if (model.checkWin()) {
+            Media winSoundMedia = new Media(new File("sound/fanfare_x.wav").toURI().toString());
+            MediaPlayer winSoundMediaPlayer = new MediaPlayer(winSoundMedia);
+            winSoundMediaPlayer.play();
+        } else {
+            Media winSoundMedia = new Media(new File("sound/whah_whah.wav").toURI().toString());
+            MediaPlayer winSoundMediaPlayer = new MediaPlayer(winSoundMedia);
+            winSoundMediaPlayer.play();
+        }
         getTheView().getButtons()[curRow].setVisible(false);
         curRow = -1;
     }
