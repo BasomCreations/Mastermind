@@ -24,36 +24,108 @@ import javafx.scene.control.Alert;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.util.concurrent.atomic.AtomicBoolean;
 
 public class NetworkSetUpController {
 
+    /**
+     * Thread for dealing with host
+     */
     private Thread hostWaitThread;
+
+    /**
+     * The stage in which this pop up window is
+     */
     private Stage windowStage;
 
+    /**
+     * Main method for host game
+     */
     private HostGameMain hostGameMain;
+
+    /**
+     * Main method for client game
+     */
     private ClientGameMain clientGameMain;
 
-    public NetworkSetUpController(Stage primaryStage, Scene prevScene, Stage windowStage ,NetworkSetUpView view) {
+    /**
+     * View for the pop up window
+     */
+    private NetworkSetUpView view;
+
+    /**
+     * Constructor
+     * @param primaryStage primary stage
+     * @param mainMenuScene main menu scene
+     * @param windowStage stage in which this window is
+     * @param theView the view
+     */
+    public NetworkSetUpController(Stage primaryStage, Scene mainMenuScene, Stage windowStage ,NetworkSetUpView theView) {
 
         hostWaitThread = null;
         hostGameMain = null;
         clientGameMain = null;
         this.windowStage = windowStage;
+        this.view = theView;
 
 
+        createJoinBtnAction();
+        createHostBtnAction();
+        createJoinOkBtnAction();
+        createOnCloseRequestAction();
+    }
 
-        view.getJoinBtn().setOnAction(event -> {
-            if(view.getNameInputField().getText().equals("")){
-                Alert alert = new Alert(Alert.AlertType.ERROR, "You need a name");
-                alert.show();
-                return;
+    /**
+     * Action taken when user closes the networking pop up,
+     * this makes sure sockets are properly closed to ensure
+     * it works properly if user opens the pop up again
+     */
+    private void createOnCloseRequestAction() {
+        windowStage.setOnCloseRequest(event -> {
+            if (hostWaitThread != null){
+                hostWaitThread.interrupt();
             }
-            view.getHostBtn().setVisible(false);
-            view.getJoinBtn().setVisible(false);
-            view.setJoinModeProperty(true);
-        });
 
+            if (hostGameMain != null){
+                try {
+                    hostGameMain.getServer().closeServerSocket();
+                } catch (IOException e) {}
+                try {
+                    hostGameMain.getServer().closeClientSocket();
+                } catch (Exception e) {}
+            }
+        });
+    }
+
+    /**
+     * Sets action to Ok Button (button where user clicks ok after writing servers IP and port)
+     */
+    private void createJoinOkBtnAction() {
+        view.getJoinOkButton().setOnAction(event -> {
+            try {
+                clientGameMain = new ClientGameMain();
+                String ip = view.getIpTextField().getText();
+                int port = Integer.parseInt(view.getPortTextField().getText());
+
+                clientGameMain.getGameClient().connectToServer(ip, port);
+                windowStage.close();
+
+                //TODO Create new server game
+
+            } catch (Exception e) {
+                Alert alert = new Alert(Alert.AlertType.ERROR, "Error: Make sure your IP and port values are correct");
+                alert.show();
+            }
+        });
+    }
+
+
+    /**
+     * Creates action to Host Btn, it sets required fields visible, asserts
+     * user entered a name, it displays the IP and Port the other player
+     * will need to connect and it creates a thread in which the server socket waits
+     * for a client
+     */
+    private void createHostBtnAction() {
         view.getHostBtn().setOnAction(event -> {
             if(view.getNameInputField().getText().equals("")){
                 Alert alert = new Alert(Alert.AlertType.ERROR, "You need a name");
@@ -86,38 +158,22 @@ public class NetworkSetUpController {
 
             }
         });
+    }
 
-
-        view.getJoinOkButton().setOnAction(event -> {
-            try {
-                clientGameMain = new ClientGameMain();
-                String ip = view.getIpTextField().getText();
-                int port = Integer.parseInt(view.getPortTextField().getText());
-
-                clientGameMain.getGameClient().connectToServer(ip, port);
-                windowStage.close();
-
-            } catch (Exception e) {
-                Alert alert = new Alert(Alert.AlertType.ERROR, "Error: Make sure your IP and port values are correct");
+    /**
+     * Sets action for join button (when user decides to join a game), it
+     * sets required view fields to visible and verifies the user entered name
+     */
+    private void createJoinBtnAction() {
+        view.getJoinBtn().setOnAction(event -> {
+            if(view.getNameInputField().getText().equals("")){
+                Alert alert = new Alert(Alert.AlertType.ERROR, "You need a name");
                 alert.show();
+                return;
             }
-        });
-
-
-
-        windowStage.setOnCloseRequest(event -> {
-            if (hostWaitThread != null){
-                hostWaitThread.interrupt();
-            }
-
-            if (hostGameMain != null){
-                try {
-                    hostGameMain.getServer().closeServerSocket();
-                } catch (IOException e) {}
-                try {
-                    hostGameMain.getServer().closeClientSocket();
-                } catch (Exception e) {}
-            }
+            view.getHostBtn().setVisible(false);
+            view.getJoinBtn().setVisible(false);
+            view.setJoinModeProperty(true);
         });
     }
 
@@ -131,7 +187,7 @@ public class NetworkSetUpController {
             boolean success = false;
             try {
                 hostGameMain.getServer().connectToClient();
-                System.out.println("connected");
+                //System.out.println("connected");
                 success = true;
 
             } catch (IOException e) {
