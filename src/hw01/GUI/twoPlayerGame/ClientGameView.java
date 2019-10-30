@@ -23,6 +23,9 @@ import hw01.GUI.onePlayerGame.OnePlayerGameView;
 
 public class ClientGameView extends OnePlayerGameView {
     public ClientGameView(double w, double h, ClientGameModel model) {
+
         super(w, h, model);
+        getResetBtn().setVisible(false);
     }
+
 }
