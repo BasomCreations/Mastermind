@@ -18,6 +18,7 @@
  */
 package hw01.GUI.twoPlayerGame;
 
+import javafx.application.Platform;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.stage.Stage;
@@ -105,6 +106,7 @@ public class NetworkSetUpController {
          * so that there are no errors when window is opened again
          */
         windowStage.setOnCloseRequest(event -> {
+            //System.out.println("closed");
             if (hostWaitThread != null){
                 hostWaitThread.interrupt();
             }
@@ -126,8 +128,9 @@ public class NetworkSetUpController {
 
             try {
                 hostGameMain.getServer().connectToClient();
-                //System.out.println("connected");
-                windowStage.close();
+                System.out.println("connected");
+                windowStage.hide();
+
 
                 //TODO Open new Scene for 2 player Game
             } catch (IOException e) {
@@ -141,7 +144,9 @@ public class NetworkSetUpController {
         };
 
         hostWaitThread = new Thread(connect);
+        hostWaitThread.start();
     }
+
 
 }
 
