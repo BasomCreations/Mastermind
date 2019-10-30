@@ -19,7 +19,6 @@
 package hw01.GUI.onePlayerGame;
 
 
-import hw01.GUI.sceneTemplate.SceneViewTemplate;
 import hw01.GUI.sceneTemplate.SceneViewTemplateController;
 import hw01.game.MasterMindBoard;
 import hw01.game.MasterMindBoardException;
@@ -91,8 +90,8 @@ public class OnePlayerGameController extends SceneViewTemplateController {
                     if (numericGuess != 0) {
                         guesses[j] = numericGuess;
                     } else {
-                        view.getErrrorMsg().setContentText("Invalid number of guesses! Guess must include " + MasterMindBoard.ROW_SIZE + " pegs.");
-                        view.getErrrorMsg().show();
+                        view.getErrorMsg().setContentText("Invalid number of guesses! Guess must include " + MasterMindBoard.ROW_SIZE + " pegs.");
+                        view.getErrorMsg().show();
                         return;
                     }
                 }

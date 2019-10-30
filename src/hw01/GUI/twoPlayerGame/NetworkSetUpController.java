@@ -40,17 +40,20 @@ public class NetworkSetUpController {
     /**
      * Main method for host game
      */
-    private HostGameModel hostGameMain;
+    private HostGameModel hostGameModel;
 
     /**
      * Main method for client game
      */
-    private ClientGameModel clientGameMain;
+    private ClientGameModel clientGameModel;
 
     /**
      * View for the pop up window
      */
     private NetworkSetUpView view;
+
+    private Scene mainMenuScene;
+    private Stage primaryStage;
 
     /**
      * Constructor
@@ -62,10 +65,12 @@ public class NetworkSetUpController {
     public NetworkSetUpController(Stage primaryStage, Scene mainMenuScene, Stage windowStage ,NetworkSetUpView theView) {
 
         hostWaitThread = null;
-        hostGameMain = null;
-        clientGameMain = null;
+        hostGameModel = null;
+        clientGameModel = null;
         this.windowStage = windowStage;
         this.view = theView;
+        this.mainMenuScene = mainMenuScene;
+        this.primaryStage = primaryStage;
 
 
         createJoinBtnAction();
@@ -85,12 +90,12 @@ public class NetworkSetUpController {
                 hostWaitThread.interrupt();
             }
 
-            if (hostGameMain != null){
+            if (hostGameModel != null){
                 try {
-                    hostGameMain.getServer().closeServerSocket();
+                    hostGameModel.getServer().closeServerSocket();
                 } catch (IOException e) {}
                 try {
-                    hostGameMain.getServer().closeClientSocket();
+                    hostGameModel.getServer().closeClientSocket();
                 } catch (Exception e) {}
             }
         });
@@ -102,14 +107,19 @@ public class NetworkSetUpController {
     private void createJoinOkBtnAction() {
         view.getJoinOkButton().setOnAction(event -> {
             try {
-                clientGameMain = new ClientGameModel();
+                clientGameModel = new ClientGameModel();
                 String ip = view.getIpTextField().getText();
                 int port = Integer.parseInt(view.getPortTextField().getText());
 
-                clientGameMain.getGameClient().connectToServer(ip, port);
+                clientGameModel.getGameClient().connectToServer(ip, port);
                 windowStage.close();
 
                 //TODO Create new server game
+                int[] secretCode = (int[]) clientGameModel.getGameClient().readObject();
+                clientGameModel.createNewGame(secretCode);
+                ClientGameView clientGameView = new ClientGameView(mainMenuScene.getWidth(), mainMenuScene.getHeight(), clientGameModel);
+                ClientGameController clientGameController = new ClientGameController(primaryStage, mainMenuScene, clientGameView, clientGameModel);
+
 
             } catch (Exception e) {
                 Alert alert = new Alert(Alert.AlertType.ERROR, "Error: Make sure your IP and port values are correct");
@@ -138,10 +148,10 @@ public class NetworkSetUpController {
 
 
             try {
-                hostGameMain = new HostGameModel();
+                hostGameModel = new HostGameModel();
 
-                String ip = hostGameMain.getServer().getFormattedIP();
-                String port = Integer.toString(hostGameMain.getServer().getPort());
+                String ip = hostGameModel.getServer().getFormattedIP();
+                String port = Integer.toString(hostGameModel.getServer().getPort());
                 view.getIpTextField().setText(ip);
                 view.getPortTextField().setText(port);
 
@@ -186,11 +196,13 @@ public class NetworkSetUpController {
         Runnable connect = () -> {
             boolean success = false;
             try {
-                hostGameMain.getServer().connectToClient();
+                hostGameModel.getServer().connectToClient();
                 //System.out.println("connected");
                 success = true;
 
-            } catch (IOException e) {
+                hostGameModel.getServer().sendObject(hostGameModel.getSecretCode());
+
+            } catch (IOException | ClassNotFoundException e) {
             }
 
             boolean successFinal = success;
@@ -198,6 +210,9 @@ public class NetworkSetUpController {
                 if(successFinal){
                     windowStage.close();
                     //TODO Open new Scene for 2 player Game
+                    HostGameView hostView = new HostGameView(mainMenuScene.getWidth(), mainMenuScene.getHeight(), hostGameModel);
+                    HostGameController hostGameController = new HostGameController(primaryStage, mainMenuScene, hostView, hostGameModel);
+                    primaryStage.setScene(new Scene(hostView.getRoot()));
                 }
 
             });

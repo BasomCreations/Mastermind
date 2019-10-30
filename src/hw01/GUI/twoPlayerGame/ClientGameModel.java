@@ -18,15 +18,22 @@
  */
 package hw01.GUI.twoPlayerGame;
 
+import hw01.GUI.onePlayerGame.OnePlayerGameModel;
+import hw01.game.MasterMindBoard;
+import hw01.game.MasterMindBoardException;
 import hw01.net.GameClient;
 
-public class ClientGameModel {
+public class ClientGameModel extends OnePlayerGameModel {
     private GameClient gameClient;
-    public ClientGameModel() {
+    public ClientGameModel() throws MasterMindBoardException {
+        super();
         gameClient = new GameClient();
+
     }
 
     public GameClient getGameClient() {
         return gameClient;
     }
+
+
 }

@@ -18,16 +18,22 @@
  */
 package hw01.GUI.twoPlayerGame;
 
+import hw01.GUI.onePlayerGame.OnePlayerGameModel;
 import hw01.net.GameServer;
 
 import java.io.IOException;
 
-public class HostGameModel {
+public class HostGameModel extends OnePlayerGameModel {
     private GameServer server;
     private boolean isConnected;
 
     public HostGameModel() throws IOException {
+        super();
         server = new GameServer();
+    }
+
+    public int[] getSecretCode() {
+        return getBoard().getSecretCode();
     }
 
 

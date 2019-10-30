@@ -42,6 +42,10 @@ public class OnePlayerGameModel {
 
     }
 
+    public OnePlayerGameModel(int[] secretCode) throws MasterMindBoardException {
+        board = new MasterMindBoard(secretCode);
+    }
+
     public Row guess(int[] guesses) throws MasterMindBoardException {
         return board.guess(guesses);
     }
@@ -52,6 +56,17 @@ public class OnePlayerGameModel {
 
     public void createNewGame() {
         board = new MasterMindBoard();
+
+        //TODO get rid of this
+        System.out.println();
+        for (int n:
+                board.getSecretCode()) {
+            System.out.print(n);
+        }
+    }
+
+    public void createNewGame(int[] secretCode) throws MasterMindBoardException {
+        board = new MasterMindBoard(secretCode);
 
         //TODO get rid of this
         System.out.println();
@@ -82,6 +97,8 @@ public class OnePlayerGameModel {
     public MasterMindBoard getBoard() {
         return board;
     }
+
+
 
 
 }

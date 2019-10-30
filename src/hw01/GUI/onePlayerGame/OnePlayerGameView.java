@@ -25,7 +25,6 @@ import javafx.geometry.Pos;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.effect.DropShadow;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
@@ -46,7 +45,7 @@ public class OnePlayerGameView extends SceneViewTemplate {
     private Polygon[] arrows;
     private Button[] buttons;
 
-    private Alert errrorMsg;
+    private Alert errorMsg;
 
     public final static String BGCOLOR = "#4b6a80";
     public final static int GRIDSQUARESIZE = 30;
@@ -64,7 +63,7 @@ public class OnePlayerGameView extends SceneViewTemplate {
         BorderPane root = getRoot();
         getTitle().setText(TITLE);
 
-        errrorMsg = new Alert(Alert.AlertType.ERROR);
+        errorMsg = new Alert(Alert.AlertType.ERROR);
 
         board = new GridPane();
         board.setStyle("-fx-background-color:" + BGCOLOR);
@@ -154,8 +153,8 @@ public class OnePlayerGameView extends SceneViewTemplate {
         return buttons;
     }
 
-    public Alert getErrrorMsg() {
-        return errrorMsg;
+    public Alert getErrorMsg() {
+        return errorMsg;
     }
 
     public Button getResetBtn() {
