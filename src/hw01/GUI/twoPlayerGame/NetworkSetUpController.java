@@ -119,7 +119,7 @@ public class NetworkSetUpController {
                 clientGameModel.createNewGame(secretCode);
                 ClientGameView clientGameView = new ClientGameView(mainMenuScene.getWidth(), mainMenuScene.getHeight(), clientGameModel);
                 ClientGameController clientGameController = new ClientGameController(primaryStage, mainMenuScene, clientGameView, clientGameModel);
-
+                primaryStage.setScene(new Scene(clientGameView.getRoot()));
 
             } catch (Exception e) {
                 Alert alert = new Alert(Alert.AlertType.ERROR, "Error: Make sure your IP and port values are correct");
