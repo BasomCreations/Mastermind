@@ -18,8 +18,15 @@
  */
 package hw01.GUI.twoPlayerGame;
 
-public class ClientGameMain {
-    public ClientGameMain() {
+import hw01.net.GameClient;
 
+public class ClientGameMain {
+    private GameClient gameClient;
+    public ClientGameMain() {
+        gameClient = new GameClient();
+    }
+
+    public GameClient getGameClient() {
+        return gameClient;
     }
 }

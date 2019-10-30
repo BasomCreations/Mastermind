@@ -38,7 +38,7 @@ public class NetworkSetUpView {
     private TextField portTextField;
     private Label ipLabel;
     private Label portLabel;
-    private Button okButton;
+    private Button joinOkButton;
 
     private SimpleBooleanProperty hostModeProperty;
     private SimpleBooleanProperty joinModeProperty;
@@ -92,10 +92,10 @@ public class NetworkSetUpView {
         Label waitingForClientLabel = new Label("Waiting for other player...");
         waitingForClientLabel.visibleProperty().bind(hostModeProperty);
 
-        okButton = new Button("OK");
-        okButton.visibleProperty().bind(joinModeProperty);
+        joinOkButton = new Button("OK");
+        joinOkButton.visibleProperty().bind(joinModeProperty);
 
-        root.getChildren().addAll(nameHBox, btnHbox, ipHbox, portHbox, waitingForClientLabel, okButton);
+        root.getChildren().addAll(nameHBox, btnHbox, ipHbox, portHbox, waitingForClientLabel, joinOkButton);
     }
 
     public VBox getRoot() {
@@ -131,8 +131,8 @@ public class NetworkSetUpView {
         return portLabel;
     }
 
-    public Button getOkButton() {
-        return okButton;
+    public Button getJoinOkButton() {
+        return joinOkButton;
     }
 
     public void setHostModeProperty(boolean hostModeProperty) {

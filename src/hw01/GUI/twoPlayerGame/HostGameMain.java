@@ -24,13 +24,18 @@ import java.io.IOException;
 
 public class HostGameMain {
     private GameServer server;
+    private boolean isConnected;
 
     public HostGameMain() throws IOException {
         server = new GameServer();
     }
 
+
+
     public GameServer getServer() {
         return server;
     }
+
+
 }
 

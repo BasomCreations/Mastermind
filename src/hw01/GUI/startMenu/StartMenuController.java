@@ -78,7 +78,7 @@ public class StartMenuController {
             if(!networkSettingsWindow.isShowing()){
                 clickSound.stop();
                 NetworkSetUpView networkSetUpView = new NetworkSetUpView();
-                NetworkSetUpController networkSetUpController = new NetworkSetUpController(stage, stage.getScene(), networkSetUpView);
+                NetworkSetUpController networkSetUpController = new NetworkSetUpController(stage, stage.getScene(), networkSettingsWindow ,networkSetUpView);
                 networkSettingsWindow.setScene( new Scene(networkSetUpView.getRoot()));
                 networkSettingsWindow.show();
                 clickSound.stop();
@@ -87,6 +87,17 @@ public class StartMenuController {
 
 
         });
+
+
+        /**
+         * Make sure networking settings window (if opened) is also closed if the game is exited
+         */
+        primaryStage.setOnCloseRequest(event -> {
+            if(networkSettingsWindow.isShowing()){
+                networkSettingsWindow.close();
+            }
+        });
     }
+
 
 }
