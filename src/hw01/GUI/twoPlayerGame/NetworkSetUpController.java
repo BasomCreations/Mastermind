@@ -40,12 +40,12 @@ public class NetworkSetUpController {
     /**
      * Main method for host game
      */
-    private HostGameMain hostGameMain;
+    private HostGameModel hostGameMain;
 
     /**
      * Main method for client game
      */
-    private ClientGameMain clientGameMain;
+    private ClientGameModel clientGameMain;
 
     /**
      * View for the pop up window
@@ -102,7 +102,7 @@ public class NetworkSetUpController {
     private void createJoinOkBtnAction() {
         view.getJoinOkButton().setOnAction(event -> {
             try {
-                clientGameMain = new ClientGameMain();
+                clientGameMain = new ClientGameModel();
                 String ip = view.getIpTextField().getText();
                 int port = Integer.parseInt(view.getPortTextField().getText());
 
@@ -138,7 +138,7 @@ public class NetworkSetUpController {
 
 
             try {
-                hostGameMain = new HostGameMain();
+                hostGameMain = new HostGameModel();
 
                 String ip = hostGameMain.getServer().getFormattedIP();
                 String port = Integer.toString(hostGameMain.getServer().getPort());

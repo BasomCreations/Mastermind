@@ -10,7 +10,7 @@
  *
  * Project: csci205_hw
  * Package: hw01.GUI.twoPlayerGame
- * Class: ClientGameMain
+ * Class: HostGameMain
  *
  * Description:
  *
@@ -18,15 +18,24 @@
  */
 package hw01.GUI.twoPlayerGame;
 
-import hw01.net.GameClient;
+import hw01.net.GameServer;
 
-public class ClientGameMain {
-    private GameClient gameClient;
-    public ClientGameMain() {
-        gameClient = new GameClient();
+import java.io.IOException;
+
+public class HostGameModel {
+    private GameServer server;
+    private boolean isConnected;
+
+    public HostGameModel() throws IOException {
+        server = new GameServer();
     }
 
-    public GameClient getGameClient() {
-        return gameClient;
+
+
+    public GameServer getServer() {
+        return server;
     }
+
+
 }
+
