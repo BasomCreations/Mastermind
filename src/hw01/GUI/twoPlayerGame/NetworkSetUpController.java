@@ -24,6 +24,7 @@ import javafx.scene.control.Alert;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 public class NetworkSetUpController {
 
@@ -39,6 +40,8 @@ public class NetworkSetUpController {
         hostGameMain = null;
         clientGameMain = null;
         this.windowStage = windowStage;
+
+
 
         view.getJoinBtn().setOnAction(event -> {
             if(view.getNameInputField().getText().equals("")){
@@ -70,7 +73,6 @@ public class NetworkSetUpController {
                 view.getIpTextField().setText(ip);
                 view.getPortTextField().setText(port);
 
-
                 handleHostThread();
 
 
@@ -80,9 +82,11 @@ public class NetworkSetUpController {
                 //e.printStackTrace();
                 Alert alert = new Alert(Alert.AlertType.ERROR, "Something went wrong...");
                 alert.show();
+                windowStage.close();
 
             }
         });
+
 
         view.getJoinOkButton().setOnAction(event -> {
             try {
@@ -91,7 +95,6 @@ public class NetworkSetUpController {
                 int port = Integer.parseInt(view.getPortTextField().getText());
 
                 clientGameMain.getGameClient().connectToServer(ip, port);
-                //System.out.println("connected");
                 windowStage.close();
 
             } catch (Exception e) {
@@ -101,12 +104,8 @@ public class NetworkSetUpController {
         });
 
 
-        /**
-         * Make sure the sockets are properly closed if window is exited,
-         * so that there are no errors when window is opened again
-         */
+
         windowStage.setOnCloseRequest(event -> {
-            //System.out.println("closed");
             if (hostWaitThread != null){
                 hostWaitThread.interrupt();
             }
@@ -122,30 +121,39 @@ public class NetworkSetUpController {
         });
     }
 
+
+    /**
+     * Handles thread were host waits for client to connect
+     */
     private void handleHostThread(){
+
         Runnable connect = () -> {
-
-
+            boolean success = false;
             try {
                 hostGameMain.getServer().connectToClient();
                 System.out.println("connected");
-                windowStage.hide();
+                success = true;
 
-
-                //TODO Open new Scene for 2 player Game
             } catch (IOException e) {
-                //This should not happen
-                //e.printStackTrace();
-                Alert alert = new Alert(Alert.AlertType.ERROR, "Something went wrong...");
-                alert.show();
             }
 
+            boolean successFinal = success;
+            Platform.runLater(() ->{
+                if(successFinal){
+                    windowStage.close();
+                    //TODO Open new Scene for 2 player Game
+                }
+
+            });
 
         };
 
         hostWaitThread = new Thread(connect);
         hostWaitThread.start();
     }
+
+
+
 
 
 }
