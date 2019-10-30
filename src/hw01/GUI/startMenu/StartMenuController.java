@@ -78,7 +78,7 @@ public class StartMenuController {
             if(!networkSettingsWindow.isShowing()){
                 clickSound.stop();
                 NetworkSetUpView networkSetUpView = new NetworkSetUpView();
-                NetworkSetUpController networkSetUpController = new NetworkSetUpController(networkSetUpView);
+                NetworkSetUpController networkSetUpController = new NetworkSetUpController(stage, stage.getScene(), networkSetUpView);
                 networkSettingsWindow.setScene( new Scene(networkSetUpView.getRoot()));
                 networkSettingsWindow.show();
                 clickSound.stop();

@@ -34,8 +34,8 @@ public class NetworkSetUpView {
     private TextField nameInputField;
     private Button hostBtn;
     private Button joinBtn;
-    private TextField ipInputField;
-    private TextField portInputField;
+    private TextField ipTextField;
+    private TextField portTextField;
     private Label ipLabel;
     private Label portLabel;
     private Button okButton;
@@ -49,7 +49,7 @@ public class NetworkSetUpView {
         joinModeProperty = new SimpleBooleanProperty(false);
 
         this.root = new VBox();
-        root.setPrefWidth(250);
+        root.setPrefWidth(300);
         root.setPrefHeight(200);
         root.setSpacing(15);
         root.setPadding(new Insets(10));
@@ -73,24 +73,29 @@ public class NetworkSetUpView {
 
         HBox ipHbox = new HBox();
         ipHbox.setSpacing(10);
-        ipInputField = new TextField();
-        ipInputField.visibleProperty().bind(hostModeProperty);
+        ipTextField = new TextField();
+        ipTextField.visibleProperty().bind(hostModeProperty.or(joinModeProperty));
+        ipTextField.disableProperty().bind(hostModeProperty);
         ipLabel = new Label("IP:");
         ipLabel.visibleProperty().bind(hostModeProperty.or(joinModeProperty));
-        ipHbox.getChildren().addAll(ipLabel,ipInputField);
+        ipHbox.getChildren().addAll(ipLabel, ipTextField);
 
         HBox portHbox = new HBox();
         portHbox.setSpacing(10);
-        portInputField = new TextField();
-        portInputField.visibleProperty().bind(hostModeProperty);
+        portTextField = new TextField();
+        portTextField.visibleProperty().bind(hostModeProperty.or(joinModeProperty));
+        portTextField.disableProperty().bind(hostModeProperty);
         portLabel = new Label("Port:");
         portLabel.visibleProperty().bind(hostModeProperty.or(joinModeProperty));
-        portHbox.getChildren().addAll(portLabel,portInputField);
+        portHbox.getChildren().addAll(portLabel, portTextField);
+
+        Label waitingForClientLabel = new Label("Waiting for other player...");
+        waitingForClientLabel.visibleProperty().bind(hostModeProperty);
 
         okButton = new Button("OK");
-        okButton.visibleProperty().bind(hostModeProperty.or(joinModeProperty));
+        okButton.visibleProperty().bind(joinModeProperty);
 
-        root.getChildren().addAll(nameHBox, btnHbox, ipHbox, portHbox, okButton);
+        root.getChildren().addAll(nameHBox, btnHbox, ipHbox, portHbox, waitingForClientLabel, okButton);
     }
 
     public VBox getRoot() {
@@ -110,12 +115,12 @@ public class NetworkSetUpView {
     }
 
 
-    public TextField getIpInputField() {
-        return ipInputField;
+    public TextField getIpTextField() {
+        return ipTextField;
     }
 
-    public TextField getPortInputField() {
-        return portInputField;
+    public TextField getPortTextField() {
+        return portTextField;
     }
 
     public Label getIpLabel() {
@@ -137,5 +142,21 @@ public class NetworkSetUpView {
 
     public void setJoinModeProperty(boolean joinModeProperty) {
         this.joinModeProperty.set(joinModeProperty);
+    }
+
+    public boolean isHostModeProperty() {
+        return hostModeProperty.get();
+    }
+
+    public SimpleBooleanProperty hostModePropertyProperty() {
+        return hostModeProperty;
+    }
+
+    public boolean isJoinModeProperty() {
+        return joinModeProperty.get();
+    }
+
+    public SimpleBooleanProperty joinModePropertyProperty() {
+        return joinModeProperty;
     }
 }

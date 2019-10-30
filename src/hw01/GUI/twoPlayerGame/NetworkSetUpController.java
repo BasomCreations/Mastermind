@@ -18,24 +18,19 @@
  */
 package hw01.GUI.twoPlayerGame;
 
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.stage.Stage;
+
+import java.io.IOException;
+import java.util.concurrent.TimeUnit;
 
 public class NetworkSetUpController {
 
-    public NetworkSetUpController(NetworkSetUpView view) {
+
+    public NetworkSetUpController(Stage primaryStage, Scene prevScene, NetworkSetUpView view) {
 
         view.getJoinBtn().setOnAction(event -> {
-            if(view.getNameInputField().getText().equals("")){
-                Alert alert = new Alert(Alert.AlertType.ERROR, "You need a name");
-                alert.show();
-                return;
-            }
-            view.getHostBtn().setVisible(false);
-            view.getJoinBtn().setVisible(false);
-            view.setHostModeProperty(true);
-        });
-
-        view.getHostBtn().setOnAction(event -> {
             if(view.getNameInputField().getText().equals("")){
                 Alert alert = new Alert(Alert.AlertType.ERROR, "You need a name");
                 alert.show();
@@ -46,8 +41,42 @@ public class NetworkSetUpController {
             view.setJoinModeProperty(true);
         });
 
+        view.getHostBtn().setOnAction(event -> {
+            if(view.getNameInputField().getText().equals("")){
+                Alert alert = new Alert(Alert.AlertType.ERROR, "You need a name");
+                alert.show();
+                return;
+            }
+            view.getHostBtn().setVisible(false);
+            view.getJoinBtn().setVisible(false);
+            view.setHostModeProperty(true);
+
+
+            try {
+                HostGameMain hostGameMain = new HostGameMain();
+
+                String ip = hostGameMain.getServer().getFormattedIP();
+                String port = Integer.toString(hostGameMain.getServer().getPort());
+                view.getIpTextField().setText(ip);
+                view.getPortTextField().setText(port);
+
+                TimeUnit.SECONDS.sleep(5);
+
+                //hostGameMain.getServer().connectToClient();
+
+
+
+            } catch (IOException | InterruptedException e) {
+                Alert alert = new Alert(Alert.AlertType.ERROR, "Something went wrong...");
+                alert.show();
+
+            }
+        });
+
         view.getOkButton().setOnAction(event -> {
+
 
         });
     }
+
 }
