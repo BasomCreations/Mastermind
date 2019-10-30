@@ -55,6 +55,8 @@ public class NetworkSetUpController {
     private Scene mainMenuScene;
     private Stage primaryStage;
 
+    private String playerName;
+
     /**
      * Constructor
      * @param primaryStage primary stage
@@ -117,6 +119,7 @@ public class NetworkSetUpController {
                 //TODO Create new server game
                 int[] secretCode = (int[]) clientGameModel.getGameClient().readObject();
                 clientGameModel.createNewGame(secretCode);
+                clientGameModel.setPlayerName(playerName);
                 ClientGameView clientGameView = new ClientGameView(mainMenuScene.getWidth(), mainMenuScene.getHeight(), clientGameModel);
                 ClientGameController clientGameController = new ClientGameController(primaryStage, mainMenuScene, clientGameView, clientGameModel);
                 primaryStage.setScene(new Scene(clientGameView.getRoot()));
@@ -137,11 +140,7 @@ public class NetworkSetUpController {
      */
     private void createHostBtnAction() {
         view.getHostBtn().setOnAction(event -> {
-            if(view.getNameInputField().getText().equals("")){
-                Alert alert = new Alert(Alert.AlertType.ERROR, "You need a name");
-                alert.show();
-                return;
-            }
+            if (validatePlayerName()) return;
             view.getHostBtn().setVisible(false);
             view.getJoinBtn().setVisible(false);
             view.setHostModeProperty(true);
@@ -170,17 +169,23 @@ public class NetworkSetUpController {
         });
     }
 
+    private boolean validatePlayerName() {
+        if (view.getNameInputField().getText().trim().equals("")) {
+            Alert alert = new Alert(Alert.AlertType.ERROR, "You need a name");
+            alert.show();
+            return true;
+        }
+        playerName = view.getNameInputField().getText().trim();
+        return false;
+    }
+
     /**
      * Sets action for join button (when user decides to join a game), it
      * sets required view fields to visible and verifies the user entered name
      */
     private void createJoinBtnAction() {
         view.getJoinBtn().setOnAction(event -> {
-            if(view.getNameInputField().getText().equals("")){
-                Alert alert = new Alert(Alert.AlertType.ERROR, "You need a name");
-                alert.show();
-                return;
-            }
+            if (validatePlayerName()) return;
             view.getHostBtn().setVisible(false);
             view.getJoinBtn().setVisible(false);
             view.setJoinModeProperty(true);
@@ -201,6 +206,7 @@ public class NetworkSetUpController {
                 success = true;
 
                 hostGameModel.getServer().sendObject(hostGameModel.getSecretCode());
+                hostGameModel.setPlayerName(playerName);
 
             } catch (IOException | ClassNotFoundException e) {
             }

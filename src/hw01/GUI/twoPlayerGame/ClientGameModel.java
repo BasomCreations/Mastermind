@@ -25,9 +25,12 @@ import hw01.net.GameClient;
 
 public class ClientGameModel extends OnePlayerGameModel {
     private GameClient gameClient;
+    private String playerName;
+
     public ClientGameModel() throws MasterMindBoardException {
         super();
         gameClient = new GameClient();
+        playerName = "Player2";
 
     }
 
@@ -35,5 +38,24 @@ public class ClientGameModel extends OnePlayerGameModel {
         return gameClient;
     }
 
+    @Override
+    public String getResults() {
+        String s;
+        if (getBoard().checkWin()) {
+            s = playerName + " guessed the correct code in:\n" +
+                    getBoard().getGuesses() + " Turns, " + getBoard().getPlayTime() + " Seconds";
+        }
+        else{
+            s = playerName + " ran out of turns!\nPlaytime: " + getBoard().getPlayTime() + " seconds";
+        }
+        return s;
+    }
 
+    public String getPlayerName() {
+        return playerName;
+    }
+
+    public void setPlayerName(String playerName) {
+        this.playerName = playerName;
+    }
 }

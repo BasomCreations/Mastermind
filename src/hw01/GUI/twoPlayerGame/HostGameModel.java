@@ -26,10 +26,25 @@ import java.io.IOException;
 public class HostGameModel extends OnePlayerGameModel {
     private GameServer server;
     private boolean isConnected;
+    private String playerName;
 
     public HostGameModel() throws IOException {
         super();
         server = new GameServer();
+        playerName = "Player1";
+    }
+
+    @Override
+    public String getResults() {
+        String s;
+        if (getBoard().checkWin()) {
+            s = playerName + " guessed the correct code in:\n" +
+                    getBoard().getGuesses() + " Turns, " + getBoard().getPlayTime() + " Seconds";
+        }
+        else{
+            s = playerName + " ran out of turns!\nPlaytime: " + getBoard().getPlayTime() + " seconds";
+        }
+        return s;
     }
 
     public int[] getSecretCode() {
@@ -42,6 +57,12 @@ public class HostGameModel extends OnePlayerGameModel {
         return server;
     }
 
+    public String getPlayerName() {
+        return playerName;
+    }
 
+    public void setPlayerName(String playerName) {
+        this.playerName = playerName;
+    }
 }
 
