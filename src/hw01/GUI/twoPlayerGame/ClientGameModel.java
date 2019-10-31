@@ -35,6 +35,7 @@ public class ClientGameModel extends OnePlayerGameModel {
         gameClient = new GameClient();
         playerName = "Player2";
 
+
     }
 
     public GameClient getGameClient() {

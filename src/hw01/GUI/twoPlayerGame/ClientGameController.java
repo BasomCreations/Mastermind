@@ -21,6 +21,7 @@ package hw01.GUI.twoPlayerGame;
 import hw01.GUI.onePlayerGame.OnePlayerGameController;
 import hw01.GUI.onePlayerGame.OnePlayerGameModel;
 import hw01.GUI.onePlayerGame.OnePlayerGameView;
+import hw01.GUI.sceneTemplate.SceneViewTemplate;
 import hw01.game.GameResults;
 import hw01.game.Score;
 import javafx.application.Platform;
@@ -35,9 +36,15 @@ import java.util.List;
 
 public class ClientGameController extends OnePlayerGameController {
     ClientGameModel model;
+    Stage primaryStage;
+    Scene prevScene;
     public ClientGameController(Stage primaryStage, Scene prevScene, ClientGameView view, ClientGameModel model) {
         super(primaryStage, prevScene, view, model);
         this.model = (ClientGameModel)super.getModel();
+        this.primaryStage = primaryStage;
+        this.prevScene = prevScene;
+        setUpGoBackBtn(view);
+
     }
 
     /**
@@ -68,6 +75,8 @@ public class ClientGameController extends OnePlayerGameController {
                 } else {
                     Alert alert = new Alert(Alert.AlertType.ERROR, "Other player disconnected");
                     alert.show();
+                    goBackToMenu();
+
                 }
 
             });
@@ -103,4 +112,24 @@ public class ClientGameController extends OnePlayerGameController {
         }
 
     }
+
+    /**
+     * Goes back to menu and closes sockets
+     */
+    private void goBackToMenu(){
+        primaryStage.setScene(prevScene);
+        model.closeSockets();
+    }
+
+    /**
+     * Makes sure sockets are properly closed when going back to main scene
+     * @param view
+     */
+    private void setUpGoBackBtn(ClientGameView view) {
+        view.getGoBackBtn().setOnAction(event -> {
+            goBackToMenu();
+        });
+    }
+
+
 }

@@ -36,10 +36,17 @@ import java.util.List;
 
 public class HostGameController extends OnePlayerGameController {
     HostGameModel model;
+    Stage primaryStage;
+    Scene prevScene;
     public HostGameController(Stage primaryStage, Scene prevScene, HostGameView view, HostGameModel model) {
         super(primaryStage, prevScene, view, model);
         this.model = (HostGameModel)getModel();
+        this.primaryStage = primaryStage;
+        this.prevScene = prevScene;
+        setUpGoBackBtn(view);
+
     }
+
 
 
     /**
@@ -70,6 +77,7 @@ public class HostGameController extends OnePlayerGameController {
                 } else {
                     Alert alert = new Alert(Alert.AlertType.ERROR, "Other player disconnected");
                     alert.show();
+                    goBackToMenu();
                 }
 
             });
@@ -104,6 +112,24 @@ public class HostGameController extends OnePlayerGameController {
             looseSoundPlayer.play();
         }
 
+    }
+
+    /**
+     * Goes back to menu and closes sockets
+     */
+    private void goBackToMenu(){
+        primaryStage.setScene(prevScene);
+        model.closeSockets();
+    }
+
+    /**
+     * Makes sure sockets are properly closed when going back to main scene
+     * @param view
+     */
+    private void setUpGoBackBtn(HostGameView view) {
+        view.getGoBackBtn().setOnAction(event -> {
+            goBackToMenu();
+        });
     }
 
 }
