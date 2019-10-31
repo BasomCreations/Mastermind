@@ -124,7 +124,7 @@ public class HostGameController extends OnePlayerGameController {
 
         getTheView().getResultsLbl().setText("1. "+scoreList.get(0).toString() + "\n2. " + scoreList.get(1).toString());
 
-        if(scoreList.get(0).equals(getModel().getResults())){
+        if(scoreList.get(0).equals(getModel().getResults()) && getModel().getBoard().checkWin()){
             Media winSoundMedia = new Media(new File("sound/fanfare_x.wav").toURI().toString());
             MediaPlayer winSoundMediaPlayer = new MediaPlayer(winSoundMedia);
             winSoundMediaPlayer.play();
