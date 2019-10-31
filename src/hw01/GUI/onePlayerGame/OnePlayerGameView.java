@@ -63,61 +63,32 @@ public class OnePlayerGameView extends SceneViewTemplate {
         BorderPane root = getRoot();
         getTitle().setText(TITLE);
 
+        initializeErrorMsg();
+
+        createBoard(root, MasterMindBoard.DEFAULT_MAXIMUM_ATTEMPTS, MasterMindBoard.ROW_SIZE);
+        initializeResetBtn();
+        initializeResultsLbl(root);
+
+    }
+
+    public OnePlayerGameView(double w, double h, OnePlayerGameModel model, int boardRows, int numGuesses) {
+        super(w, h);
+        BorderPane root = getRoot();
+        getTitle().setText(TITLE);
+
+        initializeErrorMsg();
+
+        createBoard(root, boardRows, numGuesses);
+        initializeResetBtn();
+        initializeResultsLbl(root);
+
+    }
+
+    private void initializeErrorMsg() {
         errorMsg = new Alert(Alert.AlertType.ERROR);
+    }
 
-        board = new GridPane();
-        board.setStyle("-fx-background-color:" + BGCOLOR);
-        board.setAlignment(Pos.CENTER);
-
-        pegGrid = new PegSphere[MasterMindBoard.DEFAULT_MAXIMUM_ATTEMPTS][MasterMindBoard.ROW_SIZE];
-        arrows = new Polygon[MasterMindBoard.DEFAULT_MAXIMUM_ATTEMPTS];
-        resultsGrid = new Circle[MasterMindBoard.DEFAULT_MAXIMUM_ATTEMPTS][MasterMindBoard.ROW_SIZE];
-        buttons = new Button[MasterMindBoard.DEFAULT_MAXIMUM_ATTEMPTS];
-
-        for (int y = 0; y < MasterMindBoard.DEFAULT_MAXIMUM_ATTEMPTS; y++) {
-
-            buttons[y] = new Button("Guess");
-            buttons[y].setVisible(false);
-            buttons[y].setStyle("-fx-background-color: tan;");
-            board.add(buttons[y], 0, y);
-            for (int x = 0; x < MasterMindBoard.ROW_SIZE; x++) {
-
-                StackPane stack = new StackPane();
-                stack.setAlignment(Pos.CENTER);
-                stack.getChildren().add(new Rectangle(GRIDSQUARESIZE,GRIDSQUARESIZE, Color.GRAY));
-
-
-                PegSphere curPeg = new PegSphere( GRIDSQUARESIZE / 3);
-                stack.getChildren().add(curPeg);
-
-                board.add(stack,x+1,y);
-                pegGrid[y][x] = curPeg;
-
-
-
-
-            }
-
-            // Add results for each row
-            for (int i = 1; i <= MasterMindBoard.ROW_SIZE; i++) {
-                Circle circle = new Circle(3, Color.web(BGCOLOR));
-                board.add(circle, MasterMindBoard.ROW_SIZE+i, y);
-
-                resultsGrid[y][i - 1] = circle;
-            }
-        }
-
-        // Set first button to visible
-        buttons[0].setVisible(true);
-
-        board.setAlignment(Pos.CENTER);
-
-        root.setCenter(board);
-
-        // Add reset button
-        resetBtn = new Button("Restart");
-        super.getMenuBar().getChildren().add(resetBtn);
-
+    private void initializeResultsLbl(BorderPane root) {
         // Add results label
         resultsLbl = new Label();
         resultsLbl.setFont(Font.font("Verdana", FontWeight.BOLD, 12));
@@ -134,7 +105,64 @@ public class OnePlayerGameView extends SceneViewTemplate {
         resultsVBox.getChildren().add(resultsLbl);
 
         root.setBottom(resultsVBox);
+    }
 
+    private void initializeResetBtn() {
+        // Add reset button
+        resetBtn = new Button("Restart");
+        super.getMenuBar().getChildren().add(resetBtn);
+    }
+
+    /**
+     * Creates the MasterMind Board
+     * @param root
+     */
+    protected void createBoard(BorderPane root, int rows, int guesses) {
+
+        board = new GridPane();
+        board.setStyle("-fx-background-color:" + BGCOLOR);
+        board.setAlignment(Pos.CENTER);
+
+        pegGrid = new PegSphere[rows][guesses];
+        resultsGrid = new Circle[rows][guesses];
+        buttons = new Button[rows];
+
+        for (int y = 0; y < rows; y++) {
+
+            buttons[y] = new Button("Guess");
+            buttons[y].setVisible(false);
+            buttons[y].setStyle("-fx-background-color: tan;");
+            board.add(buttons[y], 0, y);
+            for (int x = 0; x < guesses; x++) {
+
+                StackPane stack = new StackPane();
+                stack.setAlignment(Pos.CENTER);
+                stack.getChildren().add(new Rectangle(GRIDSQUARESIZE,GRIDSQUARESIZE, Color.GRAY));
+
+
+                PegSphere curPeg = new PegSphere( GRIDSQUARESIZE / 3);
+                stack.getChildren().add(curPeg);
+
+                board.add(stack,x+1,y);
+                pegGrid[y][x] = curPeg;
+
+            }
+
+            // Add results for each row
+            for (int i = 1; i <= guesses; i++) {
+                Circle circle = new Circle(3, Color.web(BGCOLOR));
+                board.add(circle, rows+i, y);
+
+                resultsGrid[y][i - 1] = circle;
+            }
+        }
+
+        // Set first button to visible
+        buttons[0].setVisible(true);
+
+        board.setAlignment(Pos.CENTER);
+
+        root.setCenter(board);
     }
 
     public GridPane getBoard() {

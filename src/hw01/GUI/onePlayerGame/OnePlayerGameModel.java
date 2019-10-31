@@ -77,11 +77,24 @@ public class OnePlayerGameModel {
         }
     }
 
+    /**
+     * Retrieves the results at the end of a game
+     * @return Score Object containing the results of the game
+     */
     public Score getResults() {
         return new Score(getBoard().getGuesses(), getBoard().getPlayTime(), "You", checkWin());
     }
 
 
+
+    /**
+     * Creates a new MasterMindBoard with a specified secret code
+     * @param secretCode int[] representing the secret code of the game
+     * @throws MasterMindBoardException
+     */
+    public void createNewBoard(int[] secretCode) throws MasterMindBoardException {
+        board = new MasterMindBoard(secretCode);
+    }
 
     public int getCurrentTurn() {
         return board.getGuesses();

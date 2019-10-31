@@ -19,6 +19,7 @@
 package hw01.game;
 
 
+import java.io.Serializable;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
@@ -28,7 +29,7 @@ import java.util.stream.Collectors;
 /**
  * Master mind game class
  */
-public class MasterMindBoard {
+public class MasterMindBoard implements Serializable {
 
     /**
      * Current row the player is using
