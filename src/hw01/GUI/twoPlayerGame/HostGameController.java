@@ -19,10 +19,9 @@
 package hw01.GUI.twoPlayerGame;
 
 import hw01.GUI.onePlayerGame.OnePlayerGameController;
-import hw01.GUI.onePlayerGame.OnePlayerGameModel;
-import hw01.GUI.onePlayerGame.OnePlayerGameView;
-import hw01.game.GameResults;
+import hw01.game.MasterMindUtility;
 import hw01.game.Score;
+import hw01.net.Protocol;
 import javafx.application.Platform;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -38,12 +37,16 @@ public class HostGameController extends OnePlayerGameController {
     HostGameModel model;
     Stage primaryStage;
     Scene prevScene;
+    boolean clientConnected;
+
     public HostGameController(Stage primaryStage, Scene prevScene, HostGameView view, HostGameModel model) {
         super(primaryStage, prevScene, view, model);
         this.model = (HostGameModel)getModel();
         this.primaryStage = primaryStage;
         this.prevScene = prevScene;
+
         setUpGoBackBtn(view);
+        handleRematchBtn(view);
 
     }
 
@@ -74,6 +77,9 @@ public class HostGameController extends OnePlayerGameController {
             Platform.runLater(() ->{
                 if(successFinal){
                     displayTwoPlayerResults(finalClientScore);
+
+                    //new
+                    getTheView().getResetBtn().setVisible(true);
                 } else {
                     Alert alert = new Alert(Alert.AlertType.ERROR, "Other player disconnected");
                     alert.show();
@@ -131,5 +137,51 @@ public class HostGameController extends OnePlayerGameController {
             goBackToMenu();
         });
     }
+
+
+    private void handleRematchBtn(HostGameView view) {
+
+        Runnable rematch = () -> {
+            boolean success = true;
+            try {
+                Protocol clientRequest = (Protocol)model.getServer().readObject();
+                if (clientRequest.equals(Protocol.READY)){
+                    model.getServer().sendObject(Protocol.READY);
+                }
+
+            } catch (Exception e) {
+                success = false;
+            }
+            boolean finalSuccess = success;
+            Platform.runLater(()->{
+                if (!finalSuccess){
+                    getTheView().getResultsLbl().setText("Other player disconnected");
+                    Alert alert = new Alert(Alert.AlertType.ERROR, "Other player disconnected");
+                    alert.show();
+                } else {
+                    getTheView().getResultsLbl().setText("");
+                    try {
+                        int[] secretCode = MasterMindUtility.generateRandomSecretCode();
+                        model.getServer().sendObject(secretCode);
+                        clearBoard();
+                        model.createNewGame(secretCode);
+                    } catch (Exception e) {
+                        Alert alert = new Alert(Alert.AlertType.ERROR, "Unknown error occurred");
+                        alert.show();
+                        goBackToMenu();
+                    }
+
+                }
+
+            });
+        };
+        view.getResetBtn().setOnAction(event -> {
+            view.getResetBtn().setVisible(false);
+            view.getResultsLbl().setText("Waiting...");
+            Thread thread = new Thread(rematch);
+            thread.start();
+        });
+    }
+
 
 }

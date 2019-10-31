@@ -25,5 +25,7 @@ public class HostGameView extends OnePlayerGameView {
     public HostGameView(double w, double h, HostGameModel model) {
         super(w, h, model);
         getResetBtn().setVisible(false);
+        getResetBtn().setText("Rematch");
+        getTitle().setText("Multiplayer");
     }
 }

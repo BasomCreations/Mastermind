@@ -26,6 +26,8 @@ public class ClientGameView extends OnePlayerGameView {
 
         super(w, h, model);
         getResetBtn().setVisible(false);
+        getResetBtn().setText("rematch");
+        getTitle().setText("Multiplayer");
     }
 
 }
