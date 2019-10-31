@@ -34,11 +34,28 @@ import java.io.IOException;
 import java.util.List;
 
 public class HostGameController extends OnePlayerGameController {
+    /**
+     * model
+     */
     HostGameModel model;
-    Stage primaryStage;
-    Scene prevScene;
-    boolean clientConnected;
 
+    /**
+     * primary stage
+     */
+    Stage primaryStage;
+
+    /**
+     * Main menu scene
+     */
+    Scene prevScene;
+
+    /**
+     * Constructor
+     * @param primaryStage primary stage
+     * @param prevScene main menu scene
+     * @param view view
+     * @param model host game model
+     */
     public HostGameController(Stage primaryStage, Scene prevScene, HostGameView view, HostGameModel model) {
         super(primaryStage, prevScene, view, model);
         this.model = (HostGameModel)getModel();
@@ -81,9 +98,7 @@ public class HostGameController extends OnePlayerGameController {
                     //new
                     getTheView().getResetBtn().setVisible(true);
                 } else {
-                    Alert alert = new Alert(Alert.AlertType.ERROR, "Other player disconnected");
-                    alert.show();
-                    super.displayResults();
+                    getTheView().getResultsLbl().setText("Other player disconnected\n" + model.getResults().toString());
                 }
 
             });
@@ -99,7 +114,7 @@ public class HostGameController extends OnePlayerGameController {
 
 
     /**
-     * Displays scores
+     * Displays scores and plays sound (sound is different for winner and loser)
      * @param otherScore the score of the other player
      */
     public void displayTwoPlayerResults(Score otherScore){
@@ -162,8 +177,6 @@ public class HostGameController extends OnePlayerGameController {
             Platform.runLater(()->{
                 if (!finalSuccess){
                     getTheView().getResultsLbl().setText("Other player disconnected");
-                    Alert alert = new Alert(Alert.AlertType.ERROR, "Other player disconnected");
-                    alert.show();
                 } else {
                     getTheView().getResultsLbl().setText("");
                     try {

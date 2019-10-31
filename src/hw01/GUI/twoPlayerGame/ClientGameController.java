@@ -37,9 +37,29 @@ import java.io.IOException;
 import java.util.List;
 
 public class ClientGameController extends OnePlayerGameController {
+
+    /**
+     * client game model
+     */
     ClientGameModel model;
+
+    /**
+     * primary stage
+     */
     Stage primaryStage;
+
+    /**
+     * Previous scene
+     */
     Scene prevScene;
+
+    /**
+     * Constructor
+     * @param primaryStage primary stage
+     * @param prevScene main menu scene
+     * @param view view
+     * @param model client game model
+     */
     public ClientGameController(Stage primaryStage, Scene prevScene, ClientGameView view, ClientGameModel model) {
         super(primaryStage, prevScene, view, model);
         this.model = (ClientGameModel)super.getModel();
@@ -51,7 +71,9 @@ public class ClientGameController extends OnePlayerGameController {
     }
 
     /**
-     * Method that deals with when the game is finished and has to wait for host
+     * Method that deals with when the game is finished and client has to wait for host
+     * Client waits for the host to get its score, then results are displayed, and
+     * rematch button is set visible
      */
     @Override
     public void finishGame() {
@@ -78,9 +100,7 @@ public class ClientGameController extends OnePlayerGameController {
 
                     getTheView().getResetBtn().setVisible(true);
                 } else {
-                    Alert alert = new Alert(Alert.AlertType.ERROR, "Other player disconnected");
-                    alert.show();
-                    super.displayResults();
+                    getTheView().getResultsLbl().setText("Other player disconnected\n" + model.getResults().toString());
 
                 }
 
@@ -96,7 +116,7 @@ public class ClientGameController extends OnePlayerGameController {
     }
 
     /**
-     * Displays scores
+     * Displays scores and plays sound (sound is different for winner and loser)
      * @param otherScore the score of the other player
      */
     public void displayTwoPlayerResults(Score otherScore){
@@ -161,8 +181,6 @@ public class ClientGameController extends OnePlayerGameController {
             Platform.runLater(()->{
                 if (!finalSuccess){
                     getTheView().getResultsLbl().setText("Other player disconnected");
-                    Alert alert = new Alert(Alert.AlertType.ERROR, "Other player disconnected");
-                    alert.show();
                 } else {
                     getTheView().getResultsLbl().setText("");
                     try {

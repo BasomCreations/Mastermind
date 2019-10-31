@@ -114,7 +114,6 @@ public class NetworkSetUpController {
                 windowStage.close();
 
                 //new server game
-                //TODO Create new server game
                 int hostNumRows = (int) clientGameModel.getGameClient().readObject();
                 int hostNumGuesses = (int) clientGameModel.getGameClient().readObject();
                 clientGameModel.setBoardSize(hostNumRows, hostNumGuesses);
