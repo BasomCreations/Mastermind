@@ -42,10 +42,6 @@ public class OnePlayerGameModel {
 
     }
 
-    public OnePlayerGameModel(int[] secretCode) throws MasterMindBoardException {
-        board = new MasterMindBoard(secretCode);
-    }
-
     public Row guess(int[] guesses) throws MasterMindBoardException {
         return board.guess(guesses);
     }
@@ -76,6 +72,10 @@ public class OnePlayerGameModel {
         }
     }
 
+    /**
+     * Retrieves the results at the end of a game
+     * @return String containing the results of the game
+     */
     public String getResults() {
         String s;
         if (board.checkWin()) {
@@ -86,6 +86,15 @@ public class OnePlayerGameModel {
             s = "Game over!\nYou ran out of turns!\nPlaytime: " + board.getPlayTime() + " seconds";
         }
         return s;
+    }
+
+    /**
+     * Creates a new MasterMindBoard with a specified secret code
+     * @param secretCode int[] representing the secret code of the game
+     * @throws MasterMindBoardException
+     */
+    public void createNewBoard(int[] secretCode) throws MasterMindBoardException {
+        board = new MasterMindBoard(secretCode);
     }
 
     public int getCurrentTurn() {

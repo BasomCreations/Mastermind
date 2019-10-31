@@ -22,10 +22,21 @@ import hw01.GUI.onePlayerGame.OnePlayerGameModel;
 import hw01.GUI.onePlayerGame.OnePlayerGameView;
 
 public class ClientGameView extends OnePlayerGameView {
-    public ClientGameView(double w, double h, ClientGameModel model) {
 
-        super(w, h, model);
+    public ClientGameView(double w, double h, ClientGameModel model, int boardRows, int numGuesses) {
+
+        super(w, h, model, boardRows, numGuesses);
+
+        getTitle().setText("Two Player Game");
+
+
         getResetBtn().setVisible(false);
     }
+
+
+
+
+
+
 
 }

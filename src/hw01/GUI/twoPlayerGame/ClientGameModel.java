@@ -58,4 +58,31 @@ public class ClientGameModel extends OnePlayerGameModel {
     public void setPlayerName(String playerName) {
         this.playerName = playerName;
     }
+
+
+    /**
+     * Sets the default size of the board
+     * @param numRows int for the number of rows on the board
+     * @param numGuesses int for the number of guesses per row
+     */
+    public void setBoardSize(int numRows, int numGuesses) {
+        MasterMindBoard.DEFAULT_MAXIMUM_ATTEMPTS = numRows;
+        MasterMindBoard.ROW_SIZE = numGuesses;
+    }
+
+    /**
+     * Retrieves the number of rows on the board
+     * @return int for the number of rows
+     */
+    public int getNumRows() {
+        return getBoard().DEFAULT_MAXIMUM_ATTEMPTS;
+    }
+
+    /**
+     * Retrieves the number of guesses per row
+     * @return int for the number of guesses
+     */
+    public int getNumGuesses() {
+        return getBoard().ROW_SIZE;
+    }
 }

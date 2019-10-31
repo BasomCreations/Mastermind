@@ -18,6 +18,8 @@
  */
 package hw01.GUI.twoPlayerGame;
 
+import hw01.game.MasterMindBoard;
+import hw01.game.MasterMindBoardException;
 import javafx.application.Platform;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -117,16 +119,22 @@ public class NetworkSetUpController {
                 windowStage.close();
 
                 //TODO Create new server game
+                int hostNumRows = (int) clientGameModel.getGameClient().readObject();
+                int hostNumGuesses = (int) clientGameModel.getGameClient().readObject();
+                clientGameModel.setBoardSize(hostNumRows, hostNumGuesses);
                 int[] secretCode = (int[]) clientGameModel.getGameClient().readObject();
-                clientGameModel.createNewGame(secretCode);
+                clientGameModel.createNewBoard(secretCode);
                 clientGameModel.setPlayerName(playerName);
-                ClientGameView clientGameView = new ClientGameView(mainMenuScene.getWidth(), mainMenuScene.getHeight(), clientGameModel);
+                ClientGameView clientGameView = new ClientGameView(mainMenuScene.getWidth(), mainMenuScene.getHeight(), clientGameModel, clientGameModel.getNumRows(), clientGameModel.getNumGuesses());
                 ClientGameController clientGameController = new ClientGameController(primaryStage, mainMenuScene, clientGameView, clientGameModel);
                 primaryStage.setScene(new Scene(clientGameView.getRoot()));
 
-            } catch (Exception e) {
+            } catch (IOException e) {
                 Alert alert = new Alert(Alert.AlertType.ERROR, "Error: Make sure your IP and port values are correct");
                 alert.show();
+            }
+            catch (MasterMindBoardException | ClassNotFoundException e) {
+                Alert alert = new Alert(Alert.AlertType.ERROR, "Error: Issue with game. Try again.");
             }
         });
     }
@@ -205,6 +213,8 @@ public class NetworkSetUpController {
                 //System.out.println("connected");
                 success = true;
 
+                hostGameModel.getServer().sendObject(MasterMindBoard.DEFAULT_MAXIMUM_ATTEMPTS);
+                hostGameModel.getServer().sendObject(MasterMindBoard.ROW_SIZE);
                 hostGameModel.getServer().sendObject(hostGameModel.getSecretCode());
                 hostGameModel.setPlayerName(playerName);
 
