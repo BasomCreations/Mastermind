@@ -21,6 +21,7 @@ package hw01.GUI.onePlayerGame;
 import hw01.game.MasterMindBoard;
 import hw01.game.MasterMindBoardException;
 import hw01.game.Row;
+import hw01.game.Score;
 import javafx.scene.paint.Paint;
 
 import java.util.Hashtable;
@@ -76,17 +77,11 @@ public class OnePlayerGameModel {
         }
     }
 
-    public String getResults() {
-        String s;
-        if (board.checkWin()) {
-            s = "Congratulations!\nYou guessed the correct code in:\n" +
-                    board.getGuesses() + " Turns, " + board.getPlayTime() + " Seconds";
-        }
-        else{
-            s = "Game over!\nYou ran out of turns!\nPlaytime: " + board.getPlayTime() + " seconds";
-        }
-        return s;
+    public Score getResults() {
+        return new Score(getBoard().getGuesses(), getBoard().getPlayTime(), "You", checkWin());
     }
+
+
 
     public int getCurrentTurn() {
         return board.getGuesses();

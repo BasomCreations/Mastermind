@@ -19,6 +19,7 @@
 package hw01.game;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 /**
  * Class for score objects
@@ -92,5 +93,21 @@ public class Score implements Serializable {
         }
 
         return s;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Score score = (Score) o;
+        return turns == score.turns &&
+                time == score.time &&
+                win == score.win &&
+                name.equals(score.name);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(turns, time, name, win);
     }
 }

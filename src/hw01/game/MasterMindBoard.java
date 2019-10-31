@@ -255,5 +255,12 @@ public class MasterMindBoard {
     public int[] getSecretCode() {
         return secretCode;
     }
+
+    /**
+     * Sets initial time (only needed if for some reason game starts after initializing the object)
+     */
+    public void setInitialTime(){
+        this.startTime = System.nanoTime();
+    }
 }
 

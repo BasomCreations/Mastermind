@@ -21,7 +21,10 @@ package hw01.GUI.twoPlayerGame;
 import hw01.GUI.onePlayerGame.OnePlayerGameModel;
 import hw01.game.MasterMindBoard;
 import hw01.game.MasterMindBoardException;
+import hw01.game.Score;
 import hw01.net.GameClient;
+
+import java.io.IOException;
 
 public class ClientGameModel extends OnePlayerGameModel {
     private GameClient gameClient;
@@ -39,16 +42,8 @@ public class ClientGameModel extends OnePlayerGameModel {
     }
 
     @Override
-    public String getResults() {
-        String s;
-        if (getBoard().checkWin()) {
-            s = playerName + " guessed the correct code in:\n" +
-                    getBoard().getGuesses() + " Turns, " + getBoard().getPlayTime() + " Seconds";
-        }
-        else{
-            s = playerName + " ran out of turns!\nPlaytime: " + getBoard().getPlayTime() + " seconds";
-        }
-        return s;
+    public Score getResults() {
+        return new Score(getBoard().getGuesses(), getBoard().getPlayTime(), playerName, checkWin());
     }
 
     public String getPlayerName() {
@@ -58,4 +53,16 @@ public class ClientGameModel extends OnePlayerGameModel {
     public void setPlayerName(String playerName) {
         this.playerName = playerName;
     }
+
+
+    /**
+     * Closes socket
+     */
+    public void closeSockets(){
+        try {
+            gameClient.close();
+        } catch (Exception e) {
+        }
+    }
+
 }

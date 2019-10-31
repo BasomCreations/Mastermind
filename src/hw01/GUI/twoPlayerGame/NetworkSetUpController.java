@@ -93,12 +93,7 @@ public class NetworkSetUpController {
             }
 
             if (hostGameModel != null){
-                try {
-                    hostGameModel.getServer().closeServerSocket();
-                } catch (IOException e) {}
-                try {
-                    hostGameModel.getServer().closeClientSocket();
-                } catch (Exception e) {}
+                hostGameModel.closeSockets();
             }
         });
     }
@@ -116,7 +111,7 @@ public class NetworkSetUpController {
                 clientGameModel.getGameClient().connectToServer(ip, port);
                 windowStage.close();
 
-                //TODO Create new server game
+                //new server game
                 int[] secretCode = (int[]) clientGameModel.getGameClient().readObject();
                 clientGameModel.createNewGame(secretCode);
                 clientGameModel.setPlayerName(playerName);
@@ -205,6 +200,7 @@ public class NetworkSetUpController {
                 //System.out.println("connected");
                 success = true;
 
+                //Sends secret code to client
                 hostGameModel.getServer().sendObject(hostGameModel.getSecretCode());
                 hostGameModel.setPlayerName(playerName);
 
@@ -215,7 +211,11 @@ public class NetworkSetUpController {
             Platform.runLater(() ->{
                 if(successFinal){
                     windowStage.close();
-                    //TODO Open new Scene for 2 player Game
+
+                    //Sets the initial time of game at this point
+                    hostGameModel.getBoard().setInitialTime();
+
+                    //Open new Scene for 2 player Game
                     HostGameView hostView = new HostGameView(mainMenuScene.getWidth(), mainMenuScene.getHeight(), hostGameModel);
                     HostGameController hostGameController = new HostGameController(primaryStage, mainMenuScene, hostView, hostGameModel);
                     primaryStage.setScene(new Scene(hostView.getRoot()));

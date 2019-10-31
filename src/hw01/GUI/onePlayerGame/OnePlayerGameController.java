@@ -192,12 +192,25 @@ public class OnePlayerGameController extends SceneViewTemplateController {
     }
 
     public void displayResults() {
-        getTheView().getResultsLbl().setText(model.getResults());
+        getTheView().getResultsLbl().setText(model.getResults().toString());
         getTheView().getResultsLbl().setVisible(true);
     }
 
     @Override
     public OnePlayerGameView getTheView() {
         return (OnePlayerGameView) super.getTheView();
+    }
+
+
+    public int getCurRow() {
+        return curRow;
+    }
+
+    public OnePlayerGameModel getModel() {
+        return model;
+    }
+
+    public void setCurRow(int curRow) {
+        this.curRow = curRow;
     }
 }

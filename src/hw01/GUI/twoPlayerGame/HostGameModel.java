@@ -19,6 +19,7 @@
 package hw01.GUI.twoPlayerGame;
 
 import hw01.GUI.onePlayerGame.OnePlayerGameModel;
+import hw01.game.Score;
 import hw01.net.GameServer;
 
 import java.io.IOException;
@@ -35,16 +36,8 @@ public class HostGameModel extends OnePlayerGameModel {
     }
 
     @Override
-    public String getResults() {
-        String s;
-        if (getBoard().checkWin()) {
-            s = playerName + " guessed the correct code in:\n" +
-                    getBoard().getGuesses() + " Turns, " + getBoard().getPlayTime() + " Seconds";
-        }
-        else{
-            s = playerName + " ran out of turns!\nPlaytime: " + getBoard().getPlayTime() + " seconds";
-        }
-        return s;
+    public Score getResults() {
+        return new Score(getBoard().getGuesses(), getBoard().getPlayTime(), playerName, checkWin());
     }
 
     public int[] getSecretCode() {
@@ -64,5 +57,20 @@ public class HostGameModel extends OnePlayerGameModel {
     public void setPlayerName(String playerName) {
         this.playerName = playerName;
     }
+
+    /**
+     * Closes sockets
+     */
+    public void closeSockets() {
+        try {
+            getServer().closeServerSocket();
+        } catch (IOException e) {
+        }
+        try {
+            getServer().closeClientSocket();
+        } catch (Exception e) {
+        }
+    }
+
 }
 
