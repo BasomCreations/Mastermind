@@ -80,7 +80,7 @@ public class ClientGameController extends OnePlayerGameController {
                 } else {
                     Alert alert = new Alert(Alert.AlertType.ERROR, "Other player disconnected");
                     alert.show();
-                    goBackToMenu();
+                    super.displayResults();
 
                 }
 
@@ -137,7 +137,12 @@ public class ClientGameController extends OnePlayerGameController {
     }
 
 
-
+    /**
+     * When rematch button is clicked (this button is only visible at the end of the a game),
+     * it waits for other players response, if the other
+     * player wants to play again, a new game is created
+     * @param view view
+     */
     private void handleRematchBtn(ClientGameView view){
 
 
