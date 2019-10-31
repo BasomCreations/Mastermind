@@ -25,6 +25,8 @@ import hw01.game.MasterMindBoardException;
 import hw01.game.Row;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
@@ -154,6 +156,7 @@ public class OnePlayerGameController extends SceneViewTemplateController {
         getTheView().getButtons()[curRow].setVisible(false);
         curRow = -1;
 
+        showCorrectCode();
         displayResults();
     }
 
@@ -184,6 +187,7 @@ public class OnePlayerGameController extends SceneViewTemplateController {
 
         // Clear the results label
         getTheView().getResultsLbl().setVisible(false);
+        getTheView().getCorrectAnswerBox().setVisible(false);
 
         getTheView().getButtons()[0].setVisible(true);
         curRow = 0;
@@ -194,6 +198,24 @@ public class OnePlayerGameController extends SceneViewTemplateController {
     public void displayResults() {
         getTheView().getResultsLbl().setText(model.getResults().toString());
         getTheView().getResultsLbl().setVisible(true);
+    }
+
+    /**
+     * Displays the correct code at the bottom of the window
+     */
+    public void showCorrectCode(){
+
+        getTheView().getCorrectAnswerBox().setVisible(true);
+        getTheView().getCorrectAnswerBox().getChildren().clear();
+        getTheView().getCorrectAnswerBox().setSpacing(5);
+        for (int numb:
+             getModel().getBoard().getSecretCode()) {
+            PegSphere peg = new PegSphere(OnePlayerGameView.GRIDSQUARESIZE / 6);
+            peg.setColor(PegColor.colors.get(numb - 1));
+            getTheView().getCorrectAnswerBox().getChildren().add(peg);
+        }
+
+
     }
 
     @Override
@@ -213,4 +235,6 @@ public class OnePlayerGameController extends SceneViewTemplateController {
     public void setCurRow(int curRow) {
         this.curRow = curRow;
     }
+
+
 }

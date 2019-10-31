@@ -29,6 +29,12 @@ import java.util.List;
  */
 public final class twoPlayerGameUtilities {
 
+    /**
+     * Orders scores
+     * @param score1 score player 1
+     * @param score2 score player 2
+     * @return list of ordered score objects
+     */
     public static List<Score> getOrderedListOfScores(Score score1, Score score2){
 
         GameResults results = new GameResults();

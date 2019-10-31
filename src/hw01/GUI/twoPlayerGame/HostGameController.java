@@ -76,6 +76,7 @@ public class HostGameController extends OnePlayerGameController {
     public void finishGame() {
 
         getTheView().getResultsLbl().setText("Waiting for other player...");
+        showCorrectCode(); //displays answer
         getTheView().getResultsLbl().setVisible(true);
 
         Runnable pleaseDontFreezeGUI = () -> {
@@ -195,6 +196,7 @@ public class HostGameController extends OnePlayerGameController {
             });
         };
         view.getResetBtn().setOnAction(event -> {
+            view.getCorrectAnswerBox().setVisible(false); //hides correct answer
             view.getResetBtn().setVisible(false);
             view.getResultsLbl().setText("Waiting...");
             Thread thread = new Thread(rematch);

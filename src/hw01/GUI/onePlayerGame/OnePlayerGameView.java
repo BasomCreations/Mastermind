@@ -55,6 +55,7 @@ public class OnePlayerGameView extends SceneViewTemplate {
     private Button resetBtn;
     private VBox resultsVBox;
     private Label resultsLbl;
+    private HBox correctAnswerBox;
 
 
     public OnePlayerGameView(double w, double h, OnePlayerGameModel model) {
@@ -98,11 +99,17 @@ public class OnePlayerGameView extends SceneViewTemplate {
         resultsLbl.setVisible(false);
 
 
+        //Add correct code
+        correctAnswerBox = new HBox();
+        correctAnswerBox.setAlignment(Pos.CENTER);
+        correctAnswerBox.setVisible(false);
+
+
         // Add VBox to bottom for results
         resultsVBox = new VBox();
         resultsVBox.setAlignment(Pos.CENTER);
         resultsVBox.setStyle("-fx-background-color: " + BGCOLOR);
-        resultsVBox.getChildren().add(resultsLbl);
+        resultsVBox.getChildren().addAll(resultsLbl, correctAnswerBox);
 
         root.setBottom(resultsVBox);
     }
@@ -150,7 +157,7 @@ public class OnePlayerGameView extends SceneViewTemplate {
 
             // Add results for each row
             for (int i = 1; i <= guesses; i++) {
-                Circle circle = new Circle(3, Color.web(BGCOLOR));
+                Circle circle = new Circle(GRIDSQUARESIZE / 10, Color.web(BGCOLOR));
                 board.add(circle, rows+i, y);
 
                 resultsGrid[y][i - 1] = circle;
@@ -196,4 +203,9 @@ public class OnePlayerGameView extends SceneViewTemplate {
     public VBox getResultsVBox() {
         return resultsVBox;
     }
+
+    public HBox getCorrectAnswerBox() {
+        return correctAnswerBox;
+    }
+
 }
