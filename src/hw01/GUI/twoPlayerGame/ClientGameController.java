@@ -122,7 +122,7 @@ public class ClientGameController extends OnePlayerGameController {
     }
 
     /**
-     * Makes sure sockets are properly closed when going back to main scene
+     * Sets action to go back button to ensure it closes sockets properly
      * @param view
      */
     private void setUpGoBackBtn(ClientGameView view) {
