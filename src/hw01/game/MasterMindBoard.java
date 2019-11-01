@@ -251,8 +251,10 @@ public class MasterMindBoard implements Serializable {
         return this.currentRow - 1;
     }
 
-
-    //TODO get rid of this
+    /**
+     * Retrieves the secret code of the game
+     * @return int[] representing the secret code
+     */
     public int[] getSecretCode() {
         return secretCode;
     }

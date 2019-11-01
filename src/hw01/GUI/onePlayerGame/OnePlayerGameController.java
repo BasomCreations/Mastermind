@@ -3,8 +3,8 @@
  * Fall 2019
  * Instructor: Prof. Brian King
  *
- * Name: Sebastian Ascoli
- * Section: 11 am
+ * Name: Sebastian Ascoli and Jonathan Basom
+ * Section: 11 am / 9 am
  * Date: 10/26/2019
  * Time: 4:26 PM
  *
@@ -13,7 +13,7 @@
  * Class: OnePlayerGameController
  *
  * Description:
- *
+ * Class for the Controller of a One Player Game
  * ****************************************
  */
 package hw01.GUI.onePlayerGame;
@@ -25,8 +25,6 @@ import hw01.game.MasterMindBoardException;
 import hw01.game.Row;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
@@ -34,19 +32,42 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import java.io.File;
 
-
+/**
+ * Class for the Controller of a One Player Game
+ */
 public class OnePlayerGameController extends SceneViewTemplateController {
 
+    /** Current Row of the board */
     private int curRow;
+
+    /** Model for a One Player Game */
     private OnePlayerGameModel model;
 
-
+    /**
+     * Constructor for a OnePlayerGameController
+     * @param primaryStage Stage representing the Stage of the application
+     * @param prevScene Scene object for the previous scene
+     * @param view OnePlayerGameView
+     * @param model OnePlayerGameModel
+     */
     public OnePlayerGameController(Stage primaryStage, Scene prevScene, OnePlayerGameView view, OnePlayerGameModel model) {
         super(primaryStage, prevScene, view);
+
         this.model = model;
 
         curRow = 0;
 
+        initializePegClicks(view);
+        initializeRestartBtn();
+        initializeGuessBtnClicks(view, model);
+
+    }
+
+    /**
+     * Initialize the action for when a peg is clicked on the GUI board
+     * @param view
+     */
+    private void initializePegClicks(OnePlayerGameView view) {
         //Sound effect when clicking peg
         Media sound = new Media(new File("sound/sound1.wav").toURI().toString());
         MediaPlayer clickSound = new MediaPlayer(sound);
@@ -63,21 +84,21 @@ public class OnePlayerGameController extends SceneViewTemplateController {
                         curPeg.setColor(PegColor.getNextColor(curPeg.getColor()));
                         clickSound.play();
                     }
-
                 });
-
             }
         }
+    }
 
-        // Initialize Restart Button
-        getTheView().getResetBtn().setOnAction(event -> {
-            clearBoard();
-        });
+    /**
+     * Initialize the action for when a guess button is clicked
+     * @param view OnePlayerGameView
+     * @param model OnePlayerGameModel
+     */
+    private void initializeGuessBtnClicks(OnePlayerGameView view, OnePlayerGameModel model) {
 
         // Initialize guess button clicks
         Button[] buttons = view.getButtons().clone();
         for (int i = 0; i < buttons.length; i++) {
-
 
             int finalI = i;
             buttons[i].setOnAction(event -> {
@@ -117,32 +138,59 @@ public class OnePlayerGameController extends SceneViewTemplateController {
                     count++;
                 }
 
+                if (checkWin(model)) return;
 
-                // Check win
-                if (model.checkWin()) {
-                    finishGame();
-                    return;
-                }
-
-                // Make next button visible if not currently on last button
-                if (finalI != buttons.length - 1) {
-                    buttons[finalI + 1].setVisible(true);
-                }
-                else {
-                    finishGame();
-                }
-                buttons[finalI].setVisible(false);
-
-                // Update current row
-                curRow++;
-
+                updateCurrentRow(buttons, finalI);
             });
-
         }
-
-
     }
 
+    /**
+     * Updates the current row on the GUI and shows the guess button for only the new row
+     * @param buttons Button[] for the list of guess buttons
+     * @param finalI int index of buttons for the current row
+     */
+    private void updateCurrentRow(Button[] buttons, int finalI) {
+        // Make next button visible if not currently on last button
+        if (finalI != buttons.length - 1) {
+            buttons[finalI + 1].setVisible(true);
+        }
+        else {
+            finishGame();
+        }
+        buttons[finalI].setVisible(false);
+
+        // Update current row
+        curRow++;
+    }
+
+    /**
+     * Check if player won
+     * @param model OnePlayerGameModel
+     * @return boolean true if player has won
+     */
+    private boolean checkWin(OnePlayerGameModel model) {
+        // Check win
+        if (model.checkWin()) {
+            finishGame();
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * Create an action for clicking the restart button
+     */
+    private void initializeRestartBtn() {
+        // Initialize Restart Button
+        getTheView().getResetBtn().setOnAction(event -> {
+            clearBoard();
+        });
+    }
+
+    /**
+     * Handles a game once it finishes
+     */
     public void finishGame() {
         if (model.checkWin()) {
             Media winSoundMedia = new Media(new File("sound/fanfare_x.wav").toURI().toString());
@@ -160,6 +208,9 @@ public class OnePlayerGameController extends SceneViewTemplateController {
         displayResults();
     }
 
+    /**
+     * Clears the current board on the GUI
+     */
     public void clearBoard() {
         //Clears peg spheres
         for (PegSphere[] row:
@@ -195,6 +246,9 @@ public class OnePlayerGameController extends SceneViewTemplateController {
 
     }
 
+    /**
+     * Displays the end of game results
+     */
     public void displayResults() {
         getTheView().getResultsLbl().setText(model.getResults().toString());
         getTheView().getResultsLbl().setVisible(true);
@@ -214,24 +268,37 @@ public class OnePlayerGameController extends SceneViewTemplateController {
             peg.setColor(PegColor.colors.get(numb - 1));
             getTheView().getCorrectAnswerBox().getChildren().add(peg);
         }
-
-
     }
 
+    /**
+     * Retrieves the object's view
+     * @return OnePlayerGameView object
+     */
     @Override
     public OnePlayerGameView getTheView() {
         return (OnePlayerGameView) super.getTheView();
     }
 
-
+    /**
+     * Retrieves the current row of the GUI board
+     * @return int for the current row
+     */
     public int getCurRow() {
         return curRow;
     }
 
+    /**
+     * Retrieves the object's model
+     * @returnn OnePlayerGameModel
+     */
     public OnePlayerGameModel getModel() {
         return model;
     }
 
+    /**
+     * Sets the GUI's current row
+     * @param curRow int for the new current row
+     */
     public void setCurRow(int curRow) {
         this.curRow = curRow;
     }

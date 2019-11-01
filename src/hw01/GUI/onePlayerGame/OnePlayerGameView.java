@@ -3,8 +3,8 @@
  * Fall 2019
  * Instructor: Prof. Brian King
  *
- * Name: Sebastian Ascoli
- * Section: 11 am
+ * Name: Sebastian Ascoli / Jonathan Basom
+ * Section: 11 am / 9 am
  * Date: 10/26/2019
  * Time: 3:10 PM
  *
@@ -13,7 +13,7 @@
  * Class: OnePlayerGameView
  *
  * Description:
- *
+ * Class for the View of a One Player Game
  * ****************************************
  */
 package hw01.GUI.onePlayerGame;
@@ -34,30 +34,56 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.TextAlignment;
 
-
+/**
+ * Class for the View of a One Player Game
+ */
 public class OnePlayerGameView extends SceneViewTemplate {
 
-
+    /** Model of a One Player game */
     private OnePlayerGameModel model;
+
+    /** Grid for the GUI board to go on */
     private GridPane board;
+
+    /** 2D array of the PegSpheres on the GUI board */
     private PegSphere[][] pegGrid;
+
+    /** 2D array of the result pegs on the GUI board */
     private Circle[][] resultsGrid;
-    private Polygon[] arrows;
+
+    /** Guess buttons for each row */
     private Button[] buttons;
 
+    /** Alert for an resulting errors */
     private Alert errorMsg;
 
+    /** Default background color of the board */
     public final static String BGCOLOR = "#4b6a80";
+
+    /** Size of all squares in the grid */
     public final static int GRIDSQUARESIZE = 30;
 
-
+    /** Title of the scene */
     public String TITLE = "Single Player Game";
+
+    /** Button to reset the game */
     private Button resetBtn;
+
+    /** VBox for the end game results */
     private VBox resultsVBox;
+
+    /** Label for the end game results */
     private Label resultsLbl;
+
+    /** HBox that contains the correct code at the end of the game */
     private HBox correctAnswerBox;
 
-
+    /**
+     * Constructor
+     * @param w double representing the width of the view
+     * @param h double representing the height of the view
+     * @param model OnePlayerGameModel
+     */
     public OnePlayerGameView(double w, double h, OnePlayerGameModel model) {
 
         super(w, h);
@@ -72,6 +98,14 @@ public class OnePlayerGameView extends SceneViewTemplate {
 
     }
 
+    /**
+     * Constructor that accepts the number of rows and guesses per row for the board
+     * @param w double representing the width of the view
+     * @param h double representing the height of the view
+     * @param model OnePlayerGameModel
+     * @param boardRows int representing the number of rows on the GUI board
+     * @param numGuesses int representing the number of guesses per row on the board
+     */
     public OnePlayerGameView(double w, double h, OnePlayerGameModel model, int boardRows, int numGuesses) {
         super(w, h);
         BorderPane root = getRoot();
@@ -85,10 +119,17 @@ public class OnePlayerGameView extends SceneViewTemplate {
 
     }
 
+    /**
+     * Initialize the Alert for any error messages
+     */
     private void initializeErrorMsg() {
         errorMsg = new Alert(Alert.AlertType.ERROR);
     }
 
+    /**
+     * Initialize results label and add it to scene graph
+     * @param root BorderPane node to contain the results label
+     */
     private void initializeResultsLbl(BorderPane root) {
         // Add results label
         resultsLbl = new Label();
@@ -98,12 +139,10 @@ public class OnePlayerGameView extends SceneViewTemplate {
         resultsLbl.setWrapText(true);
         resultsLbl.setVisible(false);
 
-
         //Add correct code
         correctAnswerBox = new HBox();
         correctAnswerBox.setAlignment(Pos.CENTER);
         correctAnswerBox.setVisible(false);
-
 
         // Add VBox to bottom for results
         resultsVBox = new VBox();
@@ -114,6 +153,9 @@ public class OnePlayerGameView extends SceneViewTemplate {
         root.setBottom(resultsVBox);
     }
 
+    /**
+     * Initialize reset button
+     */
     private void initializeResetBtn() {
         // Add reset button
         resetBtn = new Button("Restart");
@@ -152,7 +194,6 @@ public class OnePlayerGameView extends SceneViewTemplate {
 
                 board.add(stack,x+1,y);
                 pegGrid[y][x] = curPeg;
-
             }
 
             // Add results for each row
@@ -172,14 +213,26 @@ public class OnePlayerGameView extends SceneViewTemplate {
         root.setCenter(board);
     }
 
+    /**
+     * Retrieve the GUI board
+     * @return GridPane board for the GUI
+     */
     public GridPane getBoard() {
         return board;
     }
 
+    /**
+     * Retrieve the 2D array of PegSpheres on the board
+     * @return PegSphere[][] for all the guessing pegs
+     */
     public PegSphere[][] getPegGrid() {
         return pegGrid;
     }
 
+    /**
+     * Retrieve the result pegs
+     * @return Circle[][] representing the result pegs on the board
+     */
     public Circle[][] getResultsGrid() {
         return resultsGrid;
     }

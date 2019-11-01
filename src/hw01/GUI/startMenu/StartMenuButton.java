@@ -3,8 +3,8 @@
  * Fall 2019
  * Instructor: Prof. Brian King
  *
- * Name: Sebastian Ascoli
- * Section: 11 am
+ * Name: Sebastian Ascoli / Jonathan Basom
+ * Section: 11 am / 9 am
  * Date: 10/26/2019
  * Time: 1:16 PM
  *
@@ -13,17 +13,17 @@
  * Class: StartMenuButton
  *
  * Description:
- *
+ * Class representing a button on the start screen
  * ****************************************
  */
 package hw01.GUI.startMenu;
 
-import hw01.GUI.startMenu.StartMenuView;
 import javafx.scene.control.Button;
 
-
+/**
+ * Class representing a button on the start screen
+ */
 public class StartMenuButton extends Button {
-
 
     /**
      * Creates a button with the specified text as its label.

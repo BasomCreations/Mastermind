@@ -3,8 +3,8 @@
  * Fall 2019
  * Instructor: Prof. Brian King
  *
- * Name: Sebastian Ascoli
- * Section: 11 am
+ * Name: Sebastian Ascoli / Jonathan Basom
+ * Section: 11 am / 9 am
  * Date: 10/26/2019
  * Time: 4:14 PM
  *
@@ -13,7 +13,7 @@
  * Class: OnePlayerGameModel
  *
  * Description:
- *
+ * Class for the Model of a One Player Game
  * ****************************************
  */
 package hw01.GUI.onePlayerGame;
@@ -22,14 +22,18 @@ import hw01.game.MasterMindBoard;
 import hw01.game.MasterMindBoardException;
 import hw01.game.Row;
 import hw01.game.Score;
-import javafx.scene.paint.Paint;
 
-import java.util.Hashtable;
-
+/**
+ * Class for the Model of a One Player Game
+ */
 public class OnePlayerGameModel {
 
+    /** MasterMindBoard for the game */
     private MasterMindBoard board;
 
+    /**
+     * No parameter Constructor
+     */
     public OnePlayerGameModel() {
 
         board = new MasterMindBoard();
@@ -43,18 +47,27 @@ public class OnePlayerGameModel {
 
     }
 
-    public OnePlayerGameModel(int[] secretCode) throws MasterMindBoardException {
-        board = new MasterMindBoard(secretCode);
-    }
-
+    /**
+     * Make a guess on the board
+     * @param guesses int[] representing the guesses for the board
+     * @return Row object for the result of the guess
+     * @throws MasterMindBoardException
+     */
     public Row guess(int[] guesses) throws MasterMindBoardException {
         return board.guess(guesses);
     }
 
+    /**
+     * Check the board for a win
+     * @return boolean - true if win
+     */
     public boolean checkWin() {
         return board.checkWin();
     }
 
+    /**
+     * Create a new game
+     */
     public void createNewGame() {
         board = new MasterMindBoard();
 
@@ -66,6 +79,11 @@ public class OnePlayerGameModel {
         }
     }
 
+    /**
+     * Create a new game with a specified secret code
+     * @param secretCode int[] representing the secret code
+     * @throws MasterMindBoardException
+     */
     public void createNewGame(int[] secretCode) throws MasterMindBoardException {
         board = new MasterMindBoard(secretCode);
 
@@ -85,8 +103,6 @@ public class OnePlayerGameModel {
         return new Score(getBoard().getGuesses(), getBoard().getPlayTime(), "You", checkWin());
     }
 
-
-
     /**
      * Creates a new MasterMindBoard with a specified secret code
      * @param secretCode int[] representing the secret code of the game
@@ -96,17 +112,20 @@ public class OnePlayerGameModel {
         board = new MasterMindBoard(secretCode);
     }
 
+    /**
+     * Retrieve the current turn of the game
+     * @return
+     */
     public int getCurrentTurn() {
         return board.getGuesses();
     }
 
-
-
+    /**
+     * Retrieve the board for the game
+     * @return MasterMindBoard
+     */
     public MasterMindBoard getBoard() {
         return board;
     }
-
-
-
 
 }

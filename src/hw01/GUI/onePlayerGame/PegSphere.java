@@ -3,8 +3,8 @@
  * Fall 2019
  * Instructor: Prof. Brian King
  *
- * Name: Sebastian Ascoli
- * Section: 11 am
+ * Name: Sebastian Ascoli / Jonathan Basom
+ * Section: 11 am / 9 am
  * Date: 10/28/2019
  * Time: 11:28 AM
  *
@@ -13,7 +13,7 @@
  * Class: Peg
  *
  * Description:
- *
+ * Class for the GUI representation of a peg
  * ****************************************
  */
 package hw01.GUI.onePlayerGame;
@@ -24,10 +24,13 @@ import javafx.scene.paint.Paint;
 import javafx.scene.paint.PhongMaterial;
 import javafx.scene.shape.Sphere;
 
+/**
+ * Class for the GUI representation of a peg
+ */
 public class PegSphere extends Sphere {
 
+    /** Color of the peg */
     private Paint color;
-
 
     /**
      * Creates a new instance of {@code Sphere} with the given radius.
@@ -40,18 +43,24 @@ public class PegSphere extends Sphere {
         color = Color.WHITE;
     }
 
+    /**
+     * Retrieves the color of the peg
+     * @return Paint representing the color
+     */
     public Paint getColor() {
         return color;
     }
 
+    /**
+     * Sets the color of the sphere
+     * @param color Paint representing the new color
+     */
     public void setColor(Paint color) {
         PhongMaterial material = new PhongMaterial();
         material.setDiffuseColor((Color)color);
         material.setSpecularColor((Color)color);
         this.color = color;
         this.setMaterial(material);
-
     }
-
 
 }

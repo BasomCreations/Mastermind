@@ -3,8 +3,8 @@
  * Fall 2019
  * Instructor: Prof. Brian King
  *
- * Name: Sebastian Ascoli
- * Section: 11 am
+ * Name: Sebastian Ascoli / Jonathan Basom
+ * Section: 11 am / 9 am
  * Date: 10/26/2019
  * Time: 7:31 PM
  *
@@ -13,21 +13,31 @@
  * Class: SceneViewTemplateController
  *
  * Description:
- *
+ * Template for Controllers of all scenes
  * ****************************************
  */
 package hw01.GUI.sceneTemplate;
 
-
-import javafx.beans.binding.Bindings;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+/**
+ * Template for Controllers of all scenes
+ */
 public abstract class SceneViewTemplateController {
 
+    /** View to control */
     private SceneViewTemplate theView;
+
+    /** Previous scene of the application */
     private Scene prevScene;
 
+    /**
+     * Constructor
+     * @param primaryStage Stage object for the application
+     * @param prevScene Scene object representing the previous scene of the application
+     * @param view SceneViewTemplate
+     */
     public SceneViewTemplateController(Stage primaryStage, Scene prevScene, SceneViewTemplate view) {
         theView = view;
 
@@ -40,6 +50,10 @@ public abstract class SceneViewTemplateController {
         });
     }
 
+    /**
+     * Retrieve the controller's view
+     * @return ScreenViewTemplate
+     */
     public SceneViewTemplate getTheView() {
         return theView;
     }

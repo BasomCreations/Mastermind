@@ -3,8 +3,8 @@
  * Fall 2019
  * Instructor: Prof. Brian King
  *
- * Name: Sebastian Ascoli
- * Section: 11 am
+ * Name: Sebastian Ascoli / Jonathan Basom
+ * Section: 11 am / 9 am
  * Date: 10/26/2019
  * Time: 8:53 PM
  *
@@ -13,7 +13,7 @@
  * Class: SettingsView
  *
  * Description:
- *
+ * View for the settings scene of the application
  * ****************************************
  */
 package hw01.GUI.settings;
@@ -36,18 +36,28 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * View for the settings scene of the application
+ */
 public class SettingsView extends SceneViewTemplate {
 
+    /** VBox of the possible settings to change */
     private final VBox settingsChoicesVbox;
+
+    /** Selection of the number of rows on the board */
     private final ComboBox<String> comboBoxMaxRows;
+
+    /** Selection of the number of guesses per row on the board */
     private final ComboBox<String> comboBoxRowSize;
+
+    /** Button to apply changes */
     private final Button applyBtn;
 
     /**
      * Constructor
      *
-     * @param w width
-     * @param h height
+     * @param w double width
+     * @param h double height
      */
     public SettingsView(double w, double h) {
         super(w, h);
@@ -60,16 +70,7 @@ public class SettingsView extends SceneViewTemplate {
         settingsChoicesVbox.setStyle("-fx-background-color: #4b6a80");
         settingsChoicesVbox.setAlignment(Pos.TOP_CENTER);
 
-        //settings icon
-        Image image = null;
-        try {
-            image = new Image(new FileInputStream("images/settingsIcon.png"));
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-        ImageView imageView = new ImageView(image);
-        imageView.setFitHeight(h / 4);
-        imageView.setPreserveRatio(true);
+        ImageView imageView = setSettingsIcon(h);
 
 
         //Choose max rows
@@ -104,14 +105,24 @@ public class SettingsView extends SceneViewTemplate {
         applyBtn = new Button("Apply");
         applyBtn.setStyle("-fx-background-color: #248054; -fx-font-size: 2em");
 
-
         settingsChoicesVbox.getChildren().addAll(imageView, hboxMaxRows, hboxRowSize, applyBtn);
-
 
         root.setCenter(settingsChoicesVbox);
 
+    }
 
-
+    private ImageView setSettingsIcon(double h) {
+        //settings icon
+        Image image = null;
+        try {
+            image = new Image(new FileInputStream("images/settingsIcon.png"));
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        ImageView imageView = new ImageView(image);
+        imageView.setFitHeight(h / 4);
+        imageView.setPreserveRatio(true);
+        return imageView;
     }
 
     public Button getApplyBtn() {
