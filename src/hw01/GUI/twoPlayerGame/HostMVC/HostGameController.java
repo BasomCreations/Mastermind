@@ -3,8 +3,8 @@
  * Fall 2019
  * Instructor: Prof. Brian King
  *
- * Name: Jonathan Basom
- * Section: 9am
+ * Name: Jonathan Basom / Sebastian Ascoli
+ * Section: 9am / 11 am
  * Date: 10/30/2019
  * Time: 3:26 PM
  *
@@ -55,10 +55,10 @@ public class HostGameController extends OnePlayerGameController {
 
     /**
      * Constructor
-     * @param primaryStage primary stage
-     * @param prevScene main menu scene
-     * @param view view
-     * @param model host game model
+     * @param primaryStage Stage - primary stage
+     * @param prevScene Scene - main menu scene
+     * @param view HostGameView - view
+     * @param model HostGameModel - host game model
      */
     public HostGameController(Stage primaryStage, Scene prevScene, HostGameView view, HostGameModel model) {
         super(primaryStage, prevScene, view, model);

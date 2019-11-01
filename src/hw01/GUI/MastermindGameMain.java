@@ -39,10 +39,13 @@ public class MastermindGameMain extends Application {
     /** Controller for the initial view */
     private StartMenuController startMenuController;
 
+    /**
+     * Main method
+     * @param args
+     */
     public static void main(String[] args) {
         launch(args);
     }
-
 
     /**
      * init method

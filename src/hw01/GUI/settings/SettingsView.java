@@ -111,6 +111,11 @@ public class SettingsView extends SceneViewTemplate {
 
     }
 
+    /**
+     * Set the Image in the Settings Scene
+     * @param h double height
+     * @return ImageView containing the image
+     */
     private ImageView setSettingsIcon(double h) {
         //settings icon
         Image image = null;

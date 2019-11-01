@@ -3,8 +3,8 @@
  * Fall 2019
  * Instructor: Prof. Brian King
  *
- * Name: Sebastian Ascoli
- * Section: 11 am
+ * Name: Sebastian Ascoli / Jonathan Basom
+ * Section: 11 am / 9 am
  * Date: 10/29/2019
  * Time: 7:56 PM
  *
@@ -13,7 +13,7 @@
  * Class: NetworkSetUpController
  *
  * Description:
- *
+ * Controller to set up the network between two players
  * ****************************************
  */
 package hw01.GUI.twoPlayerGame.NetworkMVC;
@@ -33,6 +33,9 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
+/**
+ * Controller to set up the network between two players
+ */
 public class NetworkSetUpController {
 
     /**
@@ -41,17 +44,17 @@ public class NetworkSetUpController {
     private Thread hostWaitThread;
 
     /**
-     * The stage in which this pop up window is
+     * Stage for the pop up network connection window
      */
     private Stage windowStage;
 
     /**
-     * Main method for host game
+     * Main model for host game
      */
     private HostGameModel hostGameModel;
 
     /**
-     * Main method for client game
+     * Main model for client game
      */
     private ClientGameModel clientGameModel;
 
@@ -60,9 +63,19 @@ public class NetworkSetUpController {
      */
     private NetworkSetUpView view;
 
+    /**
+     * Scene for the main menu
+     */
     private Scene mainMenuScene;
+
+    /**
+     * Main Stage for the application
+     */
     private Stage primaryStage;
 
+    /**
+     * Name of the player
+     */
     private String playerName;
 
     /**
@@ -165,19 +178,20 @@ public class NetworkSetUpController {
 
                 handleHostThread();
 
-
-
             } catch (IOException e) {
                 //This should not happen
                 //e.printStackTrace();
                 Alert alert = new Alert(Alert.AlertType.ERROR, "Something went wrong...");
                 alert.show();
                 windowStage.close();
-
             }
         });
     }
 
+    /**
+     * Validates that the player has correctly set their name
+     * @return Boolean - true if the player has a valid name
+     */
     private boolean validatePlayerName() {
         if (view.getNameInputField().getText().trim().equals("")) {
             Alert alert = new Alert(Alert.AlertType.ERROR, "You need a name");
@@ -200,7 +214,6 @@ public class NetworkSetUpController {
             view.setJoinModeProperty(true);
         });
     }
-
 
     /**
      * Handles thread were host waits for client to connect
@@ -244,9 +257,6 @@ public class NetworkSetUpController {
         hostWaitThread = new Thread(connect);
         hostWaitThread.start();
     }
-
-
-
 
 }
 

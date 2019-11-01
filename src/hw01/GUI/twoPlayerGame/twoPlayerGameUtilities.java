@@ -3,8 +3,8 @@
  * Fall 2019
  * Instructor: Prof. Brian King
  *
- * Name: Sebastian Ascoli
- * Section: 11 am
+ * Name: Sebastian Ascoli / Jonathan Basom
+ * Section: 11 am / 9 am
  * Date: 10/31/2019
  * Time: 1:33 AM
  *
@@ -13,7 +13,7 @@
  * Class: twoPlayerGameUtilities
  *
  * Description:
- *
+ * Useful functions to deal with the 2 player game logistics
  * ****************************************
  */
 package hw01.GUI.twoPlayerGame;
