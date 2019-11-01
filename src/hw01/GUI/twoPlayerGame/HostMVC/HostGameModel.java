@@ -16,7 +16,7 @@
  *
  * ****************************************
  */
-package hw01.GUI.twoPlayerGame;
+package hw01.GUI.twoPlayerGame.HostMVC;
 
 import hw01.GUI.onePlayerGame.OnePlayerGameModel;
 import hw01.game.Score;

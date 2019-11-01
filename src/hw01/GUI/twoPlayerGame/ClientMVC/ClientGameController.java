@@ -3,8 +3,8 @@
  * Fall 2019
  * Instructor: Prof. Brian King
  *
- * Name: Jonathan Basom
- * Section: 9am
+ * Name: Jonathan Basom / Sebastian Ascoli
+ * Section: 9 am / 11 am
  * Date: 10/30/2019
  * Time: 4:02 PM
  *
@@ -13,16 +13,13 @@
  * Class: ClientGameController
  *
  * Description:
- *
+ * Controller for the Client side of the game
  * ****************************************
  */
-package hw01.GUI.twoPlayerGame;
+package hw01.GUI.twoPlayerGame.ClientMVC;
 
 import hw01.GUI.onePlayerGame.OnePlayerGameController;
-import hw01.GUI.onePlayerGame.OnePlayerGameModel;
-import hw01.GUI.onePlayerGame.OnePlayerGameView;
-import hw01.GUI.sceneTemplate.SceneViewTemplate;
-import hw01.game.GameResults;
+import hw01.GUI.twoPlayerGame.twoPlayerGameUtilities;
 import hw01.game.Score;
 import hw01.net.Protocol;
 import javafx.application.Platform;
@@ -33,9 +30,11 @@ import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.List;
 
+/**
+ * Controller for the client side of the two player game
+ */
 public class ClientGameController extends OnePlayerGameController {
 
     /**
@@ -165,7 +164,6 @@ public class ClientGameController extends OnePlayerGameController {
      * @param view view
      */
     private void handleRematchBtn(ClientGameView view){
-
 
         Runnable rematch = () -> {
             boolean success = true;

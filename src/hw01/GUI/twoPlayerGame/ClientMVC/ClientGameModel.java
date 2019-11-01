@@ -3,8 +3,8 @@
  * Fall 2019
  * Instructor: Prof. Brian King
  *
- * Name: Sebastian Ascoli
- * Section: 11 am
+ * Name: Sebastian Ascoli / Jonathan Basom
+ * Section: 11 am / 9 am
  * Date: 10/29/2019
  * Time: 10:03 PM
  *
@@ -13,10 +13,10 @@
  * Class: ClientGameMain
  *
  * Description:
- *
+ * Model for the client side of a two player game
  * ****************************************
  */
-package hw01.GUI.twoPlayerGame;
+package hw01.GUI.twoPlayerGame.ClientMVC;
 
 import hw01.GUI.onePlayerGame.OnePlayerGameModel;
 import hw01.game.MasterMindBoard;
@@ -24,36 +24,59 @@ import hw01.game.MasterMindBoardException;
 import hw01.game.Score;
 import hw01.net.GameClient;
 
-import java.io.IOException;
-
+/**
+ * Model for the client side of a two player game
+ */
 public class ClientGameModel extends OnePlayerGameModel {
+
+    /** GameClient object */
     private GameClient gameClient;
+
+    /** Name of player */
     private String playerName;
 
-    public ClientGameModel() throws MasterMindBoardException {
+    /**
+     * Constructor
+     */
+    public ClientGameModel() {
         super();
         gameClient = new GameClient();
         playerName = "Player2";
 
     }
 
+    /**
+     * Retrieve the GameClient object
+     * @return GameClient
+     */
     public GameClient getGameClient() {
         return gameClient;
     }
 
+    /**
+     * Gets the Client's end of game score
+     * @return Score object containing the end results
+     */
     @Override
     public Score getResults() {
         return new Score(getBoard().getGuesses(), getBoard().getPlayTime(), playerName, checkWin());
     }
 
+    /**
+     * Retrieves the player's name
+     * @return String for the name
+     */
     public String getPlayerName() {
         return playerName;
     }
 
+    /**
+     * Sets the player's name
+     * @param playerName String for the name
+     */
     public void setPlayerName(String playerName) {
         this.playerName = playerName;
     }
-
 
     /**
      * Closes socket
@@ -64,8 +87,6 @@ public class ClientGameModel extends OnePlayerGameModel {
         } catch (Exception e) {
         }
     }
-
-
 
     /**
      * Sets the default size of the board

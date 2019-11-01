@@ -13,12 +13,13 @@
  * Class: HostGameController
  *
  * Description:
- *
+ * Controller for the host side of a two player game
  * ****************************************
  */
-package hw01.GUI.twoPlayerGame;
+package hw01.GUI.twoPlayerGame.HostMVC;
 
 import hw01.GUI.onePlayerGame.OnePlayerGameController;
+import hw01.GUI.twoPlayerGame.twoPlayerGameUtilities;
 import hw01.game.MasterMindUtility;
 import hw01.game.Score;
 import hw01.net.Protocol;
@@ -30,10 +31,13 @@ import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.List;
 
+/**
+ * Controller for the host side of a two player game
+ */
 public class HostGameController extends OnePlayerGameController {
+
     /**
      * model
      */
@@ -66,8 +70,6 @@ public class HostGameController extends OnePlayerGameController {
         handleRematchBtn(view);
 
     }
-
-
 
     /**
      * Method that deals when the game is finished and host has to wait for client
@@ -110,9 +112,7 @@ public class HostGameController extends OnePlayerGameController {
 
         getTheView().getButtons()[getCurRow()].setVisible(false);
         setCurRow(-1);
-
     }
-
 
     /**
      * Displays scores and plays sound (sound is different for winner and loser)
@@ -203,6 +203,5 @@ public class HostGameController extends OnePlayerGameController {
             thread.start();
         });
     }
-
 
 }

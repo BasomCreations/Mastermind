@@ -16,7 +16,7 @@
  *
  * ****************************************
  */
-package hw01.GUI.twoPlayerGame;
+package hw01.GUI.twoPlayerGame.NetworkMVC;
 
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.geometry.Insets;

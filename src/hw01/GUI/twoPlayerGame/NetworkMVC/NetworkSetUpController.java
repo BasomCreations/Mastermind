@@ -16,8 +16,14 @@
  *
  * ****************************************
  */
-package hw01.GUI.twoPlayerGame;
+package hw01.GUI.twoPlayerGame.NetworkMVC;
 
+import hw01.GUI.twoPlayerGame.ClientMVC.ClientGameController;
+import hw01.GUI.twoPlayerGame.ClientMVC.ClientGameModel;
+import hw01.GUI.twoPlayerGame.ClientMVC.ClientGameView;
+import hw01.GUI.twoPlayerGame.HostMVC.HostGameController;
+import hw01.GUI.twoPlayerGame.HostMVC.HostGameModel;
+import hw01.GUI.twoPlayerGame.HostMVC.HostGameView;
 import hw01.game.MasterMindBoard;
 import hw01.game.MasterMindBoardException;
 import javafx.application.Platform;

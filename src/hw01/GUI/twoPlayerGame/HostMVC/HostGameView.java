@@ -6,39 +6,25 @@
  * Name: Jonathan Basom
  * Section: 9am
  * Date: 10/30/2019
- * Time: 3:58 PM
+ * Time: 3:13 PM
  *
  * Project: csci205_hw
  * Package: hw01.GUI.twoPlayerGame
- * Class: ClientGameView
+ * Class: HostGameView
  *
  * Description:
  *
  * ****************************************
  */
-package hw01.GUI.twoPlayerGame;
+package hw01.GUI.twoPlayerGame.HostMVC;
 
-import hw01.GUI.onePlayerGame.OnePlayerGameModel;
 import hw01.GUI.onePlayerGame.OnePlayerGameView;
 
-public class ClientGameView extends OnePlayerGameView {
-
-    public ClientGameView(double w, double h, ClientGameModel model, int boardRows, int numGuesses) {
-
-        super(w, h, model, boardRows, numGuesses);
-
-        getTitle().setText("Two Player Game");
-
-
+public class HostGameView extends OnePlayerGameView {
+    public HostGameView(double w, double h, HostGameModel model) {
+        super(w, h, model);
         getResetBtn().setVisible(false);
-        getResetBtn().setText("rematch");
+        getResetBtn().setText("Rematch");
         getTitle().setText("Multiplayer");
     }
-
-
-
-
-
-
-
 }
