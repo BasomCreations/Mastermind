@@ -34,6 +34,14 @@ GitHub Mastermind-Five-Guess-Algorithm
 GitHub Mastermind-Five-Guess-Algorithm / Five-Guess-Algorithm.cpp
 </a>
 <br>
+<a href="https://examples.javacodegeeks.com/desktop-java/javafx/javafx-concurrent-framework/">
+The JavaFX Concurrent Framework
+</a>
+<br>
+<a href="https://docs.oracle.com/javase/8/javafx/interoperability-tutorial/concurrency.htm">
+Concurrency in JavaFX
+</a>
+<br>
 <br>
 <img src="src/hw01/diagrams/topLevelUML_Game_Server.png" alt="UML Diagram 1">
 <br>
@@ -107,6 +115,75 @@ close to that of minimax's but it has essentially the same speed as
 the random solver.
 </li>
 </ul>
+<br>
+<br>
+<h4>How to use GUI</h4>
+<br>
+<p>
+When the application opens, you will be directed to the start menu where you can choose
+1 of 3 options: single player game, two player game, or settings.
+</p>
+<br>
+<img src="images/GUI_ScreenShots/StartMenu.png" alt="Start Menu">
+<br>
+<p>
+If single player is selected, you may begin guessing the secret code by clicking on the pegs in
+the first row of the board. To toggle through the different colored pegs, continue clicking on the
+specified peg slot until the desired peg color appears.
+</p>
+<br>
+<img src="images/GUI_ScreenShots/OnePlayerGame.png" alt="One Player Game">
+<br>
+<p>
+Once you have your desired guess, press the "Guess" button next to the row. Then the results of the 
+guess will appear next to the row. A red peg indicates that one of the guessed pegs is both the correct
+color and is in the correct position. A black peg indicates that one of the guessed pegs is the correct 
+color, but it is NOT in the correct position. Using this information, you can repeat the above steps in order
+to make another guess. If at any point during the game you wish to restart, press the "Restart" button to
+begin a new game.
+</p>
+<br>
+<img src="images/GUI_ScreenShots/OnePlayerGuess.png" alt="One Player Guess">
+<br>
+<p>
+You can keep on guessing until you have correctly guessed the code or run out attempts. Once the game finishes,
+your final results will be recorded at the bottom of the screen along with the correct code. If you want to play 
+again, press the restart button.
+</p>
+<br>
+<img src="images/GUI_ScreenShots/GameResults.png" alt="Game Results">
+<br>
+<p>
+The game play for a two player game is the same as a one player game, but the set-up requires a few extra steps.
+After selecting a two player game, first enter your name in the Name text box.
+</p>
+<br>
+<img src="images/GUI_ScreenShots/TwoPlayerSetUp.png" alt="Enter Name - Two Player">
+<br>
+<p>
+Then choose whether you will be hosting the game or joining another game. If you are hosting the game, then your IP
+address and Port number will be displayed so that you can share it with your opponent.
+</p>
+<br>
+<img src="images/GUI_ScreenShots/TwoPlayerHost.png.png.png" alt="Host Set Up">
+<br>
+<p>
+If you choose to join a game,
+you must enter the corresponding IP address and Port number of your opponent in order to connect. Once connected,
+the game play is similar, and once both players are finished, a winner and loser will be declared. If both players
+choose to play again, then the board will be reset, and a new game will begin.
+</p>
+<br>
+<img src="images/GUI_ScreenShots/TwoPlayerClient.png.png.png" alt="Client Set Up">
+<br>
+<p>
+If you choose the settings option in the main menu, you have the option to change the number of rows on the board and 
+the number of guesses per row by selecting the appropriate dropdown and then selecting the desired number of attempts
+or guesses. Once the desired settings are chosen, press the "Apply" button in order to save your changes.
+</p>
+<br>
+<img src="images/GUI_ScreenShots/Settings.png.png" alt="Settings">
+<br>
 
 
 
