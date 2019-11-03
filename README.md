@@ -165,7 +165,7 @@ Then choose whether you will be hosting the game or joining another game. If you
 address and Port number will be displayed so that you can share it with your opponent.
 </p>
 <br>
-<img src="images/GUI_ScreenShots/TwoPlayerHost.png.png.png" alt="Host Set Up">
+<img src="images/GUI_ScreenShots/TwoPlayerHost.png" alt="Host Set Up">
 <br>
 <p>
 If you choose to join a game,
@@ -174,7 +174,7 @@ the game play is similar, and once both players are finished, a winner and loser
 choose to play again, then the board will be reset, and a new game will begin.
 </p>
 <br>
-<img src="images/GUI_ScreenShots/TwoPlayerClient.png.png.png" alt="Client Set Up">
+<img src="images/GUI_ScreenShots/TwoPlayerClient.png" alt="Client Set Up">
 <br>
 <p>
 If you choose the settings option in the main menu, you have the option to change the number of rows on the board and 
@@ -182,7 +182,7 @@ the number of guesses per row by selecting the appropriate dropdown and then sel
 or guesses. Once the desired settings are chosen, press the "Apply" button in order to save your changes.
 </p>
 <br>
-<img src="images/GUI_ScreenShots/Settings.png.png" alt="Settings">
+<img src="images/GUI_ScreenShots/Settings.png" alt="Settings">
 <br>
 
 
