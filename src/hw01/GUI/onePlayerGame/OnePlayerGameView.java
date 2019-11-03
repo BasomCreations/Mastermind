@@ -188,7 +188,6 @@ public class OnePlayerGameView extends SceneViewTemplate {
                 stack.setAlignment(Pos.CENTER);
                 stack.getChildren().add(new Rectangle(GRIDSQUARESIZE,GRIDSQUARESIZE, Color.GRAY));
 
-
                 PegSphere curPeg = new PegSphere( GRIDSQUARESIZE / 3);
                 stack.getChildren().add(curPeg);
 
@@ -199,7 +198,7 @@ public class OnePlayerGameView extends SceneViewTemplate {
             // Add results for each row
             for (int i = 1; i <= guesses; i++) {
                 Circle circle = new Circle(GRIDSQUARESIZE / 10, Color.web(BGCOLOR));
-                board.add(circle, rows+i, y);
+                board.add(circle, rows+i+3, y);
 
                 resultsGrid[y][i - 1] = circle;
             }
