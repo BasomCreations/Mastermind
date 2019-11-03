@@ -19,7 +19,7 @@
 package hw01.GUI.twoPlayerGame.ClientMVC;
 
 import hw01.GUI.onePlayerGame.OnePlayerGameController;
-import hw01.GUI.twoPlayerGame.twoPlayerGameUtilities;
+import hw01.GUI.twoPlayerGame.TwoPlayerGameUtilities;
 import hw01.game.Score;
 import hw01.net.Protocol;
 import javafx.application.Platform;
@@ -121,7 +121,7 @@ public class ClientGameController extends OnePlayerGameController {
      */
     public void displayTwoPlayerResults(Score otherScore){
 
-        List<Score> scoreList = twoPlayerGameUtilities.getOrderedListOfScores(getModel().getResults(), otherScore);
+        List<Score> scoreList = TwoPlayerGameUtilities.getOrderedListOfScores(getModel().getResults(), otherScore);
 
         getTheView().getResultsLbl().setText("1. "+scoreList.get(0).toString() + "\n2. " + scoreList.get(1).toString());
 

@@ -27,7 +27,7 @@ import java.util.List;
 /**
  * Useful functions to deal with the 2 player game logistics
  */
-public final class twoPlayerGameUtilities {
+public final class TwoPlayerGameUtilities {
 
     /**
      * Orders scores
