@@ -217,6 +217,17 @@ public class NetworkSetUpController {
 
     /**
      * Handles thread were host waits for client to connect
+     *
+     * Ideas for parts of this method came from:
+     * @see
+     * <a href="https://examples.javacodegeeks.com/desktop-java/javafx/javafx-concurrent-framework/">
+     * The JavaFX Concurrent Framework
+     * </a>
+     *
+     * @see
+     * <a href="https://docs.oracle.com/javase/8/javafx/interoperability-tutorial/concurrency.htm">
+     * Concurrency in JavaFX
+     * </a>
      */
     private void handleHostThread(){
 

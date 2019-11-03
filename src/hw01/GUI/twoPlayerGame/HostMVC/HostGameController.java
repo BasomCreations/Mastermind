@@ -73,6 +73,17 @@ public class HostGameController extends OnePlayerGameController {
 
     /**
      * Method that deals when the game is finished and host has to wait for client
+     *
+     * Ideas for parts of this method come from:
+     * @see
+     * <a href="https://examples.javacodegeeks.com/desktop-java/javafx/javafx-concurrent-framework/">
+     * The JavaFX Concurrent Framework
+     * </a>
+     *
+     * @see
+     * <a href="https://docs.oracle.com/javase/8/javafx/interoperability-tutorial/concurrency.htm">
+     * Concurrency in JavaFX
+     * </a>
      */
     @Override
     public void finishGame() {
@@ -159,7 +170,19 @@ public class HostGameController extends OnePlayerGameController {
      * When rematch button is clicked (this button is only visible at the end of the a game),
      * it waits for other players response, if the other
      * player wants to play again, a new game is created
-     * @param view view
+     *
+     * * Ideas for parts of this method came from:
+     * @see
+     * <a href="https://examples.javacodegeeks.com/desktop-java/javafx/javafx-concurrent-framework/">
+     * The JavaFX Concurrent Framework
+     * </a>
+     *
+     * @see
+     * <a href="https://docs.oracle.com/javase/8/javafx/interoperability-tutorial/concurrency.htm">
+     * Concurrency in JavaFX
+     * </a>
+     *
+     * @param view HostGameView
      */
     private void handleRematchBtn(HostGameView view) {
 
