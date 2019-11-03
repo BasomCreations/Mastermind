@@ -181,7 +181,7 @@ public class GameServer {
      * @author Sebastian
      */
     public String getFormattedIP(){
-        Pattern pattern = Pattern.compile("[1-9]{1,3}\\.[1-9]{1,3}\\.[1-9]{1,3}\\.[1-9]{1,3}");
+        Pattern pattern = Pattern.compile("[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}");
         Matcher matcher = pattern.matcher(ip.toString());
         matcher.find();
         return matcher.group();

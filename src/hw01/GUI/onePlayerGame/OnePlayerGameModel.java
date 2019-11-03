@@ -35,16 +35,7 @@ public class OnePlayerGameModel {
      * No parameter Constructor
      */
     public OnePlayerGameModel() {
-
         board = new MasterMindBoard();
-
-        //TODO get rid of this
-        System.out.println();
-        for (int n:
-             board.getSecretCode()) {
-            System.out.print(n);
-        }
-
     }
 
     /**
@@ -70,13 +61,6 @@ public class OnePlayerGameModel {
      */
     public void createNewGame() {
         board = new MasterMindBoard();
-
-        //TODO get rid of this
-        System.out.println();
-        for (int n:
-                board.getSecretCode()) {
-            System.out.print(n);
-        }
     }
 
     /**
@@ -86,13 +70,6 @@ public class OnePlayerGameModel {
      */
     public void createNewGame(int[] secretCode) throws MasterMindBoardException {
         board = new MasterMindBoard(secretCode);
-
-        //TODO get rid of this
-        System.out.println();
-        for (int n:
-                board.getSecretCode()) {
-            System.out.print(n);
-        }
     }
 
     /**
