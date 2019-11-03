@@ -149,6 +149,11 @@ public class NetworkSetUpController {
             }
             catch (MasterMindBoardException | ClassNotFoundException e) {
                 Alert alert = new Alert(Alert.AlertType.ERROR, "Error: Issue with game. Try again.");
+                alert.show();
+            }
+            catch (Exception e) {
+                Alert alert = new Alert(Alert.AlertType.ERROR, "Error: Make sure your IP and port values are correct");
+                alert.show();
             }
         });
     }

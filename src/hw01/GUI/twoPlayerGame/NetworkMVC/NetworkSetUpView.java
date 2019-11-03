@@ -118,6 +118,7 @@ public class NetworkSetUpView {
         portTextField.visibleProperty().bind(hostModeProperty.or(joinModeProperty));
         portTextField.disableProperty().bind(hostModeProperty);
         portLabel = new Label("Port:");
+        portLabel.setPrefWidth(30);
         portLabel.visibleProperty().bind(hostModeProperty.or(joinModeProperty));
         portHbox.getChildren().addAll(portLabel, portTextField);
         return portHbox;
@@ -134,6 +135,7 @@ public class NetworkSetUpView {
         ipTextField.visibleProperty().bind(hostModeProperty.or(joinModeProperty));
         ipTextField.disableProperty().bind(hostModeProperty);
         ipLabel = new Label("IP:");
+        ipLabel.setPrefWidth(30);
         ipLabel.visibleProperty().bind(hostModeProperty.or(joinModeProperty));
         ipHbox.getChildren().addAll(ipLabel, ipTextField);
         return ipHbox;
