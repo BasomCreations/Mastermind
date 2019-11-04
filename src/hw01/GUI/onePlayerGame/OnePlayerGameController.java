@@ -34,6 +34,8 @@ import java.io.File;
 
 /**
  * Class for the Controller of a One Player Game
+ * @author Sebastian
+ * @author Jonathan
  */
 public class OnePlayerGameController extends SceneViewTemplateController {
 
@@ -49,6 +51,8 @@ public class OnePlayerGameController extends SceneViewTemplateController {
      * @param prevScene Scene object for the previous scene
      * @param view OnePlayerGameView
      * @param model OnePlayerGameModel
+     * @author Sebastian
+     * @author Jonathan
      */
     public OnePlayerGameController(Stage primaryStage, Scene prevScene, OnePlayerGameView view, OnePlayerGameModel model) {
         super(primaryStage, prevScene, view);
@@ -65,6 +69,8 @@ public class OnePlayerGameController extends SceneViewTemplateController {
 
     /**
      * Initialize the action for when a peg is clicked on the GUI board
+     * @author Sebastian
+     * @author Jonathan
      * @param view
      */
     private void initializePegClicks(OnePlayerGameView view) {
@@ -93,6 +99,7 @@ public class OnePlayerGameController extends SceneViewTemplateController {
      * Initialize the action for when a guess button is clicked
      * @param view OnePlayerGameView
      * @param model OnePlayerGameModel
+     * @author Jonathan
      */
     private void initializeGuessBtnClicks(OnePlayerGameView view, OnePlayerGameModel model) {
 
@@ -149,6 +156,7 @@ public class OnePlayerGameController extends SceneViewTemplateController {
      * Updates the current row on the GUI and shows the guess button for only the new row
      * @param buttons Button[] for the list of guess buttons
      * @param finalI int index of buttons for the current row
+     * @author Jonathan
      */
     private void updateCurrentRow(Button[] buttons, int finalI) {
         // Make next button visible if not currently on last button
@@ -168,6 +176,8 @@ public class OnePlayerGameController extends SceneViewTemplateController {
      * Check if player won
      * @param model OnePlayerGameModel
      * @return boolean true if player has won
+     * @author Sebastian
+     * @author Jonathan
      */
     private boolean checkWin(OnePlayerGameModel model) {
         // Check win
@@ -180,6 +190,8 @@ public class OnePlayerGameController extends SceneViewTemplateController {
 
     /**
      * Create an action for clicking the restart button
+     * @author Sebastian
+     * @author Jonathan
      */
     private void initializeRestartBtn() {
         // Initialize Restart Button
@@ -190,6 +202,8 @@ public class OnePlayerGameController extends SceneViewTemplateController {
 
     /**
      * Handles a game once it finishes
+     * @author Sebastian
+     * @author Jonathan
      */
     public void finishGame() {
         if (model.checkWin()) {
@@ -210,6 +224,8 @@ public class OnePlayerGameController extends SceneViewTemplateController {
 
     /**
      * Clears the current board on the GUI
+     * @author Sebastian
+     * @author Jonathan
      */
     public void clearBoard() {
         //Clears peg spheres
@@ -248,6 +264,7 @@ public class OnePlayerGameController extends SceneViewTemplateController {
 
     /**
      * Displays the end of game results
+     * @author Jonathan
      */
     public void displayResults() {
         getTheView().getResultsLbl().setText(model.getResults().toString());
@@ -256,6 +273,7 @@ public class OnePlayerGameController extends SceneViewTemplateController {
 
     /**
      * Displays the correct code at the bottom of the window
+     * @author Sebastian
      */
     public void showCorrectCode(){
 

@@ -26,6 +26,8 @@ import javafx.scene.shape.Sphere;
 
 /**
  * Class for the GUI representation of a peg
+ * @author Sebastian
+ * @author Jonathan
  */
 public class PegSphere extends Sphere {
 
@@ -37,6 +39,7 @@ public class PegSphere extends Sphere {
      * The resolution defaults to 64 divisions along the sphere's axes.
      *
      * @param radius Radius
+     * @author Sebastian
      */
     public PegSphere(double radius) {
         super(radius);
@@ -46,6 +49,7 @@ public class PegSphere extends Sphere {
     /**
      * Retrieves the color of the peg
      * @return Paint representing the color
+     * @author Sebastian
      */
     public Paint getColor() {
         return color;
@@ -54,6 +58,7 @@ public class PegSphere extends Sphere {
     /**
      * Sets the color of the sphere
      * @param color Paint representing the new color
+     * @author Sebastian
      */
     public void setColor(Paint color) {
         PhongMaterial material = new PhongMaterial();

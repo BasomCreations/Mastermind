@@ -28,6 +28,8 @@ import java.util.List;
 
 /**
  * Class to representing the colors of a peg
+ * @author Sebastian
+ * @author Jonathan
  */
 public final class PegColor {
 
@@ -38,6 +40,7 @@ public final class PegColor {
      * Returns the numeric value of the color
      * @param color Color of the peg
      * @return the numeric value of the color or 0 if it is unselected
+     * @author Sebastian
      */
     public static int getColorNumber(Paint color) {
         return colors.indexOf(color) + 1;
@@ -47,6 +50,7 @@ public final class PegColor {
      * Gets the next color
      * @param cur Paint object representing the current color of the Peg
      * @return Paint object for the new color of the peg
+     * @author Sebastian
      */
     public static Paint getNextColor(Paint cur){
         return colors.get(getColorNumber(cur) % colors.size());

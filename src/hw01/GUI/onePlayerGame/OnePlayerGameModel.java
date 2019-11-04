@@ -25,6 +25,8 @@ import hw01.game.Score;
 
 /**
  * Class for the Model of a One Player Game
+ * @author Sebastian
+ * @author Jonathan
  */
 public class OnePlayerGameModel {
 
@@ -33,6 +35,8 @@ public class OnePlayerGameModel {
 
     /**
      * No parameter Constructor
+     * @author Sebastian
+     * @author Jonathan
      */
     public OnePlayerGameModel() {
         board = new MasterMindBoard();
@@ -42,6 +46,7 @@ public class OnePlayerGameModel {
      * Make a guess on the board
      * @param guesses int[] representing the guesses for the board
      * @return Row object for the result of the guess
+     * @author Jonathan
      * @throws MasterMindBoardException
      */
     public Row guess(int[] guesses) throws MasterMindBoardException {
@@ -50,6 +55,8 @@ public class OnePlayerGameModel {
 
     /**
      * Check the board for a win
+     * @author Sebastian
+     * @author Jonathan
      * @return boolean - true if win
      */
     public boolean checkWin() {
@@ -58,6 +65,8 @@ public class OnePlayerGameModel {
 
     /**
      * Create a new game
+     * @author Sebastian
+     * @author Jonathan
      */
     public void createNewGame() {
         board = new MasterMindBoard();
@@ -66,6 +75,8 @@ public class OnePlayerGameModel {
     /**
      * Create a new game with a specified secret code
      * @param secretCode int[] representing the secret code
+     * @author Sebastian
+     * @author Jonathan
      * @throws MasterMindBoardException
      */
     public void createNewGame(int[] secretCode) throws MasterMindBoardException {
@@ -74,6 +85,8 @@ public class OnePlayerGameModel {
 
     /**
      * Retrieves the results at the end of a game
+     * @author Sebastian
+     * @author Jonathan
      * @return Score Object containing the results of the game
      */
     public Score getResults() {
@@ -83,6 +96,8 @@ public class OnePlayerGameModel {
     /**
      * Creates a new MasterMindBoard with a specified secret code
      * @param secretCode int[] representing the secret code of the game
+     * @author Sebastian
+     * @author Jonathan
      * @throws MasterMindBoardException
      */
     public void createNewBoard(int[] secretCode) throws MasterMindBoardException {

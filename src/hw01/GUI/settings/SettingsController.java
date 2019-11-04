@@ -25,6 +25,8 @@ import javafx.stage.Stage;
 
 /**
  * Controller for the setting of the application
+ * @author Sebastian
+ * @author Jonathan
  */
 public class SettingsController extends SceneViewTemplateController {
 
@@ -33,6 +35,7 @@ public class SettingsController extends SceneViewTemplateController {
      * @param primaryStage Stage for the application
      * @param prevScene Scene object representing the previous scene
      * @param view SettingsView
+     * @author Sebastian
      */
     public SettingsController(Stage primaryStage, Scene prevScene, SettingsView view) {
         super(primaryStage, prevScene, view);

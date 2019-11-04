@@ -22,6 +22,8 @@ import javafx.scene.control.Button;
 
 /**
  * Class representing a button on the start screen
+ * @author Sebastian
+ * @author Jonathan
  */
 public class StartMenuButton extends Button {
 
@@ -29,6 +31,8 @@ public class StartMenuButton extends Button {
      * Creates a button with the specified text as its label.
      *
      * @param text A text string for its label.
+     * @author Sebastian
+     * @author Jonathan
      */
     public StartMenuButton(String text) {
         super(text);

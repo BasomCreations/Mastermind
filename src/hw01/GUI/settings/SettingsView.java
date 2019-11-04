@@ -38,6 +38,8 @@ import java.util.List;
 
 /**
  * View for the settings scene of the application
+ * @author Sebastian
+ * @author Jonathan
  */
 public class SettingsView extends SceneViewTemplate {
 
@@ -58,6 +60,8 @@ public class SettingsView extends SceneViewTemplate {
      *
      * @param w double width
      * @param h double height
+     * @author Sebastian
+     * @author Jonathan
      */
     public SettingsView(double w, double h) {
         super(w, h);
@@ -115,6 +119,8 @@ public class SettingsView extends SceneViewTemplate {
      * Set the Image in the Settings Scene
      * @param h double height
      * @return ImageView containing the image
+     * @author Sebastian
+     * @author Jonathan
      */
     private ImageView setSettingsIcon(double h) {
         //settings icon

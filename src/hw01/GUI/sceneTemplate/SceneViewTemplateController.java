@@ -23,6 +23,8 @@ import javafx.stage.Stage;
 
 /**
  * Template for Controllers of all scenes
+ * @author Sebastian
+ * @author Jonathan
  */
 public abstract class SceneViewTemplateController {
 
@@ -37,6 +39,8 @@ public abstract class SceneViewTemplateController {
      * @param primaryStage Stage object for the application
      * @param prevScene Scene object representing the previous scene of the application
      * @param view SceneViewTemplate
+     * @author Sebastian
+     * @author Jonathan
      */
     public SceneViewTemplateController(Stage primaryStage, Scene prevScene, SceneViewTemplate view) {
         theView = view;

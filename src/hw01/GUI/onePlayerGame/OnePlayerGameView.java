@@ -83,6 +83,8 @@ public class OnePlayerGameView extends SceneViewTemplate {
      * @param w double representing the width of the view
      * @param h double representing the height of the view
      * @param model OnePlayerGameModel
+     * @author Sebastian
+     * @author Jonathan
      */
     public OnePlayerGameView(double w, double h, OnePlayerGameModel model) {
 
@@ -105,6 +107,8 @@ public class OnePlayerGameView extends SceneViewTemplate {
      * @param model OnePlayerGameModel
      * @param boardRows int representing the number of rows on the GUI board
      * @param numGuesses int representing the number of guesses per row on the board
+     * @author Sebastian
+     * @author Jonathan
      */
     public OnePlayerGameView(double w, double h, OnePlayerGameModel model, int boardRows, int numGuesses) {
         super(w, h);
@@ -121,6 +125,7 @@ public class OnePlayerGameView extends SceneViewTemplate {
 
     /**
      * Initialize the Alert for any error messages
+     * @author Jonathan
      */
     private void initializeErrorMsg() {
         errorMsg = new Alert(Alert.AlertType.ERROR);
@@ -128,6 +133,7 @@ public class OnePlayerGameView extends SceneViewTemplate {
 
     /**
      * Initialize results label and add it to scene graph
+     * @author Jonathan
      * @param root BorderPane node to contain the results label
      */
     private void initializeResultsLbl(BorderPane root) {
@@ -155,6 +161,8 @@ public class OnePlayerGameView extends SceneViewTemplate {
 
     /**
      * Initialize reset button
+     * @author Sebastian
+     * @author Jonathan
      */
     private void initializeResetBtn() {
         // Add reset button
@@ -164,6 +172,8 @@ public class OnePlayerGameView extends SceneViewTemplate {
 
     /**
      * Creates the MasterMind Board
+     * @author Sebastian
+     * @author Jonathan
      * @param root
      */
     protected void createBoard(BorderPane root, int rows, int guesses) {

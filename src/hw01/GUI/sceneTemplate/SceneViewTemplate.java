@@ -28,6 +28,8 @@ import javafx.scene.layout.HBox;
 
 /**
  * Template for generating new scenes
+ * @author Sebastian
+ * @author Jonathan
  */
 public abstract class SceneViewTemplate {
 
@@ -47,6 +49,8 @@ public abstract class SceneViewTemplate {
      * Constructor
      * @param w double width
      * @param h double height
+     * @author Sebastian
+     * @author Jonathan
      */
     public SceneViewTemplate(double w, double h) {
         initializeRoot(w, h);
@@ -57,6 +61,8 @@ public abstract class SceneViewTemplate {
 
     /**
      * Initialize the menu bar
+     * @author Sebastian
+     * @author Jonathan
      */
     private void initializeMenuBar() {
         //Put menu bar ar the top
@@ -71,6 +77,8 @@ public abstract class SceneViewTemplate {
 
     /**
      * Initialize the title on the menu bar
+     * @author Sebastian
+     * @author Jonathan
      */
     private void initializeTitle() {
         //Title
@@ -80,6 +88,8 @@ public abstract class SceneViewTemplate {
 
     /**
      * Initialize the back button on the menu bar
+     * @author Sebastian
+     * @author Jonathan
      */
     private void initializeBackBtn() {
         //Go Back Button
@@ -96,6 +106,8 @@ public abstract class SceneViewTemplate {
      * Initialize the BorderPane root
      * @param w double representing the width of the scene
      * @param h double representing the height of the scene
+     * @author Sebastian
+     * @author Jonathan
      */
     private void initializeRoot(double w, double h) {
         root = new BorderPane();
