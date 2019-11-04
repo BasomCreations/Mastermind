@@ -30,6 +30,8 @@ import java.io.FileNotFoundException;
 
 /**
  * Main class for MasterMind game GUI
+ * @author Jonathan
+ * @author Sebastian
  */
 public class MastermindGameMain extends Application {
 
@@ -42,6 +44,8 @@ public class MastermindGameMain extends Application {
     /**
      * Main method
      * @param args
+     * @author Jonathan
+     * @author Sebastian
      */
     public static void main(String[] args) {
         launch(args);
@@ -50,6 +54,8 @@ public class MastermindGameMain extends Application {
     /**
      * init method
      * @throws Exception
+     * @author Jonathan
+     * @author Sebastian
      */
     @Override
     public void init() throws Exception {
@@ -61,6 +67,8 @@ public class MastermindGameMain extends Application {
      * Start the application
      * @param primaryStage Stage object for the application
      * @throws FileNotFoundException
+     * @author Jonathan
+     * @author Sebastian
      */
     @Override
     public void start(Stage primaryStage) throws FileNotFoundException {

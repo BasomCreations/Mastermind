@@ -35,6 +35,8 @@ import java.util.List;
 
 /**
  * Controller for the host side of a two player game
+ * @author Jonathan
+ * @author Sebastian
  */
 public class HostGameController extends OnePlayerGameController {
 
@@ -59,6 +61,8 @@ public class HostGameController extends OnePlayerGameController {
      * @param prevScene Scene - main menu scene
      * @param view HostGameView - view
      * @param model HostGameModel - host game model
+     * @author Jonathan
+     * @author Sebastian
      */
     public HostGameController(Stage primaryStage, Scene prevScene, HostGameView view, HostGameModel model) {
         super(primaryStage, prevScene, view, model);
@@ -84,6 +88,9 @@ public class HostGameController extends OnePlayerGameController {
      * <a href="https://docs.oracle.com/javase/8/javafx/interoperability-tutorial/concurrency.htm">
      * Concurrency in JavaFX
      * </a>
+     *
+     * @author Jonathan
+     * @author Sebastian
      */
     @Override
     public void finishGame() {
@@ -128,6 +135,8 @@ public class HostGameController extends OnePlayerGameController {
     /**
      * Displays scores and plays sound (sound is different for winner and loser)
      * @param otherScore the score of the other player
+     *
+     * @author Sebastian
      */
     public void displayTwoPlayerResults(Score otherScore){
 
@@ -149,6 +158,7 @@ public class HostGameController extends OnePlayerGameController {
 
     /**
      * Goes back to menu and closes sockets
+     * @author Sebastian
      */
     private void goBackToMenu(){
         primaryStage.setScene(prevScene);
@@ -158,6 +168,8 @@ public class HostGameController extends OnePlayerGameController {
     /**
      * Sets action to go back btn to ensure it closes sockets properly
      * @param view
+     * @author Jonathan
+     * @author Sebastian
      */
     private void setUpGoBackBtn(HostGameView view) {
         view.getGoBackBtn().setOnAction(event -> {
@@ -183,6 +195,7 @@ public class HostGameController extends OnePlayerGameController {
      * </a>
      *
      * @param view HostGameView
+     * @author Sebastian
      */
     private void handleRematchBtn(HostGameView view) {
 

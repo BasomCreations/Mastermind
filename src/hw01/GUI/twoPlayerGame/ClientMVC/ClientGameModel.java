@@ -20,12 +20,13 @@ package hw01.GUI.twoPlayerGame.ClientMVC;
 
 import hw01.GUI.onePlayerGame.OnePlayerGameModel;
 import hw01.game.MasterMindBoard;
-import hw01.game.MasterMindBoardException;
 import hw01.game.Score;
 import hw01.net.GameClient;
 
 /**
  * Model for the client side of a two player game
+ * @author Jonathan
+ * @author Sebastian
  */
 public class ClientGameModel extends OnePlayerGameModel {
 
@@ -37,6 +38,8 @@ public class ClientGameModel extends OnePlayerGameModel {
 
     /**
      * Constructor
+     * @author Jonathan
+     * @author Sebastian
      */
     public ClientGameModel() {
         super();
@@ -56,6 +59,8 @@ public class ClientGameModel extends OnePlayerGameModel {
     /**
      * Gets the Client's end of game score
      * @return Score object containing the end results
+     * @author Jonathan
+     * @author Sebastian
      */
     @Override
     public Score getResults() {
@@ -80,6 +85,7 @@ public class ClientGameModel extends OnePlayerGameModel {
 
     /**
      * Closes socket
+     * @author Sebastian
      */
     public void closeSockets(){
         try {
@@ -92,6 +98,7 @@ public class ClientGameModel extends OnePlayerGameModel {
      * Sets the default size of the board
      * @param numRows int for the number of rows on the board
      * @param numGuesses int for the number of guesses per row
+     * @author Jonathan
      */
     public void setBoardSize(int numRows, int numGuesses) {
         MasterMindBoard.DEFAULT_MAXIMUM_ATTEMPTS = numRows;
@@ -101,6 +108,7 @@ public class ClientGameModel extends OnePlayerGameModel {
     /**
      * Retrieves the number of rows on the board
      * @return int for the number of rows
+     * @author Jonathan
      */
     public int getNumRows() {
         return getBoard().DEFAULT_MAXIMUM_ATTEMPTS;
@@ -109,6 +117,7 @@ public class ClientGameModel extends OnePlayerGameModel {
     /**
      * Retrieves the number of guesses per row
      * @return int for the number of guesses
+     * @author Jonathan
      */
     public int getNumGuesses() {
         return getBoard().ROW_SIZE;

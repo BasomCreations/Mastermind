@@ -26,6 +26,8 @@ import java.util.List;
 
 /**
  * Useful functions to deal with the 2 player game logistics
+ * @author Jonathan
+ * @author Sebastian
  */
 public final class TwoPlayerGameUtilities {
 
@@ -34,6 +36,7 @@ public final class TwoPlayerGameUtilities {
      * @param score1 score player 1
      * @param score2 score player 2
      * @return list of ordered score objects
+     * @author Sebastian
      */
     public static List<Score> getOrderedListOfScores(Score score1, Score score2){
 

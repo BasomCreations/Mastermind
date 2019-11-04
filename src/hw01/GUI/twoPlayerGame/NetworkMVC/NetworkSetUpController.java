@@ -35,6 +35,8 @@ import java.io.IOException;
 
 /**
  * Controller to set up the network between two players
+ * @author Jonathan
+ * @author Sebastian
  */
 public class NetworkSetUpController {
 
@@ -84,6 +86,8 @@ public class NetworkSetUpController {
      * @param mainMenuScene main menu scene
      * @param windowStage stage in which this window is
      * @param theView the view
+     * @author Jonathan
+     * @author Sebastian
      */
     public NetworkSetUpController(Stage primaryStage, Scene mainMenuScene, Stage windowStage ,NetworkSetUpView theView) {
 
@@ -106,6 +110,7 @@ public class NetworkSetUpController {
      * Action taken when user closes the networking pop up,
      * this makes sure sockets are properly closed to ensure
      * it works properly if user opens the pop up again
+     * @author Sebastian
      */
     private void createOnCloseRequestAction() {
         windowStage.setOnCloseRequest(event -> {
@@ -121,6 +126,8 @@ public class NetworkSetUpController {
 
     /**
      * Sets action to Ok Button (button where user clicks ok after writing servers IP and port)
+     * @author Sebastian
+     * @author Jonathan
      */
     private void createJoinOkBtnAction() {
         view.getJoinOkButton().setOnAction(event -> {
@@ -164,6 +171,7 @@ public class NetworkSetUpController {
      * user entered a name, it displays the IP and Port the other player
      * will need to connect and it creates a thread in which the server socket waits
      * for a client
+     * @author Sebastian
      */
     private void createHostBtnAction() {
         view.getHostBtn().setOnAction(event -> {
@@ -196,6 +204,8 @@ public class NetworkSetUpController {
     /**
      * Validates that the player has correctly set their name
      * @return Boolean - true if the player has a valid name
+     * @author Sebastian
+     * @author Jonathan
      */
     private boolean validatePlayerName() {
         if (view.getNameInputField().getText().trim().equals("")) {
@@ -210,6 +220,7 @@ public class NetworkSetUpController {
     /**
      * Sets action for join button (when user decides to join a game), it
      * sets required view fields to visible and verifies the user entered name
+     * @author Sebastian
      */
     private void createJoinBtnAction() {
         view.getJoinBtn().setOnAction(event -> {
@@ -233,6 +244,8 @@ public class NetworkSetUpController {
      * <a href="https://docs.oracle.com/javase/8/javafx/interoperability-tutorial/concurrency.htm">
      * Concurrency in JavaFX
      * </a>
+     *
+     * @author Sebastian
      */
     private void handleHostThread(){
 

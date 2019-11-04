@@ -29,6 +29,8 @@ import javafx.scene.layout.VBox;
 
 /**
  * View of the network set up pop up
+ * @author Jonathan
+ * @author Sebastian
  */
 public class NetworkSetUpView {
 
@@ -67,6 +69,8 @@ public class NetworkSetUpView {
 
     /**
      * Constructor
+     * @author Jonathan
+     * @author Sebastian
      */
     public NetworkSetUpView() {
         initializeModeProperties();
@@ -83,6 +87,8 @@ public class NetworkSetUpView {
 
     /**
      * Initialize the properties to determine host or client mode
+     * @author Jonathan
+     * @author Sebastian
      */
     private void initializeModeProperties() {
         hostModeProperty = new SimpleBooleanProperty(false);
@@ -91,6 +97,8 @@ public class NetworkSetUpView {
 
     /**
      * Initialize the Ok button to allow two player game to begin
+     * @author Jonathan
+     * @author Sebastian
      */
     private void initializeOkBtn() {
         joinOkButton = new Button("OK");
@@ -100,6 +108,8 @@ public class NetworkSetUpView {
     /**
      * Initialize the label to tell player to wait for opponent
      * @return Label
+     * @author Jonathan
+     * @author Sebastian
      */
     private Label initializeWaitLbl() {
         Label waitingForClientLabel = new Label("Waiting for other player...");
@@ -110,6 +120,8 @@ public class NetworkSetUpView {
     /**
      * Initialize the fields for the host's port number
      * @return HBox with the Port number TextField and Label
+     * @author Jonathan
+     * @author Sebastian
      */
     private HBox initializePortField() {
         HBox portHbox = new HBox();
@@ -127,6 +139,8 @@ public class NetworkSetUpView {
     /**
      * Initialize the fields for the host's IP address
      * @return HBox containing the IP address TextField and Label
+     * @author Jonathan
+     * @author Sebastian
      */
     private HBox initializeIPField() {
         HBox ipHbox = new HBox();
@@ -144,6 +158,8 @@ public class NetworkSetUpView {
     /**
      * Initialize buttons to decide whether the player wants to host or join a game
      * @return HBox containing the initialized Host/Join buttons
+     * @author Jonathan
+     * @author Sebastian
      */
     private HBox initializeHostJoinBtns() {
         hostBtn = new Button("Host");
@@ -158,6 +174,8 @@ public class NetworkSetUpView {
     /**
      * Initialize the fields for the player name
      * @return HBox containing the name Label and TextField
+     * @author Jonathan
+     * @author Sebastian
      */
     private HBox initializeNameInput() {
         HBox nameHBox = new HBox();
@@ -171,6 +189,8 @@ public class NetworkSetUpView {
 
     /**
      * Initialize the parent node of the scene graph
+     * @author Jonathan
+     * @author Sebastian
      */
     private void initializeRoot() {
         this.root = new VBox();

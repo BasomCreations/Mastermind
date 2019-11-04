@@ -31,6 +31,8 @@ import java.io.FileNotFoundException;
 
 /**
  * View of the Start Menu scene
+ * @author Jonathan
+ * @author Sebastian
  */
 public class StartMenuView {
 
@@ -60,6 +62,8 @@ public class StartMenuView {
 
     /**
      * Constructor
+     * @author Jonathan
+     * @author Sebastian
      */
     public StartMenuView() {
 
@@ -86,6 +90,8 @@ public class StartMenuView {
     /**
      * Set the title of the application
      * @return Label with the title of the application
+     * @author Jonathan
+     * @author Sebastian
      */
     private Label setTitle() {
         Label title = new Label(TITLE);
@@ -96,6 +102,8 @@ public class StartMenuView {
     /**
      * Set the start menu image
      * @return ImageView containing the Start Menu image
+     * @author Jonathan
+     * @author Sebastian
      */
     private ImageView setStartMenuImage() {
         Image image = null;

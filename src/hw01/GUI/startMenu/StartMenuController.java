@@ -34,6 +34,8 @@ import java.io.File;
 
 /**
  * Controller for the Start Menu scene
+ * @author Jonathan
+ * @author Sebastian
  */
 public class StartMenuController {
 
@@ -50,6 +52,8 @@ public class StartMenuController {
      * Constructor
      * @param startMenuView StartMenusView
      * @param primaryStage Stage object for the application's stage
+     * @author Jonathan
+     * @author Sebastian
      */
     public StartMenuController(StartMenuView startMenuView, Stage primaryStage) {
         this.startMenuView = startMenuView;
@@ -69,6 +73,7 @@ public class StartMenuController {
     /**
      * Initialize the sound of a button click
      * @return MediaPlayer object with the corresponding sound
+     * @author Sebastian
      */
     private MediaPlayer initializeClickSound() {
         //click sound
@@ -79,6 +84,7 @@ public class StartMenuController {
     /**
      * Handle a request to close the application
      * @param primaryStage Stage object of the application
+     * @author Sebastian
      */
     private void handleCloseRequest(Stage primaryStage) {
         // Make sure networking settings window (if opened) is also closed if the game is exited
@@ -92,6 +98,8 @@ public class StartMenuController {
     /**
      * Creates action for the Two Player Button click
      * @param clickSound MediaPlayer object with sound of a button click
+     * @author Jonathan
+     * @author Sebastian
      */
     private void handleTwoPlayerBtnClick(MediaPlayer clickSound) {
         this.startMenuView.getTwoPlayerBtn().setOnAction(event -> {
@@ -113,6 +121,8 @@ public class StartMenuController {
      * @param startMenuView StartMenuView
      * @param primaryStage Stage object for the application
      * @param clickSound MediaPlayer with the sound of a button click
+     * @author Jonathan
+     * @author Sebastian
      */
     private void handleSettingsBtnClick(StartMenuView startMenuView, Stage primaryStage, MediaPlayer clickSound) {
         this.startMenuView.getConfigBtn().setOnAction(event -> {
@@ -121,15 +131,16 @@ public class StartMenuController {
             SettingsController settingsController = new SettingsController(stage, stage.getScene(), settingsView);
             clickSound.stop();
             primaryStage.setScene(new Scene(settingsView.getRoot()));
-
         });
     }
 
     /**
      * Creates action for the Single Player button click
      * @param startMenuView StartMenuView
-     * @param primaryStage Stage objcet for the application
+     * @param primaryStage Stage object for the application
      * @param clickSound MediaPlayer with the sound of a button click
+     * @author Jonathan
+     * @author Sebastian
      */
     private void handleSingleBtnClick(StartMenuView startMenuView, Stage primaryStage, MediaPlayer clickSound) {
         //Switch to one player view when button is pressed

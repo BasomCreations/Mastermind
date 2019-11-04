@@ -34,6 +34,8 @@ import java.util.List;
 
 /**
  * Controller for the client side of the two player game
+ * @author Jonathan
+ * @author Sebastian
  */
 public class ClientGameController extends OnePlayerGameController {
 
@@ -58,6 +60,8 @@ public class ClientGameController extends OnePlayerGameController {
      * @param prevScene main menu scene
      * @param view view
      * @param model client game model
+     * @author Jonathan
+     * @author Sebastian
      */
     public ClientGameController(Stage primaryStage, Scene prevScene, ClientGameView view, ClientGameModel model) {
         super(primaryStage, prevScene, view, model);
@@ -84,6 +88,9 @@ public class ClientGameController extends OnePlayerGameController {
      * <a href="https://docs.oracle.com/javase/8/javafx/interoperability-tutorial/concurrency.htm">
      * Concurrency in JavaFX
      * </a>
+     *
+     * @author Jonathan
+     * @author Sebastian
      */
     @Override
     public void finishGame() {
@@ -129,6 +136,8 @@ public class ClientGameController extends OnePlayerGameController {
     /**
      * Displays scores and plays sound (sound is different for winner and loser)
      * @param otherScore the score of the other player
+     *
+     * @author Sebastian
      */
     public void displayTwoPlayerResults(Score otherScore){
 
@@ -151,6 +160,8 @@ public class ClientGameController extends OnePlayerGameController {
 
     /**
      * Goes back to menu and closes sockets
+     * @author Jonathan
+     * @author Sebastian
      */
     private void goBackToMenu(){
         primaryStage.setScene(prevScene);
@@ -160,6 +171,8 @@ public class ClientGameController extends OnePlayerGameController {
     /**
      * Sets action to go back button to ensure it closes sockets properly
      * @param view
+     * @author Jonathan
+     * @author Sebastian
      */
     private void setUpGoBackBtn(ClientGameView view) {
         view.getGoBackBtn().setOnAction(event -> {
@@ -185,6 +198,8 @@ public class ClientGameController extends OnePlayerGameController {
      * </a>
      *
      * @param view view
+     *
+     * @author Sebastian
      */
     private void handleRematchBtn(ClientGameView view){
 

@@ -22,6 +22,8 @@ import hw01.GUI.onePlayerGame.OnePlayerGameView;
 
 /**
  * View for the client side of a two player game
+ * @author Jonathan
+ * @author Sebastian
  */
 public class ClientGameView extends OnePlayerGameView {
 
@@ -32,6 +34,8 @@ public class ClientGameView extends OnePlayerGameView {
      * @param model ClientGameMode
      * @param boardRows int for number of rows on board
      * @param numGuesses int for number of guesses per row
+     * @author Jonathan
+     * @author Sebastian
      */
     public ClientGameView(double w, double h, ClientGameModel model, int boardRows, int numGuesses) {
 

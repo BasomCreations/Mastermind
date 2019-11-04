@@ -26,6 +26,8 @@ import java.io.IOException;
 
 /**
  * Model for the host side of a two player game
+ * @author Jonathan
+ * @author Sebastian
  */
 public class HostGameModel extends OnePlayerGameModel {
 
@@ -41,6 +43,8 @@ public class HostGameModel extends OnePlayerGameModel {
     /**
      * Constructor
      * @throws IOException
+     * @author Jonathan
+     * @author Sebastian
      */
     public HostGameModel() throws IOException {
         super();
@@ -51,6 +55,8 @@ public class HostGameModel extends OnePlayerGameModel {
     /**
      * Retrieves the end of game results for the host player
      * @return Score object containing the results
+     * @author Jonathan
+     * @author Sebastian
      */
     @Override
     public Score getResults() {
@@ -91,6 +97,7 @@ public class HostGameModel extends OnePlayerGameModel {
 
     /**
      * Closes sockets
+     * @author Serbastian
      */
     public void closeSockets() {
         try {

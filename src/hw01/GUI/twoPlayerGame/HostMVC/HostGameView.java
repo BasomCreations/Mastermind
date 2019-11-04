@@ -22,6 +22,8 @@ import hw01.GUI.onePlayerGame.OnePlayerGameView;
 
 /**
  * View for the host side of a two player game
+ * @author Jonathan
+ * @author Sebastian
  */
 public class HostGameView extends OnePlayerGameView {
 
@@ -30,6 +32,8 @@ public class HostGameView extends OnePlayerGameView {
      * @param w double width of scene
      * @param h double height of scene
      * @param model HostGameModel model of the MVC
+     * @author Jonathan
+     * @author Sebastian
      */
     public HostGameView(double w, double h, HostGameModel model) {
         super(w, h, model);
